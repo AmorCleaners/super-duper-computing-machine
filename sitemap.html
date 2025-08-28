@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CDL Institute Sitemap - Strategic Hub & Spoke Model | CDL Institute</title>
+
+  <meta name="description" content="Revised sitemap for CDL Institute, structured with a Hub and Spoke model to enhance user experience and SEO. Discover our core platform, learning hubs, and career resources.">
+  <meta name="keywords" content="CDL sitemap, hub and spoke SEO, CDL training resources, CDL requirements, CDL practice tests, CDL career guide">
+
+  <!-- GEO Optimization & Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "CDL Institute",
+    "url": "https://www.cdlinstitute.com",
+    "description": "A strategic, user-focused CDL training platform featuring AI-powered tools, expert-led content, and community hubs.",
+    "mainEntity": {
+      "@type": "SiteNavigationElement",
+      "name": "CDL Training & Career Hubs",
+      "description": "A structured collection of CDL training hubs, including state requirements, practice tests, and career development resources."
+    },
+    "hasPart": [
+      {
+        "@type": "WebPage",
+        "name": "State Requirements Hub",
+        "url": "https://www.cdlinstitute.com/states",
+        "description": "Central hub for CDL requirements, linking to detailed guides for all 50 states."
+      },
+      {
+        "@type": "WebPage", 
+        "name": "Practice Test Hub",
+        "url": "https://www.cdlinstitute.com/practice-test",
+        "description": "AI-powered practice tests covering all CDL endorsements and knowledge areas."
+      },
+      {
+        "@type": "WebPage",
+        "name": "CDL Jobs Hub",
+        "url": "https://www.cdlinstitute.com/jobs",
+        "description": "Automated job board with real-time listings for local, OTR, and entry-level CDL positions."
+      }
+    ]
+  }
+  </script>
+
+  <meta name="author" content="CDL Institute">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cdlinstitute.com/sitemap">
+  <meta property="og:title" content="CDL Institute Sitemap - Strategic Hub & Spoke Model">
+  <meta property="og:description" content="Our revised sitemap, built on expert SEO advice. Explore our organized content hubs for a better learning and career path.">
+  <meta property="og:image" content="assets/sitemap-og-strategic.jpg">
+  <meta property="og:site_name" content="CDL Institute">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Tailwind (Play CDN ) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#1E66FF'
+            },
+            warning: '#f59e0b',
+            success: '#10b981'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* helpers */
+    .container-pad {
+      padding-left: 1rem;
+      padding-right: 1rem
+    }
+
+    @media (min-width:768px ) {
+      .container-pad {
+        padding-left: 2rem;
+        padding-right: 2rem
+      }
+    }
+
+    @media (min-width:1280px) {
+      .container-pad {
+        padding-left: 3rem;
+        padding-right: 3rem
+      }
+    }
+
+    /* subtle reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .reveal {
+        transition: none
+      }
+    }
+
+    /* Sitemap specific styles */
+    .page-category {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .page-category:hover {
+      border-color: #1E66FF;
+      box-shadow: 0 4px 12px rgba(30, 102, 255, 0.1);
+    }
+
+    .page-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .page-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .page-item:hover {
+      background: #f1f5f9;
+      border-color: #1E66FF;
+    }
+
+    .page-item a {
+      text-decoration: none;
+      color: #374151;
+      font-size: 0.875rem;
+    }
+
+    .page-item a:hover {
+      color: #1E66FF;
+    }
+    
+    .hub-page {
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+    }
+
+    .page-count {
+      background: #1E66FF;
+      color: white;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+    }
+
+    .search-box {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      width: 100%;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: #1E66FF;
+      box-shadow: 0 0 0 3px rgba(30, 102, 255, 0.1);
+    }
+
+    .priority-badge {
+      font-size: 0.75rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+    }
+
+    .priority-high {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    .priority-medium {
+      background: #fffbeb;
+      color: #d97706;
+    }
+
+    .priority-low {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .programmatic-badge {
+      font-size: 0.75rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+    }
+
+    .manual-badge {
+      font-size: 0.75rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      background: #fef3c7;
+      color: #d97706;
+      border: 1px solid #fde68a;
+    }
+
+    .automation-badge {
+      font-size: 0.75rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      background: #f0f9ff;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+  </style>
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <script>
+    function toggleNav( ) {
+      document.getElementById('mobileNav').classList.toggle('hidden');
+    }
+    
+    // reveal on scroll
+    addEventListener('DOMContentLoaded', () => {
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((e) => e.forEach(x => {
+        if (x.isIntersecting) {
+          x.target.classList.add('in');
+          io.unobserve(x.target)
+        }
+      }), {
+        threshold: .12
+      });
+      els.forEach(el => io.observe(el));
+
+      // Search functionality
+      const searchBox = document.getElementById('sitemapSearch');
+      const pageItems = document.querySelectorAll('.page-item');
+      
+      searchBox.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        pageItems.forEach(item => {
+          const text = item.textContent.toLowerCase();
+          if (text.includes(searchTerm)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body class="antialiased text-zinc-900 bg-zinc-50">
+  <!-- NAV -->
+   <!-- Header -->
+   <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm text-white">
+    <div class="mx-auto max-w-7xl container-pad">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Left Side: Logo + State Selector -->
+        <div class="flex items-center gap-4">
+          <a href="index.html" class="flex items-center gap-3" aria-label="CDL Institute home">
+            <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9">
+            <span class="font-bold text-lg tracking-tight text-white">CDL Institute</span>
+          </a>
+          <!-- GEO State Selector (Desktop) -->
+          <div class="hidden lg:flex relative" id="state-dropdown-container">
+            <button id="state-selector-btn" class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm">
+              <i class="ri-map-pin-2-line"></i>
+              <span id="selected-state-nav">California</span>
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Right Side: Navigation + CTA -->
+        <div class="flex items-center gap-6">
+          <!-- Desktop Nav -->
+          <nav class="hidden lg:flex items-center gap-6 text-sm font-medium" aria-label="Primary">
+            <a class="hover:text-brand-blue transition" href="#comparison">Why Us</a>
+            <a class="hover:text-brand-blue transition" href="#practice-tests">What We Cover</a>
+            <a class="hover:text-brand-blue transition" href="#pricing">Pricing</a>
+          </nav>
+
+          <div class="flex items-center gap-4">
+              <a href="/login" class="hidden sm:inline-flex text-sm text-zinc-300 hover:text-white transition font-medium">Login</a>
+              <a href="/assessment" class="hidden sm:inline-flex items-center gap-2 text-sm rounded-lg bg-brand-blue text-white px-4 py-2 font-semibold hover:bg-blue-600 transition">
+                  <i class="ri-flashlight-line"></i>
+                  Start Free Assessment
+              </a>
+              <button class="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-zinc-700 text-zinc-300 hover:text-white" aria-label="Toggle navigation" onclick="toggleNav()">
+                <i class="ri-menu-line text-xl"></i>
+              </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <!-- Mobile Nav (IMPROVED with Login Link) -->
+    <div id="mobileNav" class="lg:hidden hidden border-t border-zinc-800">
+      <nav class="mx-auto max-w-7xl container-pad py-4 space-y-2 text-base" aria-label="Mobile">
+        <a href="#comparison" class="block py-2 hover:text-brand-blue">Why Us</a>
+        <a href="#practice-tests" class="block py-2 hover:text-brand-blue">What We Cover</a>
+        <a href="#pricing" class="block py-2 hover:text-brand-blue">Pricing</a>
+        
+        <!-- State Selector (Mobile) -->
+        <div class="pt-3 border-t border-zinc-800 mt-2">
+            <a href="/state-requirements" class="flex items-center justify-between w-full py-2 text-zinc-300 hover:text-white">
+                <span class="flex items-center gap-2">
+                    <i class="ri-map-pin-2-line"></i>
+                    <span>State Requirements</span>
+                </span>
+                <span class="flex items-center gap-1 text-sm">
+                    California <i class="ri-arrow-right-s-line"></i>
+                </span>
+            </a>
+        </div>
+
+        <div class="pt-3 border-t border-zinc-800 mt-2 space-y-4">
+            <a href="/login" class="block text-center text-zinc-300 hover:text-white">Login</a>
+            <a href="/assessment" class="block py-3 rounded-lg bg-brand-blue text-center font-semibold text-white">Start Free Assessment</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- HERO SECTION -->
+  <section class="relative isolate overflow-hidden bg-black text-white">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-900/80 via-black/90 to-black"></div>
+    <div class="absolute inset-0 -z-20 bg-[url('https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' )] bg-cover bg-center opacity-30"></div>
+
+    <div class="mx-auto max-w-7xl container-pad py-16 md:py-24 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Breadcrumb -->
+        <nav class="text-sm text-zinc-300 mb-6">
+          <a href="/" class="hover:text-white">Home</a> 
+          <span class="mx-2">/</span>
+          <span class="text-white">Sitemap</span>
+        </nav>
+
+        <h1 class="text-4xl md:text-6xl font-semibold leading-tight mb-6">CDL Institute Sitemap</h1>
+        <p class="text-zinc-300 md:text-lg mb-8 max-w-3xl mx-auto">
+          A strategic directory of our content hubs, learning tools, and career resources, designed for clarity and user success.
+        </p>
+
+        <!-- Search Box -->
+        <div class="max-w-md mx-auto mb-8">
+          <div class="relative">
+            <input type="text" id="sitemapSearch" class="search-box pl-10" placeholder="Search pages (e.g., 'Texas', 'HazMat')...">
+            <i class="ri-search-line absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE PLATFORM & TRUST -->
+  <section class="bg-white py-16 reveal">
+    <div class="mx-auto max-w-7xl container-pad">
+      <div class="page-category">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-semibold flex items-center gap-3">
+            <i class="ri-shield-star-line text-brand-blue"></i>
+            Core Platform & Trust (E-A-T)
+            <span class="page-count">8 pages</span>
+            <span class="manual-badge">✋ MANUAL</span>
+          </h2>
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </div>
+        <p class="text-zinc-600 mb-4">Foundation of our platform. These pages establish our expertise, authority, and trustworthiness (E-A-T) and drive conversions.</p>
+        
+        <div class="page-list">
+          <div class="page-item">
+            <a href="index.html">
+              <div class="font-medium">Homepage</div>
+              <div class="text-xs text-blue-600 font-mono">/</div>
+              <div class="text-xs text-zinc-500 mt-1">Our core value proposition and entry point.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/about">
+              <div class="font-medium">About Us & Our Experts</div>
+              <div class="text-xs text-blue-600 font-mono">/about</div>
+              <div class="text-xs text-zinc-500 mt-1">Mission, team, and author credentials.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/how-it-works">
+              <div class="font-medium">How It Works</div>
+              <div class="text-xs text-blue-600 font-mono">/how-it-works</div>
+              <div class="text-xs text-zinc-500 mt-1">Platform overview and user journey.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/assessment">
+              <div class="font-medium">AI-Powered Assessment</div>
+              <div class="text-xs text-blue-600 font-mono">/assessment</div>
+              <div class="text-xs text-zinc-500 mt-1">Our unique differentiator and lead magnet.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/pricing">
+              <div class="font-medium">Pricing & Plans</div>
+              <div class="text-xs text-blue-600 font-mono">/pricing</div>
+              <div class="text-xs text-zinc-500 mt-1">Transparent pricing for all training programs.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/success-stories">
+              <div class="font-medium">Success Stories</div>
+              <div class="text-xs text-blue-600 font-mono">/success-stories</div>
+              <div class="text-xs text-zinc-500 mt-1">Case studies demonstrating real-world results.</div>
+            </a>
+          </div>
+           <div class="page-item">
+            <a href="/reviews">
+              <div class="font-medium">Reviews & Testimonials</div>
+              <div class="text-xs text-blue-600 font-mono">/reviews</div>
+              <div class="text-xs text-zinc-500 mt-1">Social proof and user feedback.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/corporate-cdl-training">
+              <div class="font-medium">Corporate & B2B Solutions</div>
+              <div class="text-xs text-blue-600 font-mono">/corporate-cdl-training</div>
+              <div class="text-xs text-zinc-500 mt-1">High-value enterprise and government training.</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARNING & STUDY TOOLS -->
+  <section class="py-16 reveal">
+    <div class="mx-auto max-w-7xl container-pad">
+      <div class="page-category">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-semibold flex items-center gap-3">
+            <i class="ri-book-open-line text-brand-blue"></i>
+            Learning & Study Tools
+            <span class="page-count">15+ pages</span>
+            <span class="manual-badge">✋ MANUAL</span>
+          </h2>
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </div>
+        <p class="text-zinc-600 mb-4">The core user experience, including the personalized dashboard, study programs, and interactive tools.</p>
+        
+        <div class="page-list">
+          <div class="page-item hub-page">
+            <a href="/dashboard">
+              <div class="font-medium">HUB: User Dashboard</div>
+              <div class="text-xs text-blue-600 font-mono">/dashboard</div>
+              <div class="text-xs text-zinc-500 mt-1">Central point for all user activity.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/study-program">
+              <div class="font-medium">SPOKE: ELDT Study Program</div>
+              <div class="text-xs text-blue-600 font-mono">/study-program</div>
+              <div class="text-xs text-zinc-500 mt-1">Personalized learning path setup.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/progress">
+              <div class="font-medium">SPOKE: Progress Tracking</div>
+              <div class="text-xs text-blue-600 font-mono">/progress</div>
+              <div class="text-xs text-zinc-500 mt-1">Analytics and readiness scores.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/video-course">
+              <div class="font-medium">SPOKE: Video Course Library</div>
+              <div class="text-xs text-blue-600 font-mono">/video-course</div>
+              <div class="text-xs text-zinc-500 mt-1">Interactive ELDT training modules.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/ai-coach">
+              <div class="font-medium">SPOKE: AI Study Coach</div>
+              <div class="text-xs text-blue-600 font-mono">/ai-coach</div>
+              <div class="text-xs text-zinc-500 mt-1">Adaptive study recommendations.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/certificates">
+              <div class="font-medium">SPOKE: Certificates</div>
+              <div class="text-xs text-blue-600 font-mono">/certificates</div>
+              <div class="text-xs text-zinc-500 mt-1">Downloadable ELDT completion records.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/account">
+              <div class="font-medium">Account & Billing</div>
+              <div class="text-xs text-blue-600 font-mono">/account</div>
+              <div class="text-xs text-zinc-500 mt-1">User settings and subscription management.</div>
+            </a>
+          </div>
+           <div class="page-item">
+            <a href="/login">
+              <div class="font-medium">Login / Register</div>
+              <div class="text-xs text-blue-600 font-mono">/login</div>
+              <div class="text-xs text-zinc-500 mt-1">User authentication pages.</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATE & REGIONAL HUBS -->
+  <section class="bg-white py-16 reveal">
+    <div class="mx-auto max-w-7xl container-pad">
+      <div class="page-category">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-semibold flex items-center gap-3">
+            <i class="ri-map-pin-line text-brand-blue"></i>
+            State & Regional Hubs
+            <span class="page-count">50+ pages</span>
+            <span class="programmatic-badge">🤖 PROGRAMMATIC</span>
+          </h2>
+          <span class="priority-badge priority-medium">MEDIUM PRIORITY</span>
+        </div>
+        <p class="text-zinc-600 mb-4">Our programmatic SEO strategy, organized into hubs for better navigation and authority. We will start with 10 high-value states and expand based on performance.</p>
+        
+        <div class="page-list">
+          <div class="page-item hub-page">
+            <a href="/states">
+              <div class="font-medium">HUB: State Requirements</div>
+              <div class="text-xs text-blue-600 font-mono">/states</div>
+              <div class="text-xs text-zinc-500 mt-1">Interactive map and comparison tool.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/california">
+              <div class="font-medium">SPOKE: California CDL Guide</div>
+              <div class="text-xs text-blue-600 font-mono">/california</div>
+              <div class="text-xs text-zinc-500 mt-1">High-value deep-dive page.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/texas">
+              <div class="font-medium">SPOKE: Texas CDL Guide</div>
+              <div class="text-xs text-blue-600 font-mono">/texas</div>
+              <div class="text-xs text-zinc-500 mt-1">High-value deep-dive page.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/florida">
+              <div class="font-medium">SPOKE: Florida CDL Guide</div>
+              <div class="text-xs text-blue-600 font-mono">/florida</div>
+              <div class="text-xs text-zinc-500 mt-1">High-value deep-dive page.</div>
+            </a>
+          </div>
+          <div class="page-item hub-page">
+            <a href="/salary">
+              <div class="font-medium">HUB: CDL Salary Guides</div>
+              <div class="text-xs text-blue-600 font-mono">/salary</div>
+              <div class="text-xs text-zinc-500 mt-1">National data and comparison tools.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/california-cdl-salary">
+              <div class="font-medium">SPOKE: California Salary</div>
+              <div class="text-xs text-blue-600 font-mono">/california-cdl-salary</div>
+              <div class="text-xs text-zinc-500 mt-1">Detailed local salary data.</div>
+            </a>
+          </div>
+          <div class="page-item hub-page">
+            <a href="/how-to">
+              <div class="font-medium">HUB: How-To Guides</div>
+              <div class="text-xs text-blue-600 font-mono">/how-to</div>
+              <div class="text-xs text-zinc-500 mt-1">Central repository for procedural content.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/how-to-get-cdl-california">
+              <div class="font-medium">SPOKE: How to Get a CDL in CA</div>
+              <div class="text-xs text-blue-600 font-mono">/how-to-get-cdl-california</div>
+              <div class="text-xs text-zinc-500 mt-1">State-specific process walkthrough.</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KNOWLEDGE & PRACTICE HUBS -->
+  <section class="py-16 reveal">
+    <div class="mx-auto max-w-7xl container-pad">
+      <div class="page-category">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-semibold flex items-center gap-3">
+            <i class="ri-lightbulb-flash-line text-brand-blue"></i>
+            Knowledge & Practice Hubs
+            <span class="page-count">20+ pages</span>
+            <span class="manual-badge">✋ MANUAL</span>
+          </h2>
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </div>
+        <p class="text-zinc-600 mb-4">Expert-driven educational content and adaptive practice tests, structured as authoritative hubs.</p>
+        
+        <div class="page-list">
+          <div class="page-item hub-page">
+            <a href="/practice-test">
+              <div class="font-medium">HUB: Practice Test Center</div>
+              <div class="text-xs text-blue-600 font-mono">/practice-test</div>
+              <div class="text-xs text-zinc-500 mt-1">Central access to all AI-powered tests.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/general-knowledge-test">
+              <div class="font-medium">SPOKE: General Knowledge Test</div>
+              <div class="text-xs text-blue-600 font-mono">/general-knowledge-test</div>
+              <div class="text-xs text-zinc-500 mt-1">Core test for all CDL applicants.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/hazmat-practice-test">
+              <div class="font-medium">SPOKE: HazMat Endorsement Test</div>
+              <div class="text-xs text-blue-600 font-mono">/hazmat-practice-test</div>
+              <div class="text-xs text-zinc-500 mt-1">Adaptive test for H endorsement.</div>
+            </a>
+          </div>
+          <div class="page-item hub-page">
+            <a href="/cdl-classes">
+              <div class="font-medium">HUB: CDL Classifications Guide</div>
+              <div class="text-xs text-blue-600 font-mono">/cdl-classes</div>
+              <div class="text-xs text-zinc-500 mt-1">Comparing Class A, B, and C licenses.</div>
+            </a>
+          </div>
+          <div class="page-item">
+            <a href="/cdl-class-a">
+              <div class="font-medium">SPOKE: Class A License Deep Dive</div>
+              <div class="text-xs text-blue-600 font-mono">/cdl-class-a</div>
+              <div class="text-xs text-zinc-500 mt-1">Vehicles, requirements, and jobs.</div>
+            </a>
+          </div>
+          <div class="page-item hub-page">
+            <a href="/cdl
+            <div class="font-medium">HUB: CDL Endorsements Guide</div>
+            <div class="text-xs text-blue-600 font-mono">/cdl-endorsements</div>
+            <div class="text-xs text-zinc-500 mt-1">Comprehensive guide to all endorsements.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/hazmat-endorsement">
+            <div class="font-medium">SPOKE: HazMat Endorsement Deep Dive</div>
+            <div class="text-xs text-blue-600 font-mono">/hazmat-endorsement</div>
+            <div class="text-xs text-zinc-500 mt-1">Requirements, process, and benefits.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/eldt-training">
+            <div class="font-medium">ELDT Training Explained</div>
+            <div class="text-xs text-blue-600 font-mono">/eldt-training</div>
+            <div class="text-xs text-zinc-500 mt-1">Authoritative guide to FMCSA requirements.</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER & AUTOMATION HUBS -->
+<section class="bg-white py-16 reveal">
+  <div class="mx-auto max-w-7xl container-pad">
+    <div class="page-category">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold flex items-center gap-3">
+          <i class="ri-briefcase-4-line text-brand-blue"></i>
+          Career & Automation Hubs
+          <span class="page-count">35+ pages</span>
+          <span class="automation-badge">🔄 AUTOMATION</span>
+        </h2>
+        <span class="priority-badge priority-medium">MEDIUM PRIORITY</span>
+      </div>
+      <p class="text-zinc-600 mb-4">Automated resources to help users find jobs and stay current. Content freshness is key to providing ongoing value.</p>
+      
+      <div class="page-list">
+        <div class="page-item hub-page">
+          <a href="/jobs">
+            <div class="font-medium">HUB: CDL Job Board</div>
+            <div class="text-xs text-blue-600 font-mono">/jobs</div>
+            <div class="text-xs text-zinc-500 mt-1">Real-time, aggregated job listings.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/jobs/entry-level">
+            <div class="font-medium">SPOKE: Entry-Level Jobs</div>
+            <div class="text-xs text-blue-600 font-mono">/jobs/entry-level</div>
+            <div class="text-xs text-zinc-500 mt-1">Filtered for new drivers.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/jobs/local">
+            <div class="font-medium">SPOKE: Local Driving Jobs</div>
+            <div class="text-xs text-blue-600 font-mono">/jobs/local</div>
+            <div class="text-xs text-zinc-500 mt-1">Filtered for home-daily positions.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/jobs/california">
+            <div class="font-medium">SPOKE: California CDL Jobs</div>
+            <div class="text-xs text-blue-600 font-mono">/jobs/california</div>
+            <div class="text-xs text-zinc-500 mt-1">State-specific job feed.</div>
+          </a>
+        </div>
+        <div class="page-item hub-page">
+          <a href="/news">
+            <div class="font-medium">HUB: Industry News</div>
+            <div class="text-xs text-blue-600 font-mono">/news</div>
+            <div class="text-xs text-zinc-500 mt-1">Aggregated news with editorial analysis.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/regulations">
+            <div class="font-medium">SPOKE: Regulation Updates</div>
+            <div class="text-xs text-blue-600 font-mono">/regulations</div>
+            <div class="text-xs text-zinc-500 mt-1">Automated monitoring of FMCSA/DOT.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/market-trends">
+            <div class="font-medium">SPOKE: Market Trends</div>
+            <div class="text-xs text-blue-600 font-mono">/market-trends</div>
+            <div class="text-xs text-zinc-500 mt-1">Data-driven analysis of the trucking industry.</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY & UGC HUBS -->
+<section class="py-16 reveal">
+  <div class="mx-auto max-w-7xl container-pad">
+    <div class="page-category">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold flex items-center gap-3">
+          <i class="ri-team-line text-brand-blue"></i>
+          Community & UGC Hubs
+          <span class="page-count">5+ pages</span>
+          <span class="manual-badge">✋ MANUAL</span>
+        </h2>
+        <span class="priority-badge priority-low">LOW PRIORITY</span>
+      </div>
+      <p class="text-zinc-600 mb-4">Building a defensible moat with user-generated content. This creates a valuable, self-sustaining ecosystem that competitors cannot easily replicate.</p>
+      
+      <div class="page-list">
+        <div class="page-item hub-page">
+          <a href="/community">
+            <div class="font-medium">HUB: Community Center</div>
+            <div class="text-xs text-blue-600 font-mono">/community</div>
+            <div class="text-xs text-zinc-500 mt-1">Main portal for all community features.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/forums">
+            <div class="font-medium">SPOKE: Student Forums</div>
+            <div class="text-xs text-blue-600 font-mono">/forums</div>
+            <div class="text-xs text-zinc-500 mt-1">Q&A and discussion by state and topic.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/company-reviews">
+            <div class="font-medium">SPOKE: Company Reviews</div>
+            <div class="text-xs text-blue-600 font-mono">/company-reviews</div>
+            <div class="text-xs text-zinc-500 mt-1">Verified driver feedback and ratings.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/salary-reports">
+            <div class="font-medium">SPOKE: User-Submitted Salaries</div>
+            <div class="text-xs text-blue-600 font-mono">/salary-reports</div>
+            <div class="text-xs text-zinc-500 mt-1">Real-world salary data from drivers.</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS & COMPARISONS -->
+<section class="bg-white py-16 reveal">
+  <div class="mx-auto max-w-7xl container-pad">
+    <div class="page-category">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold flex items-center gap-3">
+          <i class="ri-calculator-line text-brand-blue"></i>
+          Tools & Comparisons
+          <span class="page-count">15+ pages</span>
+          <span class="manual-badge">✋ MANUAL</span>
+        </h2>
+        <span class="priority-badge priority-low">LOW PRIORITY</span>
+      </div>
+      <p class="text-zinc-600 mb-4">Interactive tools and detailed comparisons to help users make informed decisions and plan their careers.</p>
+      
+      <div class="page-list">
+        <div class="page-item hub-page">
+          <a href="/tools">
+            <div class="font-medium">HUB: CDL Tools & Calculators</div>
+            <div class="text-xs text-blue-600 font-mono">/tools</div>
+            <div class="text-xs text-zinc-500 mt-1">Central directory of all interactive tools.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/cdl-cost-calculator">
+            <div class="font-medium">CDL Cost Calculator</div>
+            <div class="text-xs text-blue-600 font-mono">/cdl-cost-calculator</div>
+            <div class="text-xs text-zinc-500 mt-1">Estimate total training and licensing costs.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/cdl-salary-calculator">
+            <div class="font-medium">CDL Salary Calculator</div>
+            <div class="text-xs text-blue-600 font-mono">/cdl-salary-calculator</div>
+            <div class="text-xs text-zinc-500 mt-1">Estimate potential earnings by location/specialty.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/cdl-school-finder">
+            <div class="font-medium">CDL School Finder</div>
+            <div class="text-xs text-blue-600 font-mono">/cdl-school-finder</div>
+            <div class="text-xs text-zinc-500 mt-1">Find local training schools and programs.</div>
+          </a>
+        </div>
+        <div class="page-item hub-page">
+          <a href="/compare">
+            <div class="font-medium">HUB: Comparison Guides</div>
+            <div class="text-xs text-blue-600 font-mono">/compare</div>
+            <div class="text-xs text-zinc-500 mt-1">Central directory for all comparison articles.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/compare/class-a-vs-b">
+            <div class="font-medium">Class A vs. Class B License</div>
+            <div class="text-xs text-blue-600 font-mono">/compare/class-a-vs-b</div>
+            <div class="text-xs text-zinc-500 mt-1">Side-by-side analysis of license types.</div>
+          </a>
+        </div>
+        <div class="page-item">
+          <a href="/compare/local-vs-otr">
+            <div class="font-medium">Local vs. OTR Driving</div>
+            <div class="text-xs text-blue-600 font-mono">/compare/local-vs-otr</div>
+            <div class="text-xs text-zinc-500 mt-1">Compare lifestyles, pay, and opportunities.</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 text-zinc-300 border-t border-zinc-800">
+      <div class="mx-auto max-w-7xl container-pad py-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 text-sm">
+          <div class="col-span-2 lg:col-span-1">
+            <a href="/" class="flex items-center gap-3 mb-4" aria-label="CDL Institute home">
+              <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-8 w-8">
+              <span class="font-bold text-lg tracking-tight text-white">CDL Institute</span>
+            </a>
+            <p class="text-zinc-400 max-w-xs">CDL Institute is an approved FMCSA theory provider for all 50 states and Washington D.C.</p>
+          </div>
+          <div>
+            <div class="font-semibold mb-4 text-white">Training</div>
+            <ul class="space-y-2">
+              <li><a href="/assessment" class="hover:text-white">Free Assessment</a></li>
+              <li><a href="/pricing" class="hover:text-white">Pricing</a></li>
+              <li><a href="/practice-test" class="hover:text-white">Practice Tests</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold mb-4 text-white">Resources</div>
+            <ul class="space-y-2">
+              <li><a href="/requirements-by-state" class="hover:text-white">State Requirements</a></li>
+              <li><a href="/cdl-salary-guide" class="hover:text-white">Salary Guide</a></li>
+              <li><a href="/endorsements" class="hover:text-white">Endorsements</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold mb-4 text-white">Company</div>
+            <ul class="space-y-2">
+              <li><a href="/about-us" class="hover:text-white">About Us</a></li>
+              <li><a href="/success-stories" class="hover:text-white">Success Stories</a></li>
+              <li><a href="/faq" class="hover:text-white">FAQ</a></li>
+              <li><a href="/contact" class="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="font-semibold mb-4 text-white">Get Updates</div>
+            <form class="flex gap-2" action="#" method="post">
+              <label for="email" class="sr-only">Email</label>
+              <input id="email" name="email" type="email" required class="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder-zinc-500" placeholder="you@example.com" />
+              <button class="rounded-lg bg-brand-blue px-3 py-2 text-sm font-semibold" type="submit">Go</button>
+            </form>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+          <p>© <span id="year"></span> CDL Institute LLC. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
+            <a href="/terms-of-service" class="hover:text-white">Terms of Service</a>
+            <a href="sitemap.html" class="hover:text-white">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) {
+      e.preventDefault();
+      t.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  }));
+</script>
+</body>
+
+</html>
