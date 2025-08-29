@@ -1,789 +1,234 @@
-<!--
-  CDL Institute Master Launch Blueprint (2025) — Homepage (Simplified, GEO-First Version)
--->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pass Your CDL Test on First Attempt — Guaranteed | CDL Institute</title>
-    <meta name="description" content="Get your personalized CDL study plan and real-time readiness score. Join 25,000+ drivers who passed on their first try. Start the free assessment now." />
-    <meta name="author" content="CDL Institute" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDL Institute - Prototype Viewer</title>
     <link rel="icon" href="assets/favicon.png" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Pass Your CDL Test on First Attempt — Guaranteed" />
-    <meta property="og:description" content="Adaptive learning, real-time readiness score, ELDT-certified. Start free—get your CDL readiness score in minutes." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cdlinstitute.com/" />
-    <meta property="og:image" content="assets/social-card.png" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Pass Your CDL Test on First Attempt — Guaranteed" />
-    <meta name="twitter:description" content="Adaptive learning, real-time readiness score, ELDT-certified. Start free—get your CDL readiness score in minutes." />
-    <meta name="twitter:image" content="assets/social-card.png" />
-
-    <!-- Canonical -->
-    <link rel="canonical" href="https://cdlinstitute.com/" />
-
-    <!-- Remix Icon -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-      crossorigin="anonymous"
-    />
-
-    <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                blue: '#1E66FF'
-              }
-            },
-            maxWidth: {
-              '8xl': '90rem'
-            }
-          }
-        }
-      };
-    </script>
-
-    <!-- Minimal base styles & helpers -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
     <style>
-      .container-pad { padding-left: 1rem; padding-right: 1rem; }
-      @media (min-width: 768px ) { .container-pad { padding-left: 2rem; padding-right: 2rem; } }
-      @media (min-width: 1280px) { .container-pad { padding-left: 3rem; padding-right: 3rem; } }
+        /* Viewer-specific styles from guideline.md */
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .sidebar-link { color: #3f3f46; transition: background-color 150ms ease-in-out, color 150ms ease-in-out; }
+        .sidebar-link:hover { background-color: #e4e4e7; color: #18181b; }
+        .sidebar-link.active { background-color: #18181b; color: #ffffff; font-weight: 600; }
+        .sidebar-link.active:hover { background-color: #27272a; }
+        summary { list-style: none; cursor: pointer; }
+        summary::-webkit-details-marker { display: none; }
+        
+        #preview-container { 
+            transition: all 300ms ease-in-out; 
+        }
+        
+        .mobile-frame {
+            width: 375px;
+            height: 812px;
+            max-width: 375px;
+            max-height: 812px;
+        }
 
-      .reveal { opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
-      .reveal.in { opacity: 1; transform: none; }
-      @media (prefers-reduced-motion: reduce) {
-        .reveal { transition: none; transform: none; }
-      }
+        .desktop-adaptive {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
-  </head>
-
-  <body class="bg-white text-zinc-900 antialiased">
-     <!-- Header -->
-     <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm text-white">
-        <div class="mx-auto max-w-7xl container-pad">
-          <div class="flex items-center justify-between h-16">
-            
-            <!-- Left Side: Logo + State Selector -->
-            <div class="flex items-center gap-4">
-              <a href="index.html" class="flex items-center gap-3" aria-label="CDL Institute home">
-                <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9">
-                <span class="font-bold text-lg tracking-tight text-white">CDL Institute</span>
-              </a>
-              <!-- GEO State Selector (Desktop) -->
-              <div class="hidden lg:flex relative" id="state-dropdown-container">
-                <button id="state-selector-btn" class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm">
-                  <i class="ri-map-pin-2-line"></i>
-                  <span id="selected-state-nav">California</span>
-                  <i class="ri-arrow-down-s-line"></i>
-                </button>
-              </div>
-            </div>
-            
-            <!-- Right Side: Navigation + CTA -->
-            <div class="flex items-center gap-6">
-              <!-- Desktop Nav -->
-              <nav class="hidden lg:flex items-center gap-6 text-sm font-medium" aria-label="Primary">
-                <a class="hover:text-brand-blue transition" href="#comparison">Why Us</a>
-                <a class="hover:text-brand-blue transition" href="#practice-tests">What We Cover</a>
-                <a class="hover:text-brand-blue transition" href="#pricing">Pricing</a>
-              </nav>
-  
-              <div class="flex items-center gap-4">
-                  <a href="/login" class="hidden sm:inline-flex text-sm text-zinc-300 hover:text-white transition font-medium">Login</a>
-                  <a href="assessment.html" class="hidden sm:inline-flex items-center gap-2 text-sm rounded-lg bg-brand-blue text-white px-4 py-2 font-semibold hover:bg-blue-600 transition">
-                      <i class="ri-flashlight-line"></i>
-                      Start Free Assessment
-                  </a>
-                  <button class="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-zinc-700 text-zinc-300 hover:text-white" aria-label="Toggle navigation" onclick="toggleNav()">
-                    <i class="ri-menu-line text-xl"></i>
-                  </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        
-        <!-- Mobile Nav (IMPROVED with Login Link) -->
-        <div id="mobileNav" class="lg:hidden hidden border-t border-zinc-800">
-          <nav class="mx-auto max-w-7xl container-pad py-4 space-y-2 text-base" aria-label="Mobile">
-            <a href="#comparison" class="block py-2 hover:text-brand-blue">Why Us</a>
-            <a href="#practice-tests" class="block py-2 hover:text-brand-blue">What We Cover</a>
-            <a href="#pricing" class="block py-2 hover:text-brand-blue">Pricing</a>
-            
-            <!-- State Selector (Mobile) -->
-            <div class="pt-3 border-t border-zinc-800 mt-2">
-                <a href="/state-requirements" class="flex items-center justify-between w-full py-2 text-zinc-300 hover:text-white">
-                    <span class="flex items-center gap-2">
-                        <i class="ri-map-pin-2-line"></i>
-                        <span>State Requirements</span>
-                    </span>
-                    <span class="flex items-center gap-1 text-sm">
-                        California <i class="ri-arrow-right-s-line"></i>
-                    </span>
-                </a>
-            </div>
-
-            <div class="pt-3 border-t border-zinc-800 mt-2 space-y-4">
-                <a href="/login" class="block text-center text-zinc-300 hover:text-white">Login</a>
-                <a href="assessment.html" class="block py-3 rounded-lg bg-brand-blue text-center font-semibold text-white">Start Free Assessment</a>
-            </div>
-          </nav>
-        </div>
-      </header>
-
-
-
-    
-    <main id="content">
-      <!-- Hero -->
-      <section id="hero" class="relative overflow-hidden bg-zinc-950 text-white">
-        <div class="relative mx-auto max-w-7xl container-pad py-16 md:py-24 grid gap-10 md:grid-cols-2 items-center">
-          <div class="max-w-xl reveal">
-            <img src="assets/trustpilot-inline-white.png" alt="trustpilot" class="h-6 w-auto mb-4">
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Pass Your CDL Test on the First Attempt — Guaranteed.
-            </h1>
-            <p class="mt-4 text-zinc-300">
-                Our assessment-driven training identifies your exact knowledge gaps and creates a personalized study path. 89% of our students pass on their first try vs. the 65% national average.
-            </p>
-            <div class="mt-8 flex flex-wrap items-center gap-3">
-              <a href="assessment.html" class="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-5 py-3 font-semibold">
-                Take Free Assessment  <i class="ri-arrow-right-line"></i>
-              </a>
-             
-            </div>
-
-         
-          </div>
-          <div class="reveal">
-            <img
-              src="assets/ui-interaction.gif"
-              alt="Preview of the CDL readiness dashboard showing a personalized study plan and readiness score"
-              class="w-full rounded-2xl ring-1 ring-white/10 shadow-2xl"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </section>
-
-        <!-- Logos (scrollable on mobile) -->
-  <section aria-label="Trusted by" class="bg-zinc-50 border-y border-zinc-200">
-    <div class="mx-auto max-w-7xl container-pad py-8">
-      <!-- <div class="text-xs uppercase tracking-wider text-zinc-600 mb-4">Trusted by Fortune 500 fleets and agencies
-      </div> -->
-      <div class="flex gap-8 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none]"
-        style="scrollbar-width:none">
-        <img src="assets/partner-logos-v2.svg" alt="">
-      </div>
-    </div>
-  </section>
-
-
-                <!-- What We Cover (Final Version with Thumbnails & Blurbs) -->
-                <section id="practice-tests" class="py-16 md:py-24">
-                    <div class="mx-auto max-w-6xl container-pad text-center">
-                      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 reveal">Everything You Need for Your CDL Knowledge Test</h2>
-                      <p class="mt-3 text-lg text-zinc-600 max-w-3xl mx-auto reveal">Our free assessment covers all the core topics and endorsements required by the FMCSA, using AI-powered questions that target common mistakes.</p>
-                      
-                      <!-- Topics Grid -->
-                      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 reveal">
-                        
-                        <!-- General Knowledge -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-book-3-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">General Knowledge</h3>
-                          <p class="mt-1 text-sm text-zinc-600">The foundation for all CDL classes, covering safety, rules of the road, and basic vehicle control.</p>
-                        </div>
-            
-                        <!-- Combination Vehicles -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-truck-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">Combination Vehicles</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Learn to safely couple, uncouple, and maneuver tractor-trailers. Required for Class A.</p>
-                        </div>
-            
-                        <!-- Air Brakes -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-windy-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">Air Brakes</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Master the components, operation, and inspection of air brake systems to ensure safety.</p>
-                        </div>
-            
-                        <!-- Pre-Trip Inspection -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-search-eye-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">Pre-Trip Inspection</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Know every step of the vehicle inspection process to stay compliant and safe on the road.</p>
-                        </div>
-            
-                        <!-- Hours of Service -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-time-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">Hours of Service (HOS)</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Understand ELD rules, driving limits, and rest requirements to avoid costly violations.</p>
-                        </div>
-            
-                        <!-- HazMat Endorsement -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-flask-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">HazMat Endorsement (H)</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Unlock higher-paying jobs by learning to safely identify and transport hazardous materials.</p>
-                        </div>
-            
-                        <!-- Tanker Endorsement -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-water-flash-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">Tanker Endorsement (N)</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Master the unique challenges of hauling liquids, including surge control and weight distribution.</p>
-                        </div>
-            
-                        <!-- Passenger Endorsement -->
-                        <div class="bg-white p-5 rounded-xl border border-zinc-200 text-left">
-                          <div class="w-12 h-12 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center">
-                            <i class="ri-group-line text-2xl"></i>
-                          </div>
-                          <h3 class="mt-3 font-semibold text-zinc-900">Passenger Endorsement (P)</h3>
-                          <p class="mt-1 text-sm text-zinc-600">Learn the specific safety rules and operational procedures required for transporting people.</p>
-                        </div>
-            
-                      </div>
-                      <div class="mt-12">
-                        <a href="assessment.html" class="inline-flex items-center gap-2 rounded-lg bg-brand-blue text-white px-8 py-4 font-semibold text-lg hover:bg-blue-600 transition">
-                            Take Free Assessment  <i class="ri-arrow-right-line"></i>
-                        </a>
-                        <p class="text-sm text-zinc-500 mt-2">Get your personalized Readiness Score in 10 minutes.</p>
-                      </div>
-                    </div>
-                  </section>
-            
-
-
-        <!-- Why Us / Comparison (Reframed Narrative) -->
-        <section id="comparison" class="py-16 md:py-24">
-            <div class="mx-auto max-w-7xl container-pad">
-              <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mt-2 reveal">We Built the Program We Wish We Had</h2>
-                <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto reveal">We saw students struggling with outdated handbooks, unreliable videos, and generic apps. So we combined official regulations with AI technology to build a smarter, faster way to pass.</p>
-              </div>
-              <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 max-w-6xl mx-auto">
-                
-                <!-- Column 1: The Raw Materials -->
-                <div class="space-y-6 reveal">
-                  <h3 class="text-2xl font-bold text-zinc-800">We Started with the Raw Materials...</h3>
-                  <div class="flex items-start gap-4">
-                    <i class="ri-book-open-line text-2xl text-zinc-400 mt-1"></i>
-                    <div>
-                      <h4 class="font-semibold">Official Handbooks & Regulations</h4>
-                      <p class="text-zinc-600">The core information is there, but it's dense, often outdated, and hard to navigate. It tells you *what* to know, but not *how* to learn it.</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-4">
-                    <i class="ri-youtube-line text-2xl text-zinc-400 mt-1"></i>
-                    <div>
-                      <h4 class="font-semibold">YouTube Videos & Forum Posts</h4>
-                      <p class="text-zinc-600">Helpful for some topics, but often unreliable, inaccurate, or taught by uncertified instructors, leading to risky misconceptions.</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-4">
-                    <i class="ri-question-answer-line text-2xl text-zinc-400 mt-1"></i>
-                    <div>
-                      <h4 class="font-semibold">Generic Practice Test Apps</h4>
-                      <p class="text-zinc-600">Most use a static bank of questions that don't adapt to you, leading to wasted time studying things you already know.</p>
-                    </div>
-                  </div>
+</head>
+<body class="bg-zinc-100 text-zinc-900">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-72 bg-white border-r border-zinc-200 flex flex-col">
+            <div class="p-4 border-b border-zinc-200 h-16 flex items-center">
+                <div class="flex items-center gap-3">
+                    <img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-9 w-9">
+                    <h1 class="text-lg font-bold">CDL Institute</h1>
                 </div>
-    
-                <!-- Column 2: The Smarter Solution -->
-                <div class="bg-white p-8 rounded-2xl border-2 border-brand-blue shadow-xl reveal">
-                  <h3 class="text-2xl font-bold text-zinc-900 flex items-center gap-3 mb-6">
-                    <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-8 w-8">
-                    ...Then We Built a Smarter Solution
-                  </h3>
-                  <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                      <i class="ri-checkbox-circle-fill text-2xl text-green-600 mt-1"></i>
-                      <div>
-                        <h4 class="font-semibold">Always Up-to-Date & Official</h4>
-                        <p class="text-zinc-600">Our content is built by former DOT inspectors and is continuously updated to match the latest FMCSA regulations and official exam questions.</p>
-                      </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                      <i class="ri-checkbox-circle-fill text-2xl text-green-600 mt-1"></i>
-                      <div>
-                        <h4 class="font-semibold">Expert-Built & AI-Powered</h4>
-                        <p class="text-zinc-600">We combine the knowledge of real CDL experts with AI that adapts to your learning style, creating a personalized plan that cuts study time by up to 40%.</p>
-                      </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                      <i class="ri-checkbox-circle-fill text-2xl text-green-600 mt-1"></i>
-                      <div>
-                        <h4 class="font-semibold">Certainty with the Readiness Score</h4>
-                        <p class="text-zinc-600">Trade guesswork for confidence. Our real-time score shows you exactly when you're ready to pass, so you walk into the exam knowing you'll succeed.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="pt-6 mt-6 ">
-                    <a href="assessment.html" class="w-full text-center inline-flex items-center justify-center gap-2 rounded-lg bg-brand-blue text-white px-6 py-3 font-semibold hover:bg-blue-600 transition">
-                        Take Free Assessment  <i class="ri-arrow-right-line"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
-          </section>
-          <!-- Social Proof (Simplified 2-Column Layout) -->
-          <section id="social-proof" class="py-24 bg-white">
-            <div class="mx-auto max-w-7xl container-pad">
-              <div class="grid md:grid-cols-2 gap-12 items-center">
-    
-                <!-- Left Column: Headline & CTA -->
-                <div class="reveal">
-                  <p class="font-semibold text-brand-blue">REAL DRIVERS, REAL RESULTS</p>
-                  <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 mt-2">Trusted by Over 25,000 Drivers</h2>
-                  <p class="mt-4 text-lg text-zinc-600">Learn why thousands of students trust our adaptive learning system to pass their CDL exam on the first try.</p>
-                  <div class="mt-8">
-                    <a href="/reviews" class="inline-flex items-center gap-2 rounded-full bg-zinc-900 text-white px-6 py-3 font-semibold hover:bg-zinc-700 transition">
-                      See All Success Stories <i class="ri-arrow-right-line"></i>
-                    </a>
-                  </div>
-                </div>
-    
-                <!-- Right Column: Scrolling Testimonials -->
-                <div class="reveal">
-                  <div class="relative max-h-[450px] overflow-y-auto space-y-6 p-1 [mask-image:linear-gradient(to_bottom,white_80%,transparent_100%)]">
+            <nav class="flex-grow overflow-y-auto">
+                <ul class="p-2 space-y-1 text-sm">
                     
-                    <!-- Testimonial 1 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-zinc-100">
-                      <blockquote class="text-zinc-700">"I now have my CDL class A and it all started here. I was able to get my permit in less then 15 minutes, each test took me less then 4 minutes."</blockquote>
-                      <p class="text-sm font-semibold mt-3 text-zinc-900">— Vernice T.</p>
-                    </div>
-    
-                    <!-- Testimonial 2 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-zinc-100">
-                      <blockquote class="text-zinc-700">"This saved me hundreds, if not thousands, of dollars. The woman at the counter was floored."</blockquote>
-                      <p class="text-sm font-semibold mt-3 text-zinc-900">— Preston L.</p>
-                    </div>
-    
-                    <!-- Testimonial 3 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-zinc-100">
-                        <blockquote class="text-zinc-700">"As a military vet, I appreciate a clear plan. The system gave me clear objectives and I watched my readiness score go from 73% to 94% in two weeks."</blockquote>
-                        <p class="text-sm font-semibold mt-3 text-zinc-900">— Jason M.</p>
-                    </div>
-    
-                    <!-- Testimonial 4 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-zinc-100">
-                        <blockquote class="text-zinc-700">"As a single mom working two jobs, the mobile app was a lifesaver. The personalized plan meant I didn't waste a minute."</blockquote>
-                        <p class="text-sm font-semibold mt-3 text-zinc-900">— Sarah K.</p>
-                    </div>
-    
-                  </div>
+                    <!-- Group: Free User Flow -->
+                    <details open>
+                        <summary class="p-2 font-semibold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-2">
+                            <i class="ri-user-line text-base text-blue-600"></i>
+                            <span>Free User Flow</span>
+                        </summary>
+                        <ul class="pl-2 pt-1 space-y-1">
+                            <li><a href="home.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">1. Arrives on Homepage</a></li>
+                            <li><a href="03-assessment-intro.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">2. Starts Free Assessment</a></li>
+                            <li><a href="assessment.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">3. Takes Assessment</a></li>
+                            <li><a href="15-test-results.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">4. Sees Assessment Results</a></li>
+                            <li><a href="auth.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">5. Creates Free Account</a></li>
+                            <li><a href="02-segment-selection.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">6. Onboarding: Selects Class</a></li>
+                            <li><a href="06-path-customization.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">7. Onboarding: Customizes Path</a></li>
+                            <li><a href="07-dashboard-free.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">8. Lands on Free Dashboard</a></li>
+                            <li><a href="gate-upgrade.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">9. Hits Upgrade Gate</a></li>
+                            <li><a href="pricing.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">10. Views Pricing Page</a></li>
+                        </ul>
+                    </details>
+
+                    <!-- Group: Paid User Flow -->
+                    <details open>
+                        <summary class="p-2 font-semibold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-2">
+                            <i class="ri-star-fill text-base text-amber-500"></i>
+                            <span>Paid User Flow</span>
+                        </summary>
+                        <ul class="pl-2 pt-1 space-y-1">
+                            <li><a href="pricing.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">1. Chooses Plan on Pricing</a></li>
+                            <li><a href="auth.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">2. Creates Account</a></li>
+                            <li><a href="02-segment-selection.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">3. Onboarding: Selects Class</a></li>
+                            <li><a href="06-path-customization.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">4. Onboarding: Customizes Path</a></li>
+                            <li><a href="07-dashboard-paid.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">5. Lands on Paid Dashboard</a></li>
+                            <li><a href="13-practice-tests.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">6. Accesses All Practice Tests</a></li>
+                            <li><a href="11-progress-report.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">7. Views Full Progress Report</a></li>
+                        </ul>
+                    </details>
+
+                    <!-- Group: Standalone & Utility Screens -->
+                    <details>
+                        <summary class="p-2 font-semibold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-2">
+                            <i class="ri-tools-fill text-base"></i>
+                            <span>Utility & Standalone</span>
+                        </summary>
+                        <ul class="pl-2 pt-1 space-y-1">
+                            <li><a href="auth.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Authentication</a></li>
+                            <li><a href="guideline.md" target="preview-frame" class="sidebar-link block p-2 rounded-md">Design Guideline</a></li>
+                        </ul>
+                    </details>
+
+                    <!-- Group: Question Component Gallery -->
+                    <details>
+                        <summary class="p-2 font-semibold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-2">
+                            <i class="ri-gallery-fill text-base"></i>
+                            <span>Question Gallery</span>
+                        </summary>
+                        <ul class="pl-2 pt-1 space-y-1">
+                            <li><a href="14a-mcq.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">MCQ</a></li>
+                            <li><a href="14b-media-mcq.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Media MCQ</a></li>
+                            <li><a href="14c-checkboxes.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Checkboxes</a></li>
+                            <li><a href="14d-numeric-input.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Numeric Input</a></li>
+                            <li><a href="14e-hotspot.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Hotspot</a></li>
+                            <li><a href="14f-dropdown.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Dropdown</a></li>
+                            <li><a href="14g-short-text.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Short Text</a></li>
+                            <li><a href="14h-true-false.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">True/False</a></li>
+                            <li><a href="14i-sequencing.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Sequencing</a></li>
+                            <li><a href="14j-matching.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Matching</a></li>
+                            <li><a href="14k-slider.html" target="preview-frame" class="sidebar-link block p-2 rounded-md">Slider/Range</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col p-4 sm:p-6 lg:p-8 overflow-y-auto">
+            <div class="flex-shrink-0 flex justify-between items-center mb-4 h-16">
+                <div id="screen-title-container" class="flex items-center gap-3 text-lg font-semibold text-zinc-900">
+                    <!-- Title will be populated by JS -->
                 </div>
-    
-              </div>
+                <div class="flex items-center gap-2 p-1 bg-zinc-200 rounded-lg">
+                    <button id="mobile-view-btn" class="px-3 py-1 text-sm font-semibold bg-white text-zinc-900 rounded-md shadow-sm">Mobile</button>
+                    <button id="desktop-view-btn" class="px-3 py-1 text-sm font-semibold text-zinc-600">Desktop</button>
+                </div>
             </div>
-          </section>
-    
-        <!-- Pricing (Merged & Final Version) -->
-        <section id="pricing" class="py-16 md:py-24">
-            <div class="mx-auto max-w-6xl container-pad">
-              <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-4 reveal">
-                  <i class="ri-shield-check-fill"></i>
-                  Official FMCSA Provider #CDL-2024-0892
+            <div class="flex-grow flex items-center justify-center">
+                <div id="preview-container" class="bg-white rounded-3xl shadow-2xl ring-8 ring-zinc-900 mobile-frame">
+                    <iframe name="preview-frame" class="w-full h-full rounded-[22px]" frameborder="0"></iframe>
                 </div>
-                <h2 class="text-3xl font-bold text-zinc-900 mb-4 reveal">Complete CDL Certification Program </h2>
-                <p class="text-zinc-600 max-w-2xl mx-auto reveal">Everything you need to get certified and pass your exam. One-time payment, lifetime access, money-back guarantee. </p>
-              </div>
-
-              <div class="flex justify-center items-center mb-16">
-                <img src="assets/federal-motor-carrier-safety-administration-provider.svg" alt="FMCSA Provider" class="h-10 w-auto px-4">
-                <img src="assets/training-provider-registry.svg" alt="Training Provider Registry" class="h-10 w-auto px-4">
-        
-              </div>
-    
-              <div class="grid md:grid-cols-2 gap-8 items-stretch">
-                
-                <!-- Option 1: Free Assessment -->
-                <div class="bg-white p-8 rounded-2xl border-2 border-zinc-200 reveal flex flex-col">
-                  <div class="flex-grow">
-                    <h3 class="text-2xl font-bold mb-2">Free Diagnostic Assessment</h3>
-                    <div class="text-4xl font-bold mb-4">$0 <span class="text-lg font-normal text-zinc-500">Always Free</span></div>
-                    <p class="text-zinc-600 mb-6">Perfect for getting started. See your current knowledge level and get a personalized plan before you commit.</p>
-                    <ul class="space-y-3 mb-8">
-                      <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-green-500 text-lg mt-0.5"></i><span>10-minute diagnostic assessment</span></li>
-                      <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-green-500 text-lg mt-0.5"></i><span>Personalized study plan & Readiness Score</span></li>
-                      <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-green-500 text-lg mt-0.5"></i><span>Basic practice questions</span></li>
-                      <li class="flex items-start gap-3 text-zinc-400"><i class="ri-close-circle-line text-lg mt-0.5"></i><span>Official ELDT Certification</span></li>
-                      <li class="flex items-start gap-3 text-zinc-400"><i class="ri-close-circle-line text-lg mt-0.5"></i><span>All Endorsements & Exam Simulators</span></li>
-                      <li class="flex items-start gap-3 text-zinc-400"><i class="ri-close-circle-line text-lg mt-0.5"></i><span>Pass Guarantee</span></li>
-                    </ul>
-                  </div>
-                  <a href="assessment.html" class="mt-auto block w-full text-center bg-zinc-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-zinc-800 transition"> Take Free Assessment  <i class="ri-arrow-right-line"></i></a>
-                </div>
-    
-                <!-- Option 2: Complete Certification (Pay Now) -->
-                <div class="bg-white p-8 rounded-2xl border-2 border-brand-blue shadow-xl relative reveal flex flex-col">
-                  <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-blue text-white text-sm font-bold px-4 py-2 rounded-full">Most Popular</div>
-                  <div class="flex-grow">
-                    <h3 class="text-2xl font-bold mb-2">Complete ELDT + Exam Prep</h3>
-                    <div class="text-4xl font-bold mb-4">$147 <span class="text-lg font-normal text-zinc-500">One-Time Payment</span></div>
-                    <p class="text-zinc-600 mb-6">Everything you need to get your official ELDT certificate and pass your exam, guaranteed.</p>
-                    
-                    <div class="space-y-6 mb-8 text-sm">
-                      <div>
-                        <h4 class="font-semibold text-zinc-800 mb-3">✓ FMCSA ELDT Certification</h4>
-                        <ul class="space-y-2 pl-4">
-                          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-brand-blue"></i><span>Class A, B, and C ELDT certificates</span></li>
-                          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-brand-blue"></i><span>All endorsement certifications (H, P, S, N, T, X)</span></li>
-                          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-brand-blue"></i><span>Instant & automatic TPR reporting</span></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 class="font-semibold text-zinc-800 mb-3">✓ Complete Exam Preparation</h4>
-                        <ul class="space-y-2 pl-4">
-                          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-brand-blue"></i><span>Adaptive learning system & Readiness Score</span></li>
-                          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-brand-blue"></i><span>1,200+ exam-like questions & simulators</span></li>
-                          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-brand-blue"></i><span>9 CDL Cheat Sheets for quick review</span></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 class="font-semibold text-zinc-800 mb-3">✓ The Ultimate Guarantee</h4>
-                        <ul class="space-y-2 pl-4">
-                          <li class="flex items-start gap-2"><i class="ri-shield-check-fill text-green-500"></i><span>Pass on your first try or get a full refund</span></li>
-                          <li class="flex items-start gap-2"><i class="ri-shield-check-fill text-green-500"></i><span>We also pay for your retest if you fail</span></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <a href="/purchase" class="mt-auto block w-full text-center bg-brand-blue text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition">Get Complete Program</a>
-                  <p class="text-xs text-zinc-500 mt-3 text-center">One-time payment • Lifetime access</p>
-                </div>
-              </div>
             </div>
-          </section>
-    
-
-            <!-- Pass Guarantee Section -->
-            <section id="pass-guarantee" class="py-16 md:py-24">
-                <div class="mx-auto max-w-6xl container-pad">
-                  <div class="bg-zinc-900 text-white rounded-2xl p-8 md:p-12 reveal">
-                    <div class="grid md:grid-cols-3 items-center gap-8">
-                      
-                      <!-- Text & CTA -->
-                      <div class="md:col-span-2">
-                        <h2 class="text-3xl md:text-4xl font-bold">You'll Pass on Your First Try—Or We'll Pay for Your Retake.</h2>
-                        <p class="mt-4 text-zinc-300 max-w-2xl">
-                          We're so confident in our adaptive learning method that we offer the strongest guarantee in the industry. Complete our program, and if you don't pass your official knowledge test, we will refund 100% of your fee AND pay for your retest. No questions. No stress. No pressure.
-                        </p>
-                        <div class="mt-8">
-                          <a href="assessment.html" class="inline-flex items-center gap-2 rounded-lg bg-brand-blue text-white px-6 py-3 font-semibold hover:bg-blue-600 transition">
-                            Start the Free Assessment
-                          </a>
-                        </div>
-                      </div>
-        
-                      <!-- Icon -->
-                      <div class="hidden md:flex items-center justify-center">
-                        <i class="ri-shield-check-fill text-8xl text-brand-blue"></i>
-                      </div>
-        
-                    </div>
-                  </div>
-                </div>
-              </section>
-        
-
-              <section class="bg-white py-16">
-                <div class="mx-auto max-w-4xl container-pad">
-                  <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-zinc-900 mb-4">Frequently Asked Questions</h2>
-                    <p class="text-zinc-600">Common questions from students considering our program.</p>
-                  </div>
-            
-                  <div class="space-y-4">
-                    <details class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 cursor-pointer group">
-                      <summary class="font-semibold text-lg flex justify-between items-center list-none">
-                        <span>What makes CDL Institute different from other training programs?</span>
-                        <i class="ri-add-line text-2xl group-open:rotate-45 transition-transform"></i>
-                      </summary>
-                      <div class="mt-4 pt-4 border-t border-zinc-200 text-zinc-600">
-                        <p>We're the only FMCSA-approved provider using adaptive learning technology. Our diagnostic assessment identifies your exact knowledge gaps, then creates a personalized study path focusing 70% of your time on weak areas. This targeted approach is why our students have an 89% first-time pass rate compared to the 65% national average.</p>
-                        <p class="mt-3">Unlike generic online courses, our content was developed by former DOT inspectors with 25+ years of experience. Every question is based on real exam scenarios, not textbook theory.</p>
-                      </div>
-                    </details>
-            
-                    <details class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 cursor-pointer group">
-                      <summary class="font-semibold text-lg flex justify-between items-center list-none">
-                        <span>Is CDL Institute officially approved by FMCSA?</span>
-                        <i class="ri-add-line text-2xl group-open:rotate-45 transition-transform"></i>
-                      </summary>
-                      <div class="mt-4 pt-4 border-t border-zinc-200 text-zinc-600">
-                        <p>Yes. We are registered with FMCSA as Entry Level Driver Training Provider #CDL-2024-0892. You can verify our status on the official FMCSA Training Provider Registry at <a href="https://tpr.fmcsa.dot.gov" class="text-brand-blue underline">tpr.fmcsa.dot.gov</a>.</p>
-                        <p class="mt-3">Upon completing our ELDT theory course, your certificate is automatically reported to the TPR within 24 hours. No additional paperwork required.</p>
-                      </div>
-                    </details>
-            
-                    <details class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 cursor-pointer group" open="">
-                      <summary class="font-semibold text-lg flex justify-between items-center list-none">
-                        <span>What is your actual pass rate and how do you track it?</span>
-                        <i class="ri-add-line text-2xl group-open:rotate-45 transition-transform"></i>
-                      </summary>
-                      <div class="mt-4 pt-4 border-t border-zinc-200 text-zinc-600">
-                        <p>89% of our students pass their CDL exam on the first attempt. This is based on verified outcomes from 847 students who completed our program between January 2023 and December 2024.</p>
-                        <p class="mt-3">We track results through follow-up surveys sent 30 days after course completion, plus voluntary reporting from students. We exclude students who didn't complete the full program or take their exam within 90 days.</p>
-                        <p class="mt-3">For comparison, the national first-time CDL pass rate is approximately 65% according to FMCSA data.</p>
-                      </div>
-                    </details>
-            
-                    <details class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 cursor-pointer group">
-                      <summary class="font-semibold text-lg flex justify-between items-center list-none">
-                        <span>How long does it take to complete the program and get my CDL?</span>
-                        <i class="ri-add-line text-2xl group-open:rotate-45 transition-transform"></i>
-                      </summary>
-                      <div class="mt-4 pt-4 border-t border-zinc-200 text-zinc-600">
-                        <p>Most students complete our ELDT theory course in 2-3 weeks studying 1-2 hours per day. The adaptive system adjusts to your pace—if you're already knowledgeable, you might finish in a week. If you need more time on certain topics, the system gives you that time.</p>
-                        <p class="mt-3">After ELDT completion, you'll need behind-the-wheel training (we provide referrals to qualified instructors), then schedule your state exam. Total time from start to CDL in hand is typically 4-8 weeks depending on your state's scheduling.</p>
-                      </div>
-                    </details>
-            
-                    <details class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 cursor-pointer group">
-                      <summary class="font-semibold text-lg flex justify-between items-center list-none">
-                        <span>What exactly does your pass guarantee cover?</span>
-                        <i class="ri-add-line text-2xl group-open:rotate-45 transition-transform"></i>
-                      </summary>
-                      <div class="mt-4 pt-4 border-t border-zinc-200 text-zinc-600">
-                        <p>If you complete our full program and don't pass your CDL knowledge test within 90 days, we provide:</p>
-                        <ul class="mt-3 space-y-2 list-disc list-inside">
-                          <li>100% refund of your program fee</li>
-                          <li>Payment for your next test attempt (up to $50)</li>
-                          <li>Additional study materials and one-on-one coaching</li>
-                        </ul>
-                        <p class="mt-3">The guarantee applies to the knowledge test only. Behind-the-wheel skills testing depends on your practical training, which we don't provide directly (but we can refer you to qualified instructors).</p>
-                      </div>
-                    </details>
-            
-                    <details class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 cursor-pointer group">
-                      <summary class="font-semibold text-lg flex justify-between items-center list-none">
-                        <span>Can I study on my mobile phone?</span>
-                        <i class="ri-add-line text-2xl group-open:rotate-45 transition-transform"></i>
-                      </summary>
-                      <div class="mt-4 pt-4 border-t border-zinc-200 text-zinc-600">
-                        <p>Yes. Our platform is mobile-optimized and works perfectly on phones, tablets, and computers. Many students do most of their studying on mobile during lunch breaks, commutes, or downtime.</p>
-                        <p class="mt-3">All features are available on mobile: diagnostic assessment, adaptive practice questions, progress tracking, and study materials. Your progress syncs across all devices automatically.</p>
-                      </div>
-                    </details>
-                  </div>
-            
-                  <div class="text-center mt-8">
-                    <a href="faq.html" class="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline">
-                      View All Questions <i class="ri-arrow-right-line"></i>
-                    </a>
-                  </div>
-                </div>
-              </section>
-
-      <!-- Final CTA -->
-      <section id="final-cta" class="bg-zinc-900 text-white py-16 md:py-24">
-        <div class="mx-auto max-w-5xl container-pad text-center reveal">
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">Your New Career is Waiting. Are You Ready?</h2>
-          <p class="text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
-            Take the free 10-minute assessment to see your current CDL Readiness Score and get your personalized plan to pass.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-            <a href="assessment.html" class="bg-brand-blue text-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-blue-700 transition inline-flex items-center justify-center gap-2">
-              Get My Readiness Score
-            </a>
-          </div>
-          <p class="text-sm text-zinc-400">No credit card required • Instant results • 100% free to start</p>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-zinc-950 text-zinc-300 border-t border-zinc-800">
-      <div class="mx-auto max-w-7xl container-pad py-16">
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 text-sm">
-          <div class="col-span-2 lg:col-span-1">
-            <a href="/" class="flex items-center gap-3 mb-4" aria-label="CDL Institute home">
-              <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-8 w-8">
-              <span class="font-bold text-lg tracking-tight text-white">CDL Institute</span>
-            </a>
-            <p class="text-zinc-400 max-w-xs">CDL Institute is an approved FMCSA theory provider for all 50 states and Washington D.C.</p>
-          </div>
-          <div>
-            <div class="font-semibold mb-4 text-white">Training</div>
-            <ul class="space-y-2">
-              <li><a href="assessment.html" class="hover:text-white">Free Assessment</a></li>
-              <li><a href="/pricing" class="hover:text-white">Pricing</a></li>
-              <li><a href="/practice-test" class="hover:text-white">Practice Tests</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="font-semibold mb-4 text-white">Resources</div>
-            <ul class="space-y-2">
-              <li><a href="/requirements-by-state" class="hover:text-white">State Requirements</a></li>
-              <li><a href="/cdl-salary-guide" class="hover:text-white">Salary Guide</a></li>
-              <li><a href="/endorsements" class="hover:text-white">Endorsements</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="font-semibold mb-4 text-white">Company</div>
-            <ul class="space-y-2">
-              <li><a href="/about-us" class="hover:text-white">About Us</a></li>
-              <li><a href="/success-stories" class="hover:text-white">Success Stories</a></li>
-              <li><a href="/faq" class="hover:text-white">FAQ</a></li>
-              <li><a href="/contact" class="hover:text-white">Contact</a></li>
-            </ul>
-          </div>
-          <div class="col-span-2 md:col-span-1">
-            <div class="font-semibold mb-4 text-white">Get Updates</div>
-            <form class="flex gap-2" action="#" method="post">
-              <label for="email" class="sr-only">Email</label>
-              <input id="email" name="email" type="email" required class="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder-zinc-500" placeholder="you@example.com" />
-              <button class="rounded-lg bg-brand-blue px-3 py-2 text-sm font-semibold" type="submit">Go</button>
-            </form>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>© <span id="year"></span> CDL Institute LLC. All rights reserved.</p>
-          <div class="flex items-center gap-4">
-            <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
-            <a href="/terms-of-service" class="hover:text-white">Terms of Service</a>
-            <a href="sitemap.html" class="hover:text-white">Sitemap</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- State Selector Dropdown (Hidden by default) -->
-    <div id="state-dropdown" class="hidden absolute top-full right-0 mt-2 w-72 bg-white border border-zinc-200 rounded-lg shadow-lg z-50 text-zinc-900">
-      <div class="p-2">
-        <input type="text" id="state-search" placeholder="Search for a state..." class="w-full px-3 py-2 border border-zinc-300 rounded-md text-sm">
-      </div>
-      <ul id="state-list" class="max-h-60 overflow-y-auto text-sm p-1">
-        <!-- States will be populated by JS -->
-      </ul>
-      <div class="p-2 border-t border-zinc-200">
-        <a href="/requirements" class="text-sm text-brand-blue font-semibold hover:underline">View All States &rarr;</a>
-      </div>
+        </main>
     </div>
 
-    <!-- Scripts -->
     <script>
-      function toggleNav() {
-        document.getElementById('mobileNav').classList.toggle('hidden');
-      }
+        document.addEventListener('DOMContentLoaded', function( ) {
+            const links = document.querySelectorAll('.sidebar-link');
+            const iframe = document.querySelector('iframe[name="preview-frame"]');
+            const screenTitleContainer = document.getElementById('screen-title-container');
+            const mobileBtn = document.getElementById('mobile-view-btn');
+            const desktopBtn = document.getElementById('desktop-view-btn');
+            const previewContainer = document.getElementById('preview-container');
+            const storageKey = 'cdl-prototype-last-page';
 
-      document.addEventListener('click', function (e) {
-        const a = e.target.closest('a[href^="#"]');
-        if (!a) return;
-        const id = a.getAttribute('href').slice(1);
-        const target = document.getElementById(id);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReduced && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in');
-              obs.unobserve(entry.target);
+            function updateActiveLink(activeLink) {
+                if (!activeLink) return;
+                
+                // Update active state in sidebar
+                links.forEach(l => l.classList.remove('active'));
+                activeLink.classList.add('active');
+                
+                // Update iframe source
+                iframe.src = activeLink.href;
+                
+                // Update header title with clickable URL
+                const pageName = activeLink.textContent.trim();
+                const pageUrl = activeLink.getAttribute('href');
+                screenTitleContainer.innerHTML = `
+                    <span>${pageName}</span>
+                    <a href="${pageUrl}" target="_blank" title="Open ${pageUrl} in new tab" class="font-mono font-normal text-sm text-zinc-400 hover:text-blue-600 hover:underline">
+                        ${pageUrl}
+                    </a>
+                `;
+                
+                // **NEW: Save the active URL to localStorage**
+                localStorage.setItem(storageKey, pageUrl);
             }
-          });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-      } else {
-        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-      }
 
-      document.getElementById('year').textContent = new Date().getFullYear();
+            // **NEW: Function to load the initial state**
+            function loadInitialState() {
+                const savedUrl = localStorage.getItem(storageKey);
+                let linkToLoad = null;
 
-      // Global State Selector Logic
-      document.addEventListener('DOMContentLoaded', function () {
-        const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
-        
-        const dropdownContainer = document.getElementById('state-dropdown-container');
-        const dropdown = document.getElementById('state-dropdown');
-        const dropdownButton = document.getElementById('state-selector-btn');
-        const stateList = document.getElementById('state-list');
-        const searchInput = document.getElementById('state-search');
-        const selectedStateNav = document.getElementById('selected-state-nav');
+                if (savedUrl) {
+                    // Find the link that matches the saved URL
+                    linkToLoad = document.querySelector(`.sidebar-link[href="${savedUrl}"]`);
+                }
 
-        // Append dropdown to the container for correct positioning
-        dropdownContainer.appendChild(dropdown);
+                // If no saved link is found, or it's the first visit, load the first link in the list
+                if (!linkToLoad) {
+                    linkToLoad = document.querySelector('.sidebar-link');
+                }
 
-        function populateStateList(filter = '') {
-          stateList.innerHTML = '';
-          const filteredStates = states.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-          
-          filteredStates.forEach(state => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            const stateSlug = state.toLowerCase().replace(/\s+/g, '-');
-            a.href = `/requirements/${stateSlug}`;
-            a.textContent = state;
-            a.className = 'block px-3 py-2 rounded-md hover:bg-zinc-100';
-            a.addEventListener('click', function(e) {
-              e.preventDefault();
-              selectedStateNav.textContent = state;
-              dropdown.classList.add('hidden');
-              window.location.href = this.href;
+                if (linkToLoad) {
+                    // Use a small timeout to ensure the iframe is ready
+                    setTimeout(() => {
+                        updateActiveLink(linkToLoad);
+                    }, 100);
+                }
+            }
+
+            // Add click listeners to all sidebar links
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    updateActiveLink(this);
+                });
             });
-            li.appendChild(a);
-            stateList.appendChild(li);
-          });
-        }
 
-        dropdownButton.addEventListener('click', (e) => {
-          e.stopPropagation();
-          dropdown.classList.toggle('hidden');
-          if (!dropdown.classList.contains('hidden')) {
-            searchInput.focus();
-          }
+            // Viewport toggle logic
+            mobileBtn.addEventListener('click', () => {
+                previewContainer.classList.remove('desktop-adaptive');
+                previewContainer.classList.add('mobile-frame');
+                mobileBtn.classList.add('bg-white', 'text-zinc-900', 'shadow-sm');
+                mobileBtn.classList.remove('text-zinc-600');
+                desktopBtn.classList.remove('bg-white', 'text-zinc-900', 'shadow-sm');
+                desktopBtn.classList.add('text-zinc-600');
+            });
+
+            desktopBtn.addEventListener('click', () => {
+                previewContainer.classList.remove('mobile-frame');
+                previewContainer.classList.add('desktop-adaptive');
+                desktopBtn.classList.add('bg-white', 'text-zinc-900', 'shadow-sm');
+                desktopBtn.classList.remove('text-zinc-600');
+                mobileBtn.classList.remove('bg-white', 'text-zinc-900', 'shadow-sm');
+                mobileBtn.classList.add('text-zinc-600');
+            });
+
+            // **NEW: Call the function to load the initial state**
+            loadInitialState();
         });
-
-        searchInput.addEventListener('keyup', () => {
-          populateStateList(searchInput.value);
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!dropdownContainer.contains(e.target)) {
-            dropdown.classList.add('hidden');
-          }
-        });
-
-        // Initial population
-        populateStateList();
-      });
     </script>
-  </body>
+</body>
 </html>
-

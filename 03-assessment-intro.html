@@ -18,9 +18,15 @@
             transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
         }
         .disclosure-content.open {
-            max-height: 500px; /* Set to a value larger than the content's expected height */
-            margin-top: 1.5rem; /* Corresponds to mt-6 */
+            max-height: 500px;
+            margin-top: 1.5rem;
         }
+
+        /* Styles for the full-screen mobile state selector panel */
+        #mobile-state-panel {
+            transition: transform 0.3s ease-in-out;
+        }
+        
         /* Helper for Tailwind config colors */
         .bg-brand-blue { background-color: #1E66FF; }
         .hover\:text-brand-blue:hover { color: #1E66FF; }
@@ -30,22 +36,30 @@
 <body class="bg-white text-zinc-900 antialiased">
 
     <!-- REFINED Header for Assessment Funnel -->
-    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm text-white">
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-sm text-white">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between h-16">
             
-            <!-- Left Side: Logo -->
+            <!-- Left Side: Logo + State Selector -->
             <div class="flex items-center gap-4">
-              <a href="index.html" class="flex items-center gap-3" aria-label="CDL Institute home">
+              <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home">
                 <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9">
                 <span class="font-bold text-lg tracking-tight text-white">CDL Institute</span>
               </a>
+              <!-- GEO State Selector (Desktop - Always Visible ) -->
+              <div class="hidden lg:flex relative" id="state-dropdown-container-desktop">
+                <button id="state-selector-btn-desktop" class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm">
+                  <i class="ri-map-pin-2-line"></i>
+                  <span id="selected-state-nav-desktop">California</span>
+                  <i class="ri-arrow-down-s-line"></i>
+                </button>
+              </div>
             </div>
             
-            <!-- Right Side: State Selector (Mobile ) & Login (Desktop) -->
+            <!-- Right Side: State Selector (Mobile) & Login (Desktop) -->
             <div class="flex items-center gap-6">
                 <!-- GEO State Selector (Mobile - Always Visible) -->
-                <div class="lg:hidden relative" id="state-dropdown-container-mobile">
+                <div class="lg:hidden">
                     <button id="state-selector-btn-mobile" class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm">
                       <i class="ri-map-pin-2-line"></i>
                       <span id="selected-state-nav-mobile">California</span>
@@ -148,22 +162,36 @@
         </div>
     </footer>
     
-    <!-- State Selector Dropdown (Hidden by default, used by JS) -->
-    <div id="state-dropdown" class="hidden absolute top-full mt-2 w-72 bg-white border border-zinc-200 rounded-lg shadow-lg z-50 text-zinc-900">
+    <!-- State Selector Dropdown (for Desktop) -->
+    <div id="state-dropdown-desktop" class="hidden absolute top-full mt-2 w-72 bg-white border border-zinc-200 rounded-lg shadow-lg z-50 text-zinc-900">
       <div class="p-2">
-        <input type="text" id="state-search" placeholder="Search for a state..." class="w-full px-3 py-2 border border-zinc-300 rounded-md text-sm">
+        <input type="text" id="state-search-desktop" placeholder="Search for a state..." class="w-full px-3 py-2 border border-zinc-300 rounded-md text-sm">
       </div>
-      <ul id="state-list" class="max-h-60 overflow-y-auto text-sm p-1">
-        <!-- States will be populated by JS -->
-      </ul>
+      <ul id="state-list-desktop" class="max-h-60 overflow-y-auto text-sm p-1"></ul>
       <div class="p-2 border-t border-zinc-200">
         <a href="/requirements" class="text-sm text-blue-600 font-semibold hover:underline">View All States &rarr;</a>
       </div>
     </div>
 
+    <!-- Full-Screen State Selector Panel (for Mobile) -->
+    <div id="mobile-state-panel" class="fixed inset-0 bg-white z-50 transform translate-y-full lg:hidden">
+        <div class="flex flex-col h-full">
+            <div class="flex-shrink-0 p-4 border-b border-zinc-200 flex items-center justify-between">
+                <h2 class="font-semibold">Select Your State</h2>
+                <button id="close-panel-btn" class="p-2 -mr-2">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-4 flex-shrink-0">
+                <input type="text" id="state-search-mobile" placeholder="Search for a state..." class="w-full px-3 py-2 border border-zinc-300 rounded-md text-sm">
+            </div>
+            <ul id="state-list-mobile" class="flex-grow overflow-y-auto p-4 space-y-2"></ul>
+        </div>
+    </div>
+
     <script>
-        // Progressive Disclosure Logic
         document.addEventListener('DOMContentLoaded', function() {
+            // Progressive Disclosure Logic
             const toggleButton = document.getElementById('toggle-topics');
             const topicsContent = document.getElementById('topics-content');
             const arrowIcon = toggleButton.querySelector('i');
@@ -173,74 +201,79 @@
                 const isOpen = topicsContent.classList.toggle('open');
                 arrowIcon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
             });
-        });
 
-        // State Selector Logic
-        document.addEventListener('DOMContentLoaded', function () {
+            // State Selector Logic
             const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
             
-            const dropdown = document.getElementById('state-dropdown');
-            const searchInput = document.getElementById('state-search');
-            const stateList = document.getElementById('state-list');
+            // --- Desktop Dropdown ---
+            const desktopBtn = document.getElementById('state-selector-btn-desktop');
+            const desktopDropdown = document.getElementById('state-dropdown-desktop');
+            const desktopContainer = document.getElementById('state-dropdown-container-desktop');
+            const desktopSearch = document.getElementById('state-search-desktop');
+            const desktopList = document.getElementById('state-list-desktop');
+            const desktopDisplay = document.getElementById('selected-state-nav-desktop');
 
-            function setupDropdown(button, container, stateDisplay) {
-                if (!button || !container || !dropdown) return;
-                
-                container.appendChild(dropdown);
-
-                button.addEventListener('click', (e) => {
+            if (desktopContainer && desktopDropdown) {
+                desktopContainer.appendChild(desktopDropdown);
+                desktopBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const isHidden = dropdown.classList.toggle('hidden');
+                    const isHidden = desktopDropdown.classList.toggle('hidden');
                     if (!isHidden) {
-                        // Position dropdown relative to the button
-                        const rect = button.getBoundingClientRect();
-                        dropdown.style.top = `${rect.bottom + window.scrollY}px`;
-                        dropdown.style.left = `${rect.left + window.scrollX}px`;
-                        if (searchInput) searchInput.focus();
+                        const rect = desktopBtn.getBoundingClientRect();
+                        desktopDropdown.style.top = `${rect.bottom + window.scrollY + 8}px`;
+                        desktopDropdown.style.left = `${rect.left + window.scrollX}px`;
+                        desktopSearch.focus();
                     }
                 });
             }
 
-            function populateStateList(filter = '') {
-                if (!stateList) return;
-                stateList.innerHTML = '';
-                const filteredStates = states.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+            // --- Mobile Panel ---
+            const mobileBtn = document.getElementById('state-selector-btn-mobile');
+            const mobilePanel = document.getElementById('mobile-state-panel');
+            const closePanelBtn = document.getElementById('close-panel-btn');
+            const mobileSearch = document.getElementById('state-search-mobile');
+            const mobileList = document.getElementById('state-list-mobile');
+            const mobileDisplay = document.getElementById('selected-state-nav-mobile');
+
+            mobileBtn.addEventListener('click', () => mobilePanel.style.transform = 'translateY(0)');
+            closePanelBtn.addEventListener('click', () => mobilePanel.style.transform = 'translateY(100%)');
+
+            // --- Shared Logic ---
+            function populateList(listElement, searchInput) {
+                const filter = searchInput.value.toLowerCase();
+                listElement.innerHTML = '';
+                const filteredStates = states.filter(s => s.toLowerCase().includes(filter));
                 
                 filteredStates.forEach(state => {
                     const li = document.createElement('li');
                     const a = document.createElement('a');
-                    a.href = `#`; // No navigation, just state change
+                    a.href = `#`;
                     a.textContent = state;
-                    a.className = 'block px-3 py-2 rounded-md hover:bg-zinc-100';
+                    a.className = 'block p-3 rounded-md hover:bg-zinc-100';
                     a.addEventListener('click', function(e) {
                         e.preventDefault();
-                        document.querySelectorAll('#selected-state-nav, #selected-state-nav-mobile').forEach(el => el.textContent = state);
-                        if(dropdown) dropdown.classList.add('hidden');
+                        desktopDisplay.textContent = state;
+                        mobileDisplay.textContent = state;
+                        if (desktopDropdown) desktopDropdown.classList.add('hidden');
+                        if (mobilePanel) mobilePanel.style.transform = 'translateY(100%)';
                     });
                     li.appendChild(a);
-                    stateList.appendChild(li);
+                    listElement.appendChild(li);
                 });
             }
 
-            // Setup for both desktop and mobile buttons
-            setupDropdown(
-                document.getElementById('state-selector-btn-mobile'),
-                document.getElementById('state-dropdown-container-mobile'),
-                document.getElementById('selected-state-nav-mobile')
-            );
-            
-            if (searchInput) {
-                searchInput.addEventListener('keyup', () => populateStateList(searchInput.value));
-            }
+            desktopSearch.addEventListener('keyup', () => populateList(desktopList, desktopSearch));
+            mobileSearch.addEventListener('keyup', () => populateList(mobileList, mobileSearch));
 
             document.addEventListener('click', (e) => {
-                const mobileContainer = document.getElementById('state-dropdown-container-mobile');
-                if (mobileContainer && !mobileContainer.contains(e.target) && dropdown) {
-                    dropdown.classList.add('hidden');
+                if (desktopContainer && !desktopContainer.contains(e.target)) {
+                    desktopDropdown.classList.add('hidden');
                 }
             });
 
-            populateStateList();
+            // Initial population
+            populateList(desktopList, desktopSearch);
+            populateList(mobileList, mobileSearch);
         });
     </script>
 
