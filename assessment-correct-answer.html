@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment - Correct | CDL Institute</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .bg-brand-blue { background-color: #1E66FF; }
+        .hover\:bg-brand-blue-dark:hover { background-color: #0052cc; }
+    </style>
+</head>
+<body class="bg-zinc-50">
+
+    <!-- Assessment Header -->
+    <header class="bg-white sticky top-0 z-30 shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="03-assessment-intro.html" class="flex items-center gap-2 text-sm font-semibold text-zinc-600 hover:text-zinc-900">
+                    <i class="ri-arrow-left-line text-xl"></i>
+                    <span>Exit Assessment</span>
+                </a>
+                <div class="font-semibold text-zinc-800">
+                    Question 1 of 20
+                </div>
+            </div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="w-full bg-zinc-200 h-1.5">
+            <div class="bg-brand-blue h-1.5" style="width: 5%"></div>
+        </div>
+    </header>
+
+    <!-- Main Question Content -->
+    <main>
+        <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+            
+            <!-- Question Component (MCQ Example ) -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg ring-1 ring-zinc-200">
+                <p class="text-sm font-semibold text-zinc-500">Topic: General Knowledge</p>
+                <h1 class="mt-2 text-xl font-bold text-zinc-900">When backing a truck, you should try to do which of the following?</h1>
+                <div class="mt-6 space-y-4">
+                    <!-- Correct Answer State -->
+                    <button class="w-full text-left p-4 rounded-lg border-2 border-green-500 bg-green-50 ring-2 ring-green-200" disabled>A. Back toward the driver's side.</button>
+                    <button class="w-full text-left p-4 rounded-lg border-2 border-zinc-200 opacity-50" disabled>B. Back toward the passenger's side.</button>
+                    <button class="w-full text-left p-4 rounded-lg border-2 border-zinc-200 opacity-50" disabled>C. Back and turn with the trailer's rear.</button>
+                    <button class="w-full text-left p-4 rounded-lg border-2 border-zinc-200 opacity-50" disabled>D. Rely solely on your mirrors.</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Sticky Footer with Feedback -->
+    <footer class="sticky bottom-0 bg-white/90 py-4 shadow-lg backdrop-blur-sm ring-1 ring-zinc-200">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center gap-4">
+            <!-- Feedback Message -->
+            <div class="flex items-center gap-2 text-green-600 font-semibold">
+                <i class="ri-check-line text-2xl"></i>
+                <span>Correct!</span>
+            </div>
+            <!-- Next Question CTA -->
+            <a href="assessment-q2.html" class="w-full sm:w-auto sm:ml-auto inline-flex items-center justify-center rounded-xl bg-brand-blue px-12 py-3 text-base font-semibold text-white shadow-md hover:bg-brand-blue-dark">
+                Next Question
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

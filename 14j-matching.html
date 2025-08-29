@@ -3,45 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question: Matching</title>
+    <title>Q10: Matching | CDL Assessment</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; color: #18181b; }
+        .matching-item { 
+            padding: 1rem; 
+            border: 1px solid #e4e4e7; 
+            border-radius: 0.75rem; 
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-select { 
+            width: 100%; 
+            padding: 0.75rem 1rem; 
+            border: 1px solid #d4d4d8; 
+            border-radius: 0.5rem; 
+            background-color: white; 
+            -webkit-appearance: none; 
+            appearance: none; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1a1aa'%3E%3Cpath d='M12 14L8 10H16L12 14Z'%3E%3C/path%3E%3C/svg%3E" ); 
+            background-repeat: no-repeat; 
+            background-position: right 0.5rem center; 
+            background-size: 1.5em 1.5em; 
+            padding-right: 2.5rem; 
+            transition: all 150ms ease-in-out;
+        }
+        /* ADDED: Correct and Incorrect styles for the select dropdown */
+        .form-select.correct { 
+            border-color: #16a34a; 
+            background-color: #f0fdf4; 
+            color: #14532d;
+            font-weight: 500;
+        }
+        .form-select.incorrect { 
+            border-color: #dc2626; 
+            background-color: #fef2f2; 
+            color: #991b1b;
+            font-weight: 500;
+        }
+        .feedback-box { display: none; margin-top: 1rem; padding: 1rem; border-radius: 0.75rem; }
+        .feedback-box.correct { display: block; border: 1px solid #a7f3d0; background-color: #f0fdf4; }
+        .feedback-box.incorrect { display: block; border: 1px solid #fecaca; background-color: #fef2f2; }
+        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="app-header">
-            <div class="leading">
-                <a href="03-assessment-intro.html" class="p-2 -ml-2"><i class="ri-close-line text-2xl"></i></a>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 bg-black/90 backdrop-blur-sm text-white">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                  <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9"><span class="font-semibold text-lg tracking-tight text-white">CDL Institute</span></a>
+                  <div class="hidden lg:flex relative"><button class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm"><i class="ri-map-pin-2-line"></i><span>California</span><i class="ri-arrow-down-s-line"></i></button></div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden lg:flex items-center gap-6"><a href="auth.html" class="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition font-medium">Login</a><a href="pricing.html" class="inline-flex items-center gap-2 rounded-lg bg-green-400/20 text-green-300 px-4 py-2 text-sm font-semibold hover:bg-green-400/30 hover:text-white"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+                    <div class="lg:hidden"><button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button></div>
+                </div>
+              </div>
             </div>
-            <div class="title">Question 10 of 11</div>
-            <div class="trailing">
-                <div class="h-2 w-16 bg-zinc-200 rounded-full"><div class="h-full bg-zinc-900 rounded-full" style="width: 91%;"></div></div>
-            </div>
+            <div class="flex h-1 w-full bg-zinc-700"><div class="h-full bg-blue-600" style="width:91%;"></div></div>
         </header>
-        <main class="app-content">
-            <h1 class="text-xl font-semibold mb-6">Match each component to its purpose.</h1>
-            <form class="space-y-4">
-                <div class="p-4 rounded-xl border border-zinc-200">
-                    <label for="match1" class="font-semibold">Slack adjuster</label>
-                    <select id="match1" class="form-input bg-white mt-2">
-                        <option disabled selected>Select purpose...</option>
-                        <option>Maintains proper brake shoe-to-drum clearance</option>
-                        <option>Connects air brake hoses</option>
-                    </select>
-                </div>
-                <div class="p-4 rounded-xl border border-zinc-200">
-                    <label for="match2" class="font-semibold">Glad hand</label>
-                    <select id="match2" class="form-input bg-white mt-2">
-                        <option disabled selected>Select purpose...</option>
-                        <option>Maintains proper brake shoe-to-drum clearance</option>
-                        <option>Connects air brake hoses</option>
-                    </select>
-                </div>
-            </form>
+
+        <!-- Main Content -->
+        <main class="flex-grow w-full max-w-3xl mx-auto py-8 sm:py-12">
+            <div class="px-4 sm:px-6 lg:px-8" id="question-content">
+                <!-- Question content will be injected by JS -->
+            </div>
         </main>
-        <footer class="p-4 border-t border-zinc-200">
-            <a href="14k-slider.html" class="btn btn-primary w-full">Submit Answer</a>
+
+        <!-- Sticky Footer -->
+        <footer class="sticky bottom-0 bg-white/80 py-3 backdrop-blur-sm border-t border-zinc-200 sm:hidden">
+            <div class="mx-auto max-w-3xl px-4" id="mobile-footer-content"></div>
         </footer>
     </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel" class="fixed inset-0 z-50 transform translate-x-full lg:hidden">
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 opacity-0 hidden"></div>
+        <div class="relative bg-zinc-100 h-full w-full max-w-sm ml-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 flex items-center justify-between border-b border-zinc-200"><a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8"><span class="font-semibold text-lg text-zinc-800">CDL Institute</span></a><button id="close-menu-btn" class="p-2 -mr-2 text-zinc-500 hover:text-zinc-900"><i class="ri-close-line text-2xl"></i></button></div>
+            <div class="flex-grow p-4 space-y-2 overflow-y-auto"><div class="grid grid-cols-2 gap-2"><a href="home.html" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-arrow-left-s-line"></i> Back to Home</a><a href="#" id="restart-btn" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-restart-line"></i> Restart</a></div><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bar-chart-line text-lg"></i> Test progress</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-settings-3-line text-lg"></i> Test settings</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bookmark-line text-lg"></i> Challenge Bank™</span><span class="text-blue-600 font-bold">5 Questions</span></a><a href="#" class="flex items-center gap-3 text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><i class="ri-book-open-line text-lg"></i> Driver's License Handbook</a></div>
+            <div class="flex-shrink-0 p-4 border-t border-zinc-200"><a href="pricing.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 text-white px-4 py-3 text-base font-semibold hover:bg-green-500"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+        </div>
+    </div>
+    <script>
+        const questionData = {
+            question_text: "Match each placard to the hazard class it represents.",
+            terms: ["1.4", "2.1", "3", "8"],
+            options: ["Explosives", "Flammable Gas", "Flammable Liquid", "Corrosive"],
+            correct_matches: {
+                "1.4": "Explosives",
+                "2.1": "Flammable Gas",
+                "3": "Flammable Liquid",
+                "8": "Corrosive"
+            },
+            explanation: "Placards are essential for identifying hazardous materials. Class 1.4 are minor explosives, 2.1 are flammable gases, 3 are flammable liquids, and 8 are corrosive substances."
+        };
+
+        const questionContainer = document.getElementById('question-content');
+        const mobileFooter = document.getElementById('mobile-footer-content');
+        let isAnswered = false;
+
+        function renderQuestion() {
+            let optionsHTML = questionData.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+            
+            let itemsHTML = questionData.terms.map(term => `
+                <div class="matching-item">
+                    <label for="match-${term}" class="font-semibold text-zinc-700 mb-2">Placard: ${term}</label>
+                    <select id="match-${term}" data-term="${term}" class="form-select">
+                        <option value="" disabled selected>Select a hazard class...</option>
+                        ${optionsHTML}
+                    </select>
+                </div>`).join('');
+
+            questionContainer.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-semibold text-zinc-500"><i class="ri-list-ordered"></i> Question 10/11</span>
+                    <span class="flex items-center gap-1 text-sm font-semibold text-zinc-500"><i class="ri-fire-fill"></i> Streak: 0</span>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight">${questionData.question_text}</h2>
+                <div class="mt-6 space-y-4">${itemsHTML}</div>
+                <div id="feedback-box" class="feedback-box"></div>
+                <div id="desktop-footer" class="hidden sm:block mt-6"></div>
+            `;
+            attachListeners();
+        }
+
+        function handleSubmit() {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            let allCorrect = true;
+            const selects = document.querySelectorAll('.form-select');
+            
+            // CORRECTED: This loop now correctly applies the visual feedback classes.
+            selects.forEach(select => {
+                const term = select.dataset.term;
+                const userAnswer = select.value;
+                const correctAnswer = questionData.correct_matches[term];
+                select.disabled = true;
+
+                if (userAnswer === correctAnswer) {
+                    select.classList.add('correct');
+                } else {
+                    select.classList.add('incorrect');
+                    allCorrect = false;
+                }
+            });
+
+            const feedbackBox = document.getElementById('feedback-box');
+            if (allCorrect) {
+                feedbackBox.classList.add('correct');
+                feedbackBox.innerHTML = `<p class="font-semibold text-green-800">Perfect Match!</p><p class="mt-1 text-sm text-green-700">${questionData.explanation}</p>`;
+            } else {
+                feedbackBox.classList.add('incorrect');
+                feedbackBox.innerHTML = `<p class="font-semibold text-red-800">Not quite.</p><p class="mt-1 text-sm text-red-700">${questionData.explanation}</p>`;
+            }
+            renderFooter(true, true);
+        }
+
+        function renderFooter(isSubmittable, isSubmitted = false) {
+            let buttonHTML;
+            if (isSubmitted) {
+                buttonHTML = `<button onclick="alert('Next question would load.')" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700">Next Question</button>`;
+            } else {
+                buttonHTML = `<button id="submit-btn" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700 disabled:bg-zinc-400 disabled:cursor-not-allowed" ${!isSubmittable ? 'disabled' : ''}>Submit Matches</button>`;
+            }
+            document.getElementById('desktop-footer').innerHTML = buttonHTML;
+            mobileFooter.innerHTML = buttonHTML;
+            if (!isSubmitted) {
+                document.getElementById('submit-btn')?.addEventListener('click', handleSubmit);
+            }
+        }
+
+        function attachListeners() {
+            let allSelected = false;
+            const selects = document.querySelectorAll('.form-select');
+            selects.forEach(select => {
+                select.addEventListener('change', () => {
+                    allSelected = Array.from(selects).every(s => s.value !== "");
+                    renderFooter(allSelected);
+                });
+            });
+            renderFooter(false);
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderQuestion);
+
+        // Menu functionality
+        const menu = { panel: document.getElementById('mobile-menu-panel'), overlay: document.getElementById('mobile-menu-overlay'), openBtn: document.getElementById('mobile-menu-btn'), closeBtn: document.getElementById('close-menu-btn') };
+        function openMenu() { menu.panel.style.transform = 'translateX(0)'; menu.overlay.classList.remove('hidden'); setTimeout(() => menu.overlay.classList.remove('opacity-0'), 10); }
+        function closeMenu() { menu.panel.style.transform = 'translateX(100%)'; menu.overlay.classList.add('opacity-0'); setTimeout(() => menu.overlay.classList.add('hidden'), 300); }
+        menu.openBtn?.addEventListener('click', openMenu);
+        menu.closeBtn?.addEventListener('click', closeMenu);
+        menu.overlay?.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>

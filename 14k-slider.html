@@ -3,38 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question: Slider</title>
+    <title>Q11: Slider | CDL Assessment</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; color: #18181b; }
+        .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #e4e4e7; border-radius: 9999px; outline: none; transition: opacity .2s; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #2563eb; border-radius: 50%; cursor: pointer; }
+        .slider::-moz-range-thumb { width: 24px; height: 24px; background: #2563eb; border-radius: 50%; cursor: pointer; }
+        .slider.disabled { opacity: 0.6; pointer-events: none; }
+        .slider.correct::-webkit-slider-thumb { background: #16a34a; }
+        .slider.correct::-moz-range-thumb { background: #16a34a; }
+        .slider.incorrect::-webkit-slider-thumb { background: #dc2626; }
+        .slider.incorrect::-moz-range-thumb { background: #dc2626; }
+        
+        .feedback-box { display: none; margin-top: 1rem; padding: 1rem; border-radius: 0.75rem; }
+        .feedback-box.correct { display: block; border: 1px solid #a7f3d0; background-color: #f0fdf4; }
+        .feedback-box.incorrect { display: block; border: 1px solid #fecaca; background-color: #fef2f2; }
+        
+        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="app-header">
-            <div class="leading">
-                <a href="03-assessment-intro.html" class="p-2 -ml-2"><i class="ri-close-line text-2xl"></i></a>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 bg-black/90 backdrop-blur-sm text-white">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                  <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9"><span class="font-semibold text-lg tracking-tight text-white">CDL Institute</span></a>
+                  <div class="hidden lg:flex relative"><button class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm"><i class="ri-map-pin-2-line"></i><span>California</span><i class="ri-arrow-down-s-line"></i></button></div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden lg:flex items-center gap-6"><a href="auth.html" class="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition font-medium">Login</a><a href="pricing.html" class="inline-flex items-center gap-2 rounded-lg bg-green-400/20 text-green-300 px-4 py-2 text-sm font-semibold hover:bg-green-400/30 hover:text-white"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+                    <div class="lg:hidden"><button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button></div>
+                </div>
+              </div>
             </div>
-            <div class="title">Question 11 of 11</div>
-            <div class="trailing">
-                <div class="h-2 w-16 bg-zinc-200 rounded-full"><div class="h-full bg-zinc-900 rounded-full" style="width: 100%;"></div></div>
-            </div>
+            <div class="flex h-1 w-full bg-zinc-700"><div class="h-full bg-blue-600" style="width:100%;"></div></div>
         </header>
-        <main class="app-content">
-            <h1 class="text-xl font-semibold mb-6">Use the slider to select the recommended minimum tread depth for steering axle tires.</h1>
-            <form>
-                <div class="text-center mb-4">
-                    <span class="text-3xl font-bold">4/32"</span>
-                    <span class="text-zinc-500">inch</span>
-                </div>
-                <input type="range" min="1" max="8" step="1" value="4" class="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[var(--brand-ink )]">
-                <div class="flex justify-between text-xs text-zinc-500 mt-2">
-                    <span>1/32"</span>
-                    <span>8/32"</span>
-                </div>
-            </form>
+
+        <!-- Main Content -->
+        <main class="flex-grow w-full max-w-3xl mx-auto py-8 sm:py-12">
+            <div class="px-4 sm:px-6 lg:px-8" id="question-content">
+                <!-- Question content will be injected by JS -->
+            </div>
         </main>
-        <footer class="p-4 border-t border-zinc-200">
-            <a href="15-test-results.html" class="btn btn-primary w-full">Submit Answer</a>
+
+        <!-- Sticky Footer -->
+        <footer class="sticky bottom-0 bg-white/80 py-3 backdrop-blur-sm border-t border-zinc-200 sm:hidden">
+            <div class="mx-auto max-w-3xl px-4" id="mobile-footer-content"></div>
         </footer>
     </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel" class="fixed inset-0 z-50 transform translate-x-full lg:hidden">
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 opacity-0 hidden"></div>
+        <div class="relative bg-zinc-100 h-full w-full max-w-sm ml-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 flex items-center justify-between border-b border-zinc-200"><a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8"><span class="font-semibold text-lg text-zinc-800">CDL Institute</span></a><button id="close-menu-btn" class="p-2 -mr-2 text-zinc-500 hover:text-zinc-900"><i class="ri-close-line text-2xl"></i></button></div>
+            <div class="flex-grow p-4 space-y-2 overflow-y-auto"><div class="grid grid-cols-2 gap-2"><a href="home.html" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-arrow-left-s-line"></i> Back to Home</a><a href="#" id="restart-btn" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-restart-line"></i> Restart</a></div><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bar-chart-line text-lg"></i> Test progress</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-settings-3-line text-lg"></i> Test settings</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bookmark-line text-lg"></i> Challenge Bank™</span><span class="text-blue-600 font-bold">5 Questions</span></a><a href="#" class="flex items-center gap-3 text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><i class="ri-book-open-line text-lg"></i> Driver's License Handbook</a></div>
+            <div class="flex-shrink-0 p-4 border-t border-zinc-200"><a href="pricing.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 text-white px-4 py-3 text-base font-semibold hover:bg-green-500"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+        </div>
+    </div>
+    <script>
+        const questionData = {
+            question_text: "If you double your speed from 30 mph to 60 mph, by what factor does your vehicle's braking distance increase?",
+            min: 1,
+            max: 8,
+            step: 1,
+            initial: 1,
+            correct_answer: 4,
+            explanation: "Braking distance increases with the square of the speed increase. Doubling your speed (a 2x increase ) means your braking distance increases by 2 squared, which is 4 times."
+        };
+
+        const questionContainer = document.getElementById('question-content');
+        const mobileFooter = document.getElementById('mobile-footer-content');
+        let isAnswered = false;
+
+        function renderQuestion() {
+            questionContainer.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-semibold text-zinc-500"><i class="ri-list-ordered"></i> Question 11/11</span>
+                    <span class="flex items-center gap-1 text-sm font-semibold text-zinc-500"><i class="ri-fire-fill"></i> Streak: 0</span>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight">${questionData.question_text}</h2>
+                <div class="mt-8 text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-4">
+                        <span id="slider-value">${questionData.initial}</span>x
+                    </div>
+                    <input type="range" id="slider-input" class="slider" 
+                           min="${questionData.min}" 
+                           max="${questionData.max}" 
+                           step="${questionData.step}" 
+                           value="${questionData.initial}">
+                    <div class="flex justify-between text-sm text-zinc-500 mt-2 px-1">
+                        <span>${questionData.min}x</span>
+                        <span>${questionData.max}x</span>
+                    </div>
+                </div>
+                <div id="feedback-box" class="feedback-box"></div>
+                <div id="desktop-footer" class="hidden sm:block mt-6"></div>
+            `;
+            attachListeners();
+        }
+
+        function handleInput() {
+            const slider = document.getElementById('slider-input');
+            const display = document.getElementById('slider-value');
+            display.textContent = slider.value;
+            renderFooter(true);
+        }
+
+        function handleSubmit() {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const slider = document.getElementById('slider-input');
+            const userAnswer = parseInt(slider.value);
+            const isCorrect = userAnswer === questionData.correct_answer;
+            const feedbackBox = document.getElementById('feedback-box');
+
+            slider.classList.add('disabled');
+            if (isCorrect) {
+                slider.classList.add('correct');
+                feedbackBox.classList.add('correct');
+                feedbackBox.innerHTML = `<p class="font-semibold text-green-800">Correct!</p><p class="mt-1 text-sm text-green-700">${questionData.explanation}</p>`;
+            } else {
+                slider.classList.add('incorrect');
+                feedbackBox.classList.add('incorrect');
+                feedbackBox.innerHTML = `<p class="font-semibold text-red-800">Incorrect.</p><p class="mt-1 text-sm text-red-700">The correct answer is <strong>${questionData.correct_answer}x</strong>. ${questionData.explanation}</p>`;
+            }
+            renderFooter(true, true);
+        }
+
+        function renderFooter(isSubmittable, isSubmitted = false) {
+            let buttonHTML;
+            if (isSubmitted) {
+                buttonHTML = `<button onclick="alert('End of assessment!')" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700">Finish Assessment</button>`;
+            } else {
+                buttonHTML = `<button id="submit-btn" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700 disabled:bg-zinc-400 disabled:cursor-not-allowed" ${!isSubmittable ? 'disabled' : ''}>Submit Answer</button>`;
+            }
+            document.getElementById('desktop-footer').innerHTML = buttonHTML;
+            mobileFooter.innerHTML = buttonHTML;
+            if (!isSubmitted) {
+                document.getElementById('submit-btn')?.addEventListener('click', handleSubmit);
+            }
+        }
+
+        function attachListeners() {
+            document.getElementById('slider-input').addEventListener('input', handleInput);
+            renderFooter(true); // Slider has an initial value, so it's always submittable
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderQuestion);
+
+        // Menu functionality
+        const menu = { panel: document.getElementById('mobile-menu-panel'), overlay: document.getElementById('mobile-menu-overlay'), openBtn: document.getElementById('mobile-menu-btn'), closeBtn: document.getElementById('close-menu-btn') };
+        function openMenu() { menu.panel.style.transform = 'translateX(0)'; menu.overlay.classList.remove('hidden'); setTimeout(() => menu.overlay.classList.remove('opacity-0'), 10); }
+        function closeMenu() { menu.panel.style.transform = 'translateX(100%)'; menu.overlay.classList.add('opacity-0'); setTimeout(() => menu.overlay.classList.add('hidden'), 300); }
+        menu.openBtn?.addEventListener('click', openMenu);
+        menu.closeBtn?.addEventListener('click', closeMenu);
+        menu.overlay?.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>

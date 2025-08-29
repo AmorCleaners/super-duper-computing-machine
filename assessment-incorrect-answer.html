@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment - Incorrect | CDL Institute</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .bg-brand-blue { background-color: #1E66FF; }
+        .hover\:bg-brand-blue-dark:hover { background-color: #0052cc; }
+    </style>
+</head>
+<body class="bg-zinc-50">
+
+    <!-- Assessment Header -->
+    <header class="bg-white sticky top-0 z-30 shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="03-assessment-intro.html" class="flex items-center gap-2 text-sm font-semibold text-zinc-600 hover:text-zinc-900">
+                    <i class="ri-arrow-left-line text-xl"></i>
+                    <span>Exit Assessment</span>
+                </a>
+                <div class="font-semibold text-zinc-800">
+                    Question 10 of 20
+                </div>
+            </div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="w-full bg-zinc-200 h-1.5">
+            <div class="bg-brand-blue h-1.5" style="width: 50%"></div>
+        </div>
+    </header>
+
+    <!-- Main Question Content -->
+    <main>
+        <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+            
+            <!-- Question Component (Hotspot Example ) -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg ring-1 ring-zinc-200">
+                <p class="text-sm font-semibold text-zinc-500">Topic: Pre-Trip Inspection</p>
+                <h1 class="mt-2 text-xl font-bold text-zinc-900">Tap on the area of the truck that contains the "kingpin".</h1>
+                <div class="mt-6 relative">
+                    <img src="assets/truck-diagram.png" alt="Diagram of a tractor trailer" class="w-full h-auto rounded-lg border border-zinc-200">
+                    <!-- User's incorrect tap position -->
+                    <div class="absolute w-4 h-4 bg-red-500/50 rounded-full ring-2 ring-white" style="top: 40%; left: 60%;"></div>
+                    <!-- Correct answer highlight -->
+                    <div class="absolute w-8 h-8 border-2 border-dashed border-green-500 rounded-full" style="top: 65%; left: 30%;"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Sticky Footer with Feedback -->
+    <footer class="sticky bottom-0 bg-white/90 py-4 shadow-lg backdrop-blur-sm ring-1 ring-zinc-200">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center gap-4">
+            <!-- Feedback Message -->
+            <div class="flex items-center gap-2 text-zinc-700 font-semibold">
+                <i class="ri-lightbulb-flash-line text-2xl text-amber-500"></i>
+                <span>Noted. Let's keep going.</span>
+            </div>
+            <!-- Next Question CTA -->
+            <a href="assessment-q11.html" class="w-full sm:w-auto sm:ml-auto inline-flex items-center justify-center rounded-xl bg-brand-blue px-12 py-3 text-base font-semibold text-white shadow-md hover:bg-brand-blue-dark">
+                Next Question
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

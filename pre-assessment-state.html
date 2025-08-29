@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 1: Confirm State | CDL Assessment</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; color: #18181b; }
+        #state-modal { transition: opacity 0.3s ease-in-out; }
+        #state-modal-content { transition: all 0.3s ease-in-out; }
+        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 bg-black/90 backdrop-blur-sm text-white">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                  <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9"><span class="font-semibold text-lg tracking-tight text-white">CDL Institute</span></a>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="lg:hidden"><button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button></div>
+                </div>
+              </div>
+            </div>
+            <div class="flex h-1 w-full bg-zinc-700"><div class="h-full bg-blue-600" style="width:0%;"></div></div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow w-full max-w-3xl mx-auto py-8 sm:py-12">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <i class="ri-map-pin-2-line text-5xl text-blue-600 mx-auto"></i>
+                    <h1 class="mt-4 text-2xl font-bold text-zinc-900">Confirm Your State</h1>
+                    <p class="text-zinc-600 mt-2 max-w-xl mx-auto">To ensure we provide the most accurate, state-specific practice tests and regulations, please confirm your location.</p>
+                </div>
+                <div class="mt-6 p-4 bg-zinc-100 border border-zinc-200 rounded-lg flex items-center justify-between max-w-md mx-auto">
+                    <span id="current-state-display" class="text-lg font-semibold text-zinc-800">California</span>
+                    <button id="change-state-btn" class="text-sm font-semibold text-blue-600 hover:underline">Change</button>
+                </div>
+                <div id="desktop-footer" class="hidden sm:block mt-8 max-w-md mx-auto">
+                    <a href="pre-assessment-goal.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700">
+                        Confirm & Continue <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sticky Footer -->
+        <footer class="sticky bottom-0 bg-white/80 py-3 backdrop-blur-sm border-t border-zinc-200 sm:hidden">
+            <div class="mx-auto max-w-3xl px-4">
+                 <a href="pre-assessment-goal.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700">
+                    Confirm & Continue <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- State Selection Modal -->
+    <div id="state-modal" class="fixed inset-0 z-50 bg-black/60 hidden opacity-0">
+        <div id="state-modal-content" class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto mt-20 p-6 transform scale-95 opacity-0">
+            <div class="flex justify-between items-center"><h2 class="text-xl font-bold">Change Your State</h2><button id="close-modal-btn" class="text-zinc-400 hover:text-zinc-800"><i class="ri-close-line text-2xl"></i></button></div>
+            <div class="mt-4"><input type="text" id="state-search" placeholder="Search for a state..." class="w-full px-3 py-2 border border-zinc-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></div>
+            <ul id="state-list" class="mt-4 max-h-72 overflow-y-auto space-y-1 pr-2"></ul>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Panel (Standard ) -->
+    <div id="mobile-menu-panel" class="fixed inset-0 z-50 transform translate-x-full lg:hidden">
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 opacity-0 hidden"></div>
+        <div class="relative bg-zinc-100 h-full w-full max-w-sm ml-auto flex flex-col"></div>
+    </div>
+
+    <script>
+        // State Modal JS
+        const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+        const changeBtn = document.getElementById('change-state-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modal = document.getElementById('state-modal');
+        const modalContent = document.getElementById('state-modal-content');
+        const stateList = document.getElementById('state-list');
+        const stateSearch = document.getElementById('state-search');
+        const currentStateDisplay = document.getElementById('current-state-display');
+
+        function openModal() { modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('opacity-0', 'scale-95'); }, 10); stateSearch.focus(); }
+        function closeModal() { modal.classList.add('opacity-0'); modalContent.classList.add('opacity-0', 'scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); }
+        function populateStateList(filter = '') { stateList.innerHTML = ''; const filteredStates = states.filter(s => s.toLowerCase().includes(filter.toLowerCase())); filteredStates.forEach(state => { const li = document.createElement('li'); const button = document.createElement('button'); button.textContent = state; button.className = 'w-full text-left p-3 rounded-md hover:bg-zinc-100'; button.onclick = () => { currentStateDisplay.textContent = state; closeModal(); }; li.appendChild(button); stateList.appendChild(li); }); }
+        changeBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        stateSearch.addEventListener('keyup', () => populateStateList(stateSearch.value));
+        populateStateList();
+
+        // Mobile Menu JS (Standard)
+        const menu = { panel: document.getElementById('mobile-menu-panel'), overlay: document.getElementById('mobile-menu-overlay'), openBtn: document.getElementById('mobile-menu-btn')};
+        menu.openBtn?.addEventListener('click', () => { menu.panel.style.transform = 'translateX(0)'; menu.overlay.classList.remove('hidden'); setTimeout(() => menu.overlay.classList.remove('opacity-0'), 10); });
+    </script>
+</body>
+</html>

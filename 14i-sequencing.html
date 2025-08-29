@@ -3,42 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question: Sequencing</title>
+    <title>Q9: Sequencing | CDL Assessment</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; color: #18181b; }
+        .sequence-item { display: flex; align-items: center; width: 100%; padding: 1rem; border: 1px solid #e4e4e7; border-radius: 0.75rem; background-color: white; transition: all 150ms ease-in-out; cursor: grab; }
+        .sequence-item.dragging { opacity: 0.5; background-color: #eff6ff; }
+        .sequence-item.disabled { cursor: not-allowed; background-color: #f4f4f5; }
+        .feedback-box { display: none; margin-top: 1rem; padding: 1rem; border-radius: 0.75rem; }
+        .feedback-box.correct { display: block; border: 1px solid #a7f3d0; background-color: #f0fdf4; }
+        .feedback-box.incorrect { display: block; border: 1px solid #fecaca; background-color: #fef2f2; }
+        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="app-header">
-            <div class="leading">
-                <a href="03-assessment-intro.html" class="p-2 -ml-2"><i class="ri-close-line text-2xl"></i></a>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 bg-black/90 backdrop-blur-sm text-white">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                  <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9"><span class="font-semibold text-lg tracking-tight text-white">CDL Institute</span></a>
+                  <div class="hidden lg:flex relative"><button class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm"><i class="ri-map-pin-2-line"></i><span>California</span><i class="ri-arrow-down-s-line"></i></button></div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden lg:flex items-center gap-6"><a href="auth.html" class="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition font-medium">Login</a><a href="pricing.html" class="inline-flex items-center gap-2 rounded-lg bg-green-400/20 text-green-300 px-4 py-2 text-sm font-semibold hover:bg-green-400/30 hover:text-white"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+                    <div class="lg:hidden"><button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button></div>
+                </div>
+              </div>
             </div>
-            <div class="title">Question 9 of 11</div>
-            <div class="trailing">
-                <div class="h-2 w-16 bg-zinc-200 rounded-full"><div class="h-full bg-zinc-900 rounded-full" style="width: 82%;"></div></div>
-            </div>
+            <div class="flex h-1 w-full bg-zinc-700"><div class="h-full bg-blue-600" style="width:82%;"></div></div>
         </header>
-        <main class="app-content">
-            <h1 class="text-xl font-semibold mb-2">Arrange the first steps to safely uncouple a trailer.</h1>
-            <p class="text-zinc-600 mb-6">Drag items to reorder.</p>
-            <ol class="space-y-2">
-                <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-4 cursor-grab active:cursor-grabbing">
-                    <i class="ri-drag-move-2-line text-zinc-400"></i>
-                    <span class="flex-1 text-sm font-medium">Set parking brakes and chock wheels</span>
-                </li>
-                <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-4 cursor-grab active:cursor-grabbing">
-                    <i class="ri-drag-move-2-line text-zinc-400"></i>
-                    <span class="flex-1 text-sm font-medium">Lower landing gear until it just touches ground</span>
-                </li>
-                <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-4 cursor-grab active:cursor-grabbing">
-                    <i class="ri-drag-move-2-line text-zinc-400"></i>
-                    <span class="flex-1 text-sm font-medium">Disconnect air lines and electrical cable</span>
-                </li>
-            </ol>
+
+        <!-- Main Content -->
+        <main class="flex-grow w-full max-w-3xl mx-auto py-8 sm:py-12">
+            <div class="px-4 sm:px-6 lg:px-8" id="question-content">
+                <!-- Question content will be injected by JS -->
+            </div>
         </main>
-        <footer class="p-4 border-t border-zinc-200">
-            <a href="14j-matching.html" class="btn btn-primary w-full">Submit Answer</a>
+
+        <!-- Sticky Footer -->
+        <footer class="sticky bottom-0 bg-white/80 py-3 backdrop-blur-sm border-t border-zinc-200 sm:hidden">
+            <div class="mx-auto max-w-3xl px-4" id="mobile-footer-content"></div>
         </footer>
     </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel" class="fixed inset-0 z-50 transform translate-x-full lg:hidden">
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 opacity-0 hidden"></div>
+        <div class="relative bg-zinc-100 h-full w-full max-w-sm ml-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 flex items-center justify-between border-b border-zinc-200"><a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8"><span class="font-semibold text-lg text-zinc-800">CDL Institute</span></a><button id="close-menu-btn" class="p-2 -mr-2 text-zinc-500 hover:text-zinc-900"><i class="ri-close-line text-2xl"></i></button></div>
+            <div class="flex-grow p-4 space-y-2 overflow-y-auto"><div class="grid grid-cols-2 gap-2"><a href="home.html" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-arrow-left-s-line"></i> Back to Home</a><a href="#" id="restart-btn" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-restart-line"></i> Restart</a></div><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bar-chart-line text-lg"></i> Test progress</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-settings-3-line text-lg"></i> Test settings</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bookmark-line text-lg"></i> Challenge Bank™</span><span class="text-blue-600 font-bold">5 Questions</span></a><a href="#" class="flex items-center gap-3 text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><i class="ri-book-open-line text-lg"></i> Driver's License Handbook</a></div>
+            <div class="flex-shrink-0 p-4 border-t border-zinc-200"><a href="pricing.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 text-white px-4 py-3 text-base font-semibold hover:bg-green-500"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+        </div>
+    </div>
+    <script>
+        const questionData = {
+            question_text: "Arrange the first four steps for coupling a tractor to a semitrailer in the correct order.",
+            items: [
+                "Inspect the fifth-wheel.",
+                "Back up to the trailer.",
+                "Connect the air lines.",
+                "Supply air to the trailer."
+            ],
+            correct_order: [
+                "Inspect the fifth-wheel.",
+                "Back up to the trailer.",
+                "Connect the air lines.",
+                "Supply air to the trailer."
+            ],
+            explanation: "The correct sequence is: 1 ) Inspect the fifth-wheel for damage and ensure it's properly greased. 2) Back up, stopping just short of the kingpin. 3) Connect the emergency and service air lines. 4) Supply air to the trailer system to check for leaks before fully coupling."
+        };
+
+        const questionContainer = document.getElementById('question-content');
+        const mobileFooter = document.getElementById('mobile-footer-content');
+        let isAnswered = false;
+
+        function renderQuestion() {
+            let itemsHTML = questionData.items.map(item => `
+                <li class="sequence-item" draggable="true">
+                    <i class="ri-drag-move-2-line text-zinc-400 mr-4"></i>
+                    <span class="font-medium">${item}</span>
+                </li>`).join('');
+
+            questionContainer.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-semibold text-zinc-500"><i class="ri-list-ordered"></i> Question 9/11</span>
+                    <span class="flex items-center gap-1 text-sm font-semibold text-zinc-500"><i class="ri-fire-fill"></i> Streak: 0</span>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight">${questionData.question_text}</h2>
+                <p class="text-base text-zinc-500 mt-2">Drag and drop the items into the correct sequence.</p>
+                <ul id="sequence-list" class="mt-6 space-y-3">${itemsHTML}</ul>
+                <div id="feedback-box" class="feedback-box"></div>
+                <div id="desktop-footer" class="hidden sm:block mt-6"></div>
+            `;
+            attachListeners();
+        }
+
+        function handleSubmit() {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const sequenceList = document.getElementById('sequence-list');
+            const currentOrder = Array.from(sequenceList.querySelectorAll('.sequence-item span')).map(span => span.textContent);
+            const isCorrect = JSON.stringify(currentOrder) === JSON.stringify(questionData.correct_order);
+            const feedbackBox = document.getElementById('feedback-box');
+
+            sequenceList.querySelectorAll('.sequence-item').forEach(item => item.classList.add('disabled'));
+
+            if (isCorrect) {
+                feedbackBox.classList.add('correct');
+                feedbackBox.innerHTML = `<p class="font-semibold text-green-800">Correct!</p><p class="mt-1 text-sm text-green-700">${questionData.explanation}</p>`;
+            } else {
+                feedbackBox.classList.add('incorrect');
+                feedbackBox.innerHTML = `<p class="font-semibold text-red-800">Incorrect.</p><p class="mt-1 text-sm text-red-700">The correct order is: ${questionData.correct_order.map((s, i) => `  
+${i+1}. ${s}`).join('')}</p>`;
+            }
+            renderFooter(true, true);
+        }
+
+        function renderFooter(isSubmittable, isSubmitted = false) {
+            let buttonHTML;
+            if (isSubmitted) {
+                buttonHTML = `<button onclick="alert('Next question would load.')" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700">Next Question</button>`;
+            } else {
+                buttonHTML = `<button id="submit-btn" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700">Submit Order</button>`;
+            }
+            document.getElementById('desktop-footer').innerHTML = buttonHTML;
+            mobileFooter.innerHTML = buttonHTML;
+            if (!isSubmitted) {
+                document.getElementById('submit-btn')?.addEventListener('click', handleSubmit);
+            }
+        }
+
+        function attachListeners() {
+            const sequenceList = document.getElementById('sequence-list');
+            let draggedItem = null;
+
+            sequenceList.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                setTimeout(() => e.target.classList.add('dragging'), 0);
+            });
+
+            sequenceList.addEventListener('dragend', (e) => {
+                setTimeout(() => e.target.classList.remove('dragging'), 0);
+                draggedItem = null;
+            });
+
+            sequenceList.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(sequenceList, e.clientY);
+                if (afterElement == null) {
+                    sequenceList.appendChild(draggedItem);
+                } else {
+                    sequenceList.insertBefore(draggedItem, afterElement);
+                }
+            });
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.sequence-item:not(.dragging)')];
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+            renderFooter(true);
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderQuestion);
+
+        // Menu functionality
+        const menu = { panel: document.getElementById('mobile-menu-panel'), overlay: document.getElementById('mobile-menu-overlay'), openBtn: document.getElementById('mobile-menu-btn'), closeBtn: document.getElementById('close-menu-btn') };
+        function openMenu() { menu.panel.style.transform = 'translateX(0)'; menu.overlay.classList.remove('hidden'); setTimeout(() => menu.overlay.classList.remove('opacity-0'), 10); }
+        function closeMenu() { menu.panel.style.transform = 'translateX(100%)'; menu.overlay.classList.add('opacity-0'); setTimeout(() => menu.overlay.classList.add('hidden'), 300); }
+        menu.openBtn?.addEventListener('click', openMenu);
+        menu.closeBtn?.addEventListener('click', closeMenu);
+        menu.overlay?.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>

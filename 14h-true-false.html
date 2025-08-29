@@ -3,37 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question: True/False</title>
+    <title>Q8: True/False | CDL Assessment</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; color: #18181b; }
+        .answer-card { display: flex; align-items: flex-start; width: 100%; padding: 1rem; border: 1px solid #e4e4e7; border-radius: 0.75rem; background-color: white; transition: all 150ms ease-in-out; cursor: pointer; text-align: left; }
+        .answer-card:hover:not(.disabled ) { border-color: #a1a1aa; background-color: #fafafa; }
+        .answer-card .radio-icon { margin-top: 0.125rem; height: 1.25rem; width: 1.25rem; border-radius: 9999px; border: 2px solid #d4d4d8; margin-right: 1rem; flex-shrink: 0; }
+        .answer-card.correct { border-color: #16a34a; background-color: #f0fdf4; }
+        .answer-card.correct .radio-icon { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2316a34a'%3E%3Cpath d='M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z'%3E%3C/path%3E%3C/svg%3E"  ); border: none; }
+        .answer-card.incorrect { border-color: #dc2626; background-color: #fef2f2; }
+        .answer-card.incorrect .radio-icon { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'%3E%3Cpath d='M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z'%3E%3C/path%3E%3C/svg%3E"  ); border: none; }
+        .answer-card.disabled { pointer-events: none; }
+        .answer-card.muted { opacity: 0.6; }
+        .explanation-text { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #d4d4d8; color: #3f3f46; }
+        .answer-card.correct .explanation-text { border-top-color: #a7f3d0; }
+        .explanation-text.open { display: block; }
+        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="app-header">
-            <div class="leading">
-                <a href="03-assessment-intro.html" class="p-2 -ml-2"><i class="ri-close-line text-2xl"></i></a>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 bg-black/90 backdrop-blur-sm text-white">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                  <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9"><span class="font-semibold text-lg tracking-tight text-white">CDL Institute</span></a>
+                  <div class="hidden lg:flex relative"><button class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm"><i class="ri-map-pin-2-line"></i><span>California</span><i class="ri-arrow-down-s-line"></i></button></div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden lg:flex items-center gap-6"><a href="auth.html" class="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition font-medium">Login</a><a href="pricing.html" class="inline-flex items-center gap-2 rounded-lg bg-green-400/20 text-green-300 px-4 py-2 text-sm font-semibold hover:bg-green-400/30 hover:text-white"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+                    <div class="lg:hidden"><button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button></div>
+                </div>
+              </div>
             </div>
-            <div class="title">Question 8 of 11</div>
-            <div class="trailing">
-                <div class="h-2 w-16 bg-zinc-200 rounded-full"><div class="h-full bg-zinc-900 rounded-full" style="width: 73%;"></div></div>
-            </div>
+            <div class="flex h-1 w-full bg-zinc-700"><div class="h-full bg-blue-600" style="width:73%;"></div></div>
         </header>
-        <main class="app-content">
-            <h1 class="text-xl font-semibold mb-6">True or False: The service brake is applied by using the hand (trolley ) valve during normal driving.</h1>
-            <form class="space-y-3">
-                <label class="selectable-card flex justify-between items-center">
-                    <h2 class="font-semibold">True</h2>
-                    <input type="radio" name="q8" class="h-5 w-5 accent-[var(--brand-blue)]">
-                </label>
-                <label class="selectable-card flex justify-between items-center">
-                    <h2 class="font-semibold">False</h2>
-                    <input type="radio" name="q8" class="h-5 w-5 accent-[var(--brand-blue)]">
-                </label>
-            </form>
+
+        <!-- Main Content -->
+        <main class="flex-grow w-full max-w-3xl mx-auto py-8 sm:py-12">
+            <div class="px-4 sm:px-6 lg:px-8" id="question-content">
+                <!-- Question content will be injected by JS -->
+            </div>
         </main>
-        <footer class="p-4 border-t border-zinc-200">
-            <a href="14i-sequencing.html" class="btn btn-primary w-full">Submit Answer</a>
+
+        <!-- Sticky Footer -->
+        <footer class="sticky bottom-0 bg-white/80 py-3 backdrop-blur-sm border-t border-zinc-200 sm:hidden">
+            <div class="mx-auto max-w-3xl px-4" id="mobile-footer-content"></div>
         </footer>
     </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel" class="fixed inset-0 z-50 transform translate-x-full lg:hidden">
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 opacity-0 hidden"></div>
+        <div class="relative bg-zinc-100 h-full w-full max-w-sm ml-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 flex items-center justify-between border-b border-zinc-200"><a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8"><span class="font-semibold text-lg text-zinc-800">CDL Institute</span></a><button id="close-menu-btn" class="p-2 -mr-2 text-zinc-500 hover:text-zinc-900"><i class="ri-close-line text-2xl"></i></button></div>
+            <div class="flex-grow p-4 space-y-2 overflow-y-auto"><div class="grid grid-cols-2 gap-2"><a href="home.html" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-arrow-left-s-line"></i> Back to Home</a><a href="#" id="restart-btn" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50"><i class="ri-restart-line"></i> Restart</a></div><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bar-chart-line text-lg"></i> Test progress</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-settings-3-line text-lg"></i> Test settings</span><i class="ri-arrow-right-s-line text-lg"></i></a><a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50"><span class="flex items-center gap-3"><i class="ri-bookmark-line text-lg"></i> Challenge Bank™</span><span class="text-blue-600 font-bold">5 Questions</span></a><a href="#" class="flex items-center gap-3 text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50"><i class="ri-book-open-line text-lg"></i> Driver's License Handbook</a></div>
+            <div class="flex-shrink-0 p-4 border-t border-zinc-200"><a href="pricing.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 text-white px-4 py-3 text-base font-semibold hover:bg-green-500"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a></div>
+        </div>
+    </div>
+    <script>
+        const questionData = {
+            question_text: "True or False: You can use a hands-free mobile phone to make a call while operating a commercial motor vehicle.",
+            options: ["True", "False"],
+            correct_answer_index: 0,
+            explanation: "According to FMCSA regulations (49 CFR 392.82), a driver is allowed to use a hands-free mobile phone to make a call, provided the device is located close to them and can be operated in compliance with the rule."
+        };
+
+        const questionContainer = document.getElementById('question-content');
+        const mobileFooter = document.getElementById('mobile-footer-content');
+        let isAnswered = false;
+
+        function renderQuestion() {
+            let optionsHTML = questionData.options.map((opt, i) => `
+                <button class="answer-card" data-index="${i}">
+                    <div class="radio-icon"></div>
+                    <div class="flex-1">
+                        <p class="font-medium text-main">${opt}</p>
+                        <div class="explanation-text text-sm">${questionData.explanation}</div>
+                    </div>
+                </button>`).join('');
+
+            questionContainer.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-semibold text-zinc-500"><i class="ri-list-ordered"></i> Question 8/11</span>
+                    <span class="flex items-center gap-1 text-sm font-semibold text-zinc-500"><i class="ri-fire-fill"></i> Streak: 0</span>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight">${questionData.question_text}</h2>
+                <div class="mt-6 space-y-3">${optionsHTML}</div>
+                <div id="desktop-footer" class="hidden sm:block mt-6"></div>
+            `;
+            attachListeners();
+        }
+
+        function handleSelect(e) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const selectedIndex = parseInt(e.currentTarget.dataset.index);
+            const correctIndex = questionData.correct_answer_index;
+
+            document.querySelectorAll('.answer-card').forEach((card, i) => {
+                card.classList.add('disabled');
+                if (i === correctIndex) {
+                    card.classList.add('correct');
+                    card.querySelector('.explanation-text').classList.add('open');
+                } else if (i === selectedIndex) {
+                    card.classList.add('incorrect');
+                } else {
+                    card.classList.add('muted');
+                }
+            });
+            renderFooter();
+        }
+
+        function renderFooter() {
+            const nextButtonHTML = `<button onclick="alert('Next question would load.')" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700">Next Question</button>`;
+            document.getElementById('desktop-footer').innerHTML = nextButtonHTML;
+            mobileFooter.innerHTML = nextButtonHTML;
+        }
+
+        function attachListeners() {
+            document.querySelectorAll('.answer-card').forEach(card => {
+                card.addEventListener('click', handleSelect);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderQuestion);
+
+        // Menu functionality
+        const menu = { panel: document.getElementById('mobile-menu-panel'), overlay: document.getElementById('mobile-menu-overlay'), openBtn: document.getElementById('mobile-menu-btn'), closeBtn: document.getElementById('close-menu-btn') };
+        function openMenu() { menu.panel.style.transform = 'translateX(0)'; menu.overlay.classList.remove('hidden'); setTimeout(() => menu.overlay.classList.remove('opacity-0'), 10); }
+        function closeMenu() { menu.panel.style.transform = 'translateX(100%)'; menu.overlay.classList.add('opacity-0'); setTimeout(() => menu.overlay.classList.add('hidden'), 300); }
+        menu.openBtn?.addEventListener('click', openMenu);
+        menu.closeBtn?.addEventListener('click', closeMenu);
+        menu.overlay?.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>

@@ -35,46 +35,33 @@
 </head>
 <body class="bg-white text-zinc-900 antialiased">
 
-    <!-- REFINED Header for Assessment Funnel -->
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-sm text-white">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="flex items-center justify-between h-16">
-            
-            <!-- Left Side: Logo + State Selector -->
-            <div class="flex items-center gap-4">
-              <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home">
+   <!-- 1. Header -->
+   <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-sm text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+            <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home">
                 <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9">
                 <span class="font-bold text-lg tracking-tight text-white">CDL Institute</span>
               </a>
-              <!-- GEO State Selector (Desktop - Always Visible ) -->
-              <div class="hidden lg:flex relative" id="state-dropdown-container-desktop">
-                <button id="state-selector-btn-desktop" class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm">
-                  <i class="ri-map-pin-2-line"></i>
-                  <span id="selected-state-nav-desktop">California</span>
-                  <i class="ri-arrow-down-s-line"></i>
-                </button>
-              </div>
-            </div>
-            
-            <!-- Right Side: State Selector (Mobile) & Login (Desktop) -->
-            <div class="flex items-center gap-6">
-                <!-- GEO State Selector (Mobile - Always Visible) -->
-                <div class="lg:hidden">
-                    <button id="state-selector-btn-mobile" class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm">
-                      <i class="ri-map-pin-2-line"></i>
-                      <span id="selected-state-nav-mobile">California</span>
-                      <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                </div>
-
-                <!-- Login (Desktop) -->
-                <a href="auth.html" class="hidden lg:inline-flex text-sm text-zinc-300 hover:text-white transition font-medium">Login</a>
-            </div>
-
+          <div class="hidden lg:flex relative">
+            <button class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm"><i class="ri-map-pin-2-line"></i><span>California</span><i class="ri-arrow-down-s-line"></i></button>
           </div>
         </div>
-    </header>
-
+        <div class="flex items-center gap-6">
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="#" class="flex items-center gap-1 text-sm text-zinc-300 hover:text-white transition font-medium">Help <i class="ri-arrow-down-s-line"></i></a>
+                <a href="auth.html" class="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition font-medium"><i class="ri-lock-line text-blue-400"></i> Premium Login</a>
+                <a href="pricing.html" class="inline-flex items-center gap-2 rounded-lg bg-green-400/20 text-green-300 px-4 py-2 text-sm font-semibold hover:bg-green-400/30 hover:text-white"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a>
+            </div>
+            <div class="lg:hidden">
+                <button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="progress-bar" class="flex h-1 w-full"></div>
+</header>
     <!-- Main Content -->
     <main class="bg-zinc-50">
         <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

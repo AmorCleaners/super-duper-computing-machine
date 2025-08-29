@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDL Readiness Assessment | CDL Institute</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; color: #18181b; -webkit-font-smoothing: antialiased; }
+
+        /* --- Answer Card & Feedback Styles --- */
+        .answer-card { display: flex; align-items: flex-start; width: 100%; padding: 1rem; border: 1px solid #e4e4e7; border-radius: 0.75rem; background-color: white; transition: all 150ms ease-in-out; cursor: pointer; text-align: left; }
+        .answer-card:hover:not(.disabled ) { border-color: #a1a1aa; background-color: #fafafa; }
+        .answer-card .radio-icon { margin-top: 0.125rem; height: 1.25rem; width: 1.25rem; border-radius: 9999px; border: 2px solid #d4d4d8; margin-right: 1rem; flex-shrink: 0; transition: all 150ms ease-in-out; }
+        
+        .answer-card.correct { border-color: #16a34a; background-color: #f0fdf4; }
+        .answer-card.correct .radio-icon { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2316a34a'%3E%3Cpath d='M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z'%3E%3C/path%3E%3C/svg%3E" ); border: none; background: none; box-shadow: none; }
+        
+        .answer-card.incorrect { border-color: #dc2626; background-color: #fef2f2; }
+        .answer-card.incorrect .radio-icon { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'%3E%3Cpath d='M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z'%3E%3C/path%3E%3C/svg%3E" ); border: none; background: none; box-shadow: none; }
+        
+        .answer-card.disabled { pointer-events: none; }
+        .answer-card.muted { opacity: 0.6; }
+        
+        .explanation-text { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #d4d4d8; color: #3f3f46; }
+        .answer-card.correct .explanation-text { border-top-color: #a7f3d0; }
+        .explanation-text.open { display: block; }
+
+        /* --- Mobile Menu Panel Styles --- */
+        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body>
+
+    <div class="flex flex-col min-h-screen">
+        <!-- 1. Header -->
+        <header class="sticky top-0 z-30 bg-black/90 backdrop-blur-sm text-white">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                  <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home">
+                    <img src="assets/shield-fill.svg" alt="CDL Institute Logo" class="h-9 w-9">
+                    <span class="font-semibold text-lg tracking-tight text-white">CDL Institute</span>
+                  </a>
+                  <div class="hidden lg:flex relative">
+                    <button class="flex items-center gap-1 text-zinc-300 hover:text-white transition text-sm"><i class="ri-map-pin-2-line"></i><span>California</span><i class="ri-arrow-down-s-line"></i></button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden lg:flex items-center gap-6">
+                        <a href="auth.html" class="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition font-medium">Login</a>
+                        <a href="pricing.html" class="inline-flex items-center gap-2 rounded-lg bg-green-400/20 text-green-300 px-4 py-2 text-sm font-semibold hover:bg-green-400/30 hover:text-white"><i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed</a>
+                    </div>
+                    <div class="lg:hidden"><button id="mobile-menu-btn" class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-800"><i class="ri-menu-line text-xl"></i></button></div>
+                </div>
+              </div>
+            </div>
+            <div id="progress-bar" class="flex h-1 w-full"></div>
+        </header>
+
+        <!-- 2. Main Content -->
+        <main class="flex-grow w-full max-w-3xl mx-auto py-8 sm:py-12">
+            <div class="px-4 sm:px-6 lg:px-8" id="question-container"></div>
+        </main>
+
+        <!-- 3. Sticky Footer (MOBILE ONLY) -->
+        <footer id="mobile-footer" class="sticky bottom-0 bg-white/80 py-3 backdrop-blur-sm border-t border-zinc-200 sm:hidden">
+            <div class="mx-auto max-w-3xl px-4" id="mobile-footer-content"></div>
+        </footer>
+    </div>
+
+    <!-- 4. Mobile Menu Panel -->
+    <div id="mobile-menu-panel" class="fixed inset-0 z-50 transform translate-x-full lg:hidden">
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 opacity-0 hidden"></div>
+        <div class="relative bg-zinc-100 h-full w-full max-w-sm ml-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 flex items-center justify-between border-b border-zinc-200">
+                <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home">
+                    <img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8">
+                    <span class="font-semibold text-lg text-zinc-800">CDL Institute</span>
+                  </a>
+                <button id="close-menu-btn" class="p-2 -mr-2 text-zinc-500 hover:text-zinc-900"><i class="ri-close-line text-2xl"></i></button>
+            </div>
+            <div class="flex-grow p-4 space-y-2 overflow-y-auto">
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="home.html" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50">
+                        <i class="ri-arrow-left-s-line"></i> Back to Home
+                    </a>
+                    <a href="#" id="restart-btn" class="flex items-center justify-center gap-2 text-sm font-semibold bg-white border border-zinc-200 rounded-lg py-2.5 hover:bg-zinc-50">
+                        <i class="ri-restart-line"></i> Restart
+                    </a>
+                </div>
+                <a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50">
+                    <span class="flex items-center gap-3"><i class="ri-bar-chart-line text-lg"></i> Test progress</span>
+                    <i class="ri-arrow-right-s-line text-lg"></i>
+                </a>
+                <a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50">
+                    <span class="flex items-center gap-3"><i class="ri-settings-3-line text-lg"></i> Test settings</span>
+                    <i class="ri-arrow-right-s-line text-lg"></i>
+                </a>
+                <a href="#" class="flex items-center justify-between text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 mt-4 hover:bg-zinc-50">
+                    <span class="flex items-center gap-3"><i class="ri-bookmark-line text-lg"></i> Challenge Bank™</span>
+                    <span class="text-blue-600 font-bold">5 Questions</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 text-sm font-semibold bg-white border border-zinc-200 rounded-lg p-4 hover:bg-zinc-50">
+                    <i class="ri-book-open-line text-lg"></i> Driver's License Handbook
+                </a>
+
+            </div>
+            <div class="flex-shrink-0 p-4 border-t border-zinc-200">
+                <a href="pricing.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 text-white px-4 py-3 text-base font-semibold hover:bg-green-500">
+                    <i class="ri-verified-badge-fill"></i> Pass the first time, guaranteed
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =================================================================
+        // REFACTORED ASSESSMENT ENGINE V9.0 (Final)
+        // =================================================================
+        
+        const state = {
+            questions: [
+                { 
+                    type: 'mcq', 
+                    q: "Under Hours of Service (HOS), when must a driver take a 30-minute break?", 
+                    subtext: "Choose one answer.", 
+                    options: [
+                        {text: "After 8 hours of driving time", hint: "Break may be off-duty, sleeper berth, or on-duty not driving."}, 
+                        {text: "After 6 hours of driving time"}, 
+                        {text: "After 10 hours of on-duty time"}, 
+                        {text: "Before the 14-hour duty window ends"}
+                    ], 
+                    correct: 0, 
+                    explanation: "The FMCSA requires property-carrying drivers to take a 30-minute break after 8 cumulative hours of driving time. This break can be satisfied by any non-driving period of 30 minutes." 
+                },
+                { 
+                    type: 'mcq', 
+                    q: "What is the primary purpose of a vehicle's suspension system?", 
+                    subtext: "Choose one answer.", 
+                    options: [
+                        {text: "To provide a smooth ride and maintain wheel contact with the road."}, 
+                        {text: "To increase the vehicle's fuel efficiency."}, 
+                        {text: "To power the vehicle's electrical components."}, 
+                        {text: "To cool the engine."}
+                    ], 
+                    correct: 0, 
+                    explanation: "The suspension system's main jobs are to absorb bumps for a comfortable ride and to keep the tires in firm contact with the road for safety and handling." 
+                },
+            ],
+            user: { answers: [], streak: 0, currentQ: 0 },
+            isAnswered: false
+        };
+
+        const dom = {
+            qContainer: document.getElementById('question-container'),
+            mobileFooterContent: document.getElementById('mobile-footer-content'),
+            progressBar: document.getElementById('progress-bar'),
+            menu: {
+                panel: document.getElementById('mobile-menu-panel'),
+                overlay: document.getElementById('mobile-menu-overlay'),
+                openBtn: document.getElementById('mobile-menu-btn'),
+                closeBtn: document.getElementById('close-menu-btn'),
+                restartBtn: document.getElementById('restart-btn')
+            }
+        };
+
+        function render() {
+            const qData = state.questions[state.user.currentQ];
+            renderHeader();
+            renderQuestionBody(qData);
+            attachEventListeners();
+            
+            if (state.isAnswered) {
+                updateCardStyles(qData.correct, state.user.answers[state.user.currentQ].selected);
+                renderFooterButtons();
+            }
+        }
+
+        function renderHeader() {
+            const qNum = state.user.currentQ + 1;
+            const total = state.questions.length;
+            const progress = (qNum / total) * 100;
+            dom.progressBar.innerHTML = `<div class="h-full bg-blue-600" style="width:${progress}%;"></div>`;
+            
+            const headerMeta = dom.qContainer.querySelector('#header-meta');
+            if (headerMeta) {
+                headerMeta.innerHTML = `
+                    <span class="text-sm font-semibold text-zinc-500"><i class="ri-list-ordered"></i> Question ${qNum}/${total}</span>
+                    <span class="flex items-center gap-1 text-sm font-semibold ${state.user.streak > 0 ? 'text-amber-500' : 'text-zinc-500'}"><i class="ri-fire-fill"></i> Streak: ${state.user.streak}</span>
+                `;
+            }
+        }
+
+        function renderQuestionBody(qData) {
+            const qNum = state.user.currentQ + 1;
+            const total = state.questions.length;
+            
+            let optionsHTML = '';
+            if (qData.type === 'mcq') {
+                optionsHTML = qData.options.map((opt, i) => `
+                    <button class="answer-card" data-index="${i}">
+                        <div class="radio-icon"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-main">${opt.text}</p>
+                            ${opt.hint ? `<p class="text-sm text-zinc-500 mt-1">${opt.hint}</p>` : ''}
+                            <div class="explanation-text text-sm">${qData.explanation}</div>
+                        </div>
+                    </button>`).join('');
+            }
+
+            dom.qContainer.innerHTML = `
+                <div id="header-meta" class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-semibold text-zinc-500"><i class="ri-list-ordered"></i> Question ${qNum}/${total}</span>
+                    <span class="flex items-center gap-1 text-sm font-semibold ${state.user.streak > 0 ? 'text-amber-500' : 'text-zinc-500'}"><i class="ri-fire-fill"></i> Streak: ${state.user.streak}</span>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight">${qData.q}</h2>
+                ${qData.subtext ? `<p class="text-base text-zinc-500 mt-2">${qData.subtext}</p>` : ''}
+                <div id="options-container" class="mt-6 space-y-3">${optionsHTML}</div>
+                <div id="desktop-footer" class="hidden sm:block mt-6"></div>
+            `;
+            dom.mobileFooterContent.innerHTML = '';
+        }
+
+        function attachEventListeners() {
+            document.querySelectorAll('.answer-card').forEach(c => {
+                c.addEventListener('click', handleSelect);
+            });
+        }
+
+        function handleSelect(e) {
+            if (state.isAnswered) return;
+
+            const selectedCard = e.currentTarget;
+            const selectedIndex = parseInt(selectedCard.dataset.index);
+            const qData = state.questions[state.user.currentQ];
+            const isCorrect = selectedIndex === qData.correct;
+
+            state.isAnswered = true;
+            state.user.answers[state.user.currentQ] = { selected: selectedIndex, correct: isCorrect };
+            state.user.streak = isCorrect ? state.user.streak + 1 : 0;
+
+            updateCardStyles(qData.correct, selectedIndex);
+            renderFooterButtons();
+            renderHeader();
+        }
+
+        function updateCardStyles(correctIndex, selectedIndex) {
+            document.querySelectorAll('.answer-card').forEach((card, i) => {
+                card.classList.add('disabled');
+                if (i === correctIndex) {
+                    card.classList.add('correct');
+                    card.querySelector('.explanation-text').classList.add('open');
+                } else if (i === selectedIndex) {
+                    card.classList.add('incorrect');
+                } else {
+                    card.classList.add('muted');
+                }
+            });
+        }
+
+        function renderFooterButtons() {
+            const nextButtonHTML = `<button id="next-btn" class="w-full rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white shadow-md hover:bg-blue-700">Next Question</button>`;
+            
+            const desktopFooter = dom.qContainer.querySelector('#desktop-footer');
+            if (desktopFooter) desktopFooter.innerHTML = nextButtonHTML;
+            dom.mobileFooterContent.innerHTML = nextButtonHTML;
+
+            document.querySelectorAll('#next-btn, #mobile-footer-content button').forEach(btn => {
+                btn.addEventListener('click', handleNext);
+            });
+        }
+
+        function handleNext() {
+            if (state.user.currentQ < state.questions.length - 1) {
+                state.user.currentQ++;
+                state.isAnswered = false;
+                render();
+            } else {
+                alert("End of assessment! You would be redirected to the results page here.");
+            }
+        }
+
+        function handleRestart() {
+            state.user = { answers: [], streak: 0, currentQ: 0 };
+            state.isAnswered = false;
+            closeMenu();
+            render();
+        }
+
+        function openMenu() {
+            dom.menu.panel.style.transform = 'translateX(0)';
+            dom.menu.overlay.classList.remove('hidden');
+            setTimeout(() => dom.menu.overlay.classList.remove('opacity-0'), 10);
+        }
+
+        function closeMenu() {
+            dom.menu.panel.style.transform = 'translateX(100%)';
+            dom.menu.overlay.classList.add('opacity-0');
+            setTimeout(() => dom.menu.overlay.classList.add('hidden'), 300);
+        }
+
+        dom.menu.openBtn?.addEventListener('click', openMenu);
+        dom.menu.closeBtn?.addEventListener('click', closeMenu);
+        dom.menu.overlay?.addEventListener('click', closeMenu);
+        dom.menu.restartBtn?.addEventListener('click', handleRestart);
+
+        render();
+    </script>
+
+</body>
+</html>
