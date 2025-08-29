@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CDL Institute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-wrapper">
+    <header class="app-header">
+        <div class="app-header-inner">
+            <div>
+                <h1 class="text-xl font-bold">Hello, Alex</h1>
+                <p class="text-sm text-zinc-600">Let's get you ready to pass.</p>
+            </div>
+            <a href="19-user-profile.html" class="p-2 rounded-full hover:bg-zinc-200"><i class="ri-user-line text-xl"></i></a>
+        </div>
+    </header>
+
+    <main class="card-body">
+        <!-- Upgrade CTA -->
+        <div class="p-4 bg-blue-500 text-white rounded-xl mb-6">
+            <div class="flex items-center justify-between">
+                <h2 class="font-bold">Unlock All Features</h2>
+                <a href="pricing.html" class="font-semibold bg-white text-blue-600 px-3 py-1 rounded-full text-sm">Upgrade</a>
+            </div>
+            <p class="text-sm text-blue-100 mt-1">Get the Pass Guarantee and 1,200+ questions.</p>
+        </div>
+
+        <!-- Progress Card -->
+        <div class="bg-zinc-100 p-5 rounded-xl border border-zinc-200 mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="font-semibold">Your Readiness Score</h2>
+                <span class="font-bold text-lg">65%</span>
+            </div>
+            <div class="h-2 w-full bg-zinc-300 rounded-full"><div class="h-2 bg-black rounded-full" style="width: 65%;"></div></div>
+            <p class="text-sm text-zinc-600 mt-3">Complete the free assessment to see your full report.</p>
+        </div>
+
+        <!-- Main Actions -->
+        <div class="space-y-3">
+            <a href="03-assessment-intro.html" class="flex items-center gap-4 p-4 bg-zinc-100 rounded-xl hover:bg-zinc-200">
+                <i class="ri-file-list-3-line text-2xl text-zinc-500"></i>
+                <div>
+                    <h3 class="font-semibold">Take Free Assessment</h3>
+                    <p class="text-sm text-zinc-600">Get your personalized study plan.</p>
+                </div>
+                <i class="ri-arrow-right-s-line text-xl ml-auto text-zinc-400"></i>
+            </a>
+            <div class="flex items-center gap-4 p-4 bg-zinc-100 rounded-xl text-zinc-400">
+                <i class="ri-lock-line text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Full Practice Tests</h3>
+                    <p class="text-sm">Upgrade to unlock all exam simulators.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="mobile-nav">
+        <a href="#" class="mobile-nav-link active">
+            <i class="ri-home-5-line nav-icon text-2xl"></i><i class="ri-home-5-fill nav-icon-active text-2xl"></i>
+            <span class="text-xs font-semibold">Home</span>
+        </a>
+        <a href="#" class="mobile-nav-link">
+            <i class="ri-book-open-line nav-icon text-2xl"></i><i class="ri-book-open-fill nav-icon-active text-2xl"></i>
+            <span class="text-xs">Study</span>
+        </a>
+        <a href="21-settings.html" class="mobile-nav-link">
+            <i class="ri-settings-3-line nav-icon text-2xl"></i><i class="ri-settings-3-fill nav-icon-active text-2xl"></i>
+            <span class="text-xs">Settings</span>
+        </a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,215 @@
+/* CDL Institute - Global Stylesheet v3.0 (Modern Web Aesthetic) */
+
+/* 1. Root Variables & Base Styles */
+:root {
+    --brand-blue: #2563eb; /* A slightly richer blue */
+    --brand-ink: #18181b;  /* zinc-900 */
+    --bg-main: #f4f4f5;    /* zinc-100 */
+    --bg-card: #ffffff;
+    --text-primary: #18181b; /* zinc-900 */
+    --text-secondary: #52525b; /* zinc-600 */
+    --border-color: #e4e4e7; /* zinc-200 */
+    --border-hover: #a1a1aa; /* zinc-400 */
+    --border-active: var(--brand-ink);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Layout System */
+.web-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-card {
+    width: 100%;
+    max-width: 42rem; /* 672px */
+    margin: 2rem auto;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem; /* 24px */
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* For mobile-only views that shouldn't be centered on desktop */
+.mobile-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-card);
+}
+
+/* 3. Component: Headers */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+}
+.app-header-inner {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+.app-header .leading, .app-header .trailing {
+    flex: 1 0 0;
+}
+.app-header .leading { display: flex; justify-content: flex-start; }
+.app-header .trailing { display: flex; justify-content: flex-end; }
+.app-header .title { font-weight: 600; }
+
+/* 4. Component: Content & Footers */
+.app-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+.app-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+}
+.app-footer-sticky {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+/* 5. Component: Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem; /* 12px */
+    transition: all 150ms ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover {
+    transform: translateY(-1px);
+}
+.btn-primary {
+    background-color: var(--brand-blue);
+    color: white;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+.btn-primary:hover {
+    background-color: #1d4ed8; /* darker blue */
+}
+.btn-secondary {
+    background-color: #e4e4e7; /* zinc-200 */
+    color: var(--text-primary);
+}
+.btn-secondary:hover {
+    background-color: #d4d4d8; /* zinc-300 */
+}
+.btn-dark {
+    background-color: var(--brand-ink);
+    color: white;
+}
+.btn-dark:hover {
+    background-color: #27272a; /* zinc-800 */
+}
+
+/* 6. Component: Forms & Interactive Cards */
+.form-label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+.form-input, .form-select {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    background-color: #f9fafb; /* gray-50 */
+    transition: all 150ms ease-in-out;
+}
+.form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    background-color: white;
+}
+
+.selectable-card {
+    display: block;
+    padding: 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+.selectable-card:hover {
+    border-color: var(--border-hover);
+}
+.selectable-card:has(:checked) {
+    border-color: var(--brand-blue);
+    background-color: #eff6ff; /* blue-50 */
+    box-shadow: 0 4px 10px -2px rgba(37, 99, 235, 0.1);
+}
+
+/* 7. Component: List Card (for settings, profile, etc.) */
+.list-card {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 150ms ease-in-out;
+}
+.list-item:hover {
+    background-color: #f4f4f5; /* zinc-100 */
+}
+.list-card > :last-child {
+    border-bottom: none;
+}
+
+/* 8. Mobile Nav Bar */
+.mobile-nav {
+    position: sticky;
+    bottom: 0;
+    z-index: 50;
+    background-color: white;
+    border-top: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    padding: 0.5rem;
+}
+.mobile-nav-link {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: #71717a; /* zinc-500 */
+}
+.mobile-nav-link:hover {
+    background-color: var(--bg-main);
+}
+.mobile-nav-link.active {
+    color: var(--brand-ink);
+    font-weight: 600;
+}
+.mobile-nav-link.active .nav-icon { display: none; }
+.mobile-nav-link:not(.active) .nav-icon-active { display: none; }

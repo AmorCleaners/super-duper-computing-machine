@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment | CDL Institute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        /* Custom radio button style */
+        .custom-radio:checked + label {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-zinc-100">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between">
+                <p class="text-sm font-semibold text-zinc-900">Question 1 of 20</p>
+                <div class="w-full mx-4 bg-zinc-200 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full" style="width: 5%"></div>
+                </div>
+                <a href="index.html" class="text-sm font-semibold text-zinc-500 hover:text-zinc-900">Exit</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-12 sm:py-16">
+        <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+            
+            <!-- Question Card -->
+            <div class="rounded-xl bg-white p-6 sm:p-8 shadow-lg">
+                <p class="text-sm font-semibold text-blue-600">Topic: General Knowledge</p>
+                <h1 class="mt-2 text-xl font-semibold text-zinc-900">
+                    When driving in heavy fog, you should use:
+                </h1>
+
+                <!-- Answer Options -->
+                <fieldset class="mt-6">
+                    <legend class="sr-only">Answer options</legend>
+                    <div class="space-y-3">
+                        <div>
+                            <input type="radio" name="answer" value="a" id="a" class="sr-only custom-radio">
+                            <label for="a" class="block cursor-pointer rounded-lg border border-zinc-200 p-4 text-zinc-700 hover:bg-zinc-50">High-beam headlights</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="answer" value="b" id="b" class="sr-only custom-radio">
+                            <label for="b" class="block cursor-pointer rounded-lg border border-zinc-200 p-4 text-zinc-700 hover:bg-zinc-50">Low-beam headlights</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="answer" value="c" id="c" class="sr-only custom-radio">
+                            <label for="c" class="block cursor-pointer rounded-lg border border-zinc-200 p-4 text-zinc-700 hover:bg-zinc-50">Parking lights</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="answer" value="d" id="d" class="sr-only custom-radio">
+                            <label for="d" class="block cursor-pointer rounded-lg border border-zinc-200 p-4 text-zinc-700 hover:bg-zinc-50">Hazard lights</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Action Footer -->
+            <div class="mt-8 flex justify-end">
+                <!-- This button would be disabled until an answer is selected. -->
+                <!-- For the final question, the text changes and the link goes to the results page. -->
+                <a href="15-test-results.html" class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-blue-700">
+                    Finish & See My Results
+                </a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

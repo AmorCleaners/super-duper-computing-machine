@@ -1,0 +1,776 @@
+<!-- filename: assessment-intro.html -->
+<!--
+ASSESSMENT INTRO PAGE • CDL Institute Master Launch Blueprint (2025)
+Blueprint sections included on this file:
+1) Intro (warm, anxiety-reducing copy)
+2) Trust Signals Bar
+3) Primary CTA to start the assessment
+4) Sample Questions Gallery revealed when CTA is clicked (structure only; no grading logic)
+
+Question Types Included (expanded):
+- Q1: MCQ (single-select radios)
+- Q2: Media (16:9 image) + MCQ radios
+- Q3: Media (16:9 video) + multi-select checkboxes
+- Q4: Numeric input (with unit)
+- Q5: Interactive hotspot mock (visual only) + radio
+- Q6: Dropdown select (single-correct from fixed vocab)
+- Q7: Short text input (brief term)
+- Q8: True/False (radio variant)
+- Q9: Ordering / Sequencing (accessible list with move buttons)
+- Q10: Matching (left terms → right dropdowns)
+- Q11: Slider / Range (band grading possible later)
+
+Notes:
+- No grading logic; this is a component gallery to validate UI patterns.
+- Mobile-first, desktop-centered.
+-->
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Start Your Free CDL Assessment | CDL Institute</title>
+    <meta name="description" content="Quick, accurate, FMCSA-aligned readiness check. Get confident before test day—free assessment with instant results." />
+    <meta name="author" content="CDL Institute" />
+    <link rel="icon" href="assets/favicon.png" />
+
+    <!-- Remix Icons + Tailwind -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" crossorigin="anonymous" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: ['class', '[data-theme="dark"]'],
+        theme: {
+          extend: {
+            colors: {
+              brand: { blue:'#1E66FF', green:'#10B981', amber:'#F59E0B', ink:'#0B0B0C' }
+            },
+            boxShadow: {
+              'soft': '0 20px 60px -20px rgba(0,0,0,.25)'
+            },
+            borderRadius: {
+              '2xl': '1rem'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .reveal{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+      .reveal.in{opacity:1;transform:none}
+      .container-pad{padding-left:1rem;padding-right:1rem}
+      @media (min-width:768px){.container-pad{padding-left:2rem;padding-right:2rem}}
+      @media (min-width:1280px){.container-pad{padding-left:3rem;padding-right:3rem}}
+      .visually-hidden { position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+      /* Simple 16:9 helper */
+      .frame-16x9 { position: relative; width: 100%; padding-top: 56.25%; border-radius: .75rem; overflow: hidden; background: #0a0a0a; }
+      .frame-16x9 > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .hotspot { position:absolute; width:28px; height:28px; border-radius:9999px; border:2px solid #fff; background: rgba(30,102,255,.85); box-shadow: 0 6px 20px -4px rgba(0,0,0,.4);}
+      .ghost-btn { @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-zinc-300 text-sm hover:bg-zinc-50; }
+    </style>
+  </head>
+
+  <body class="bg-zinc-50 text-zinc-900 antialiased">
+    <!-- ===== Sticky Header (dark) ===== -->
+    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm text-white border-b border-black/20">
+      <div class="mx-auto max-w-7xl container-pad">
+        <div class="h-16 flex items-center justify-between">
+          <a href="index.html" class="flex items-center gap-3" aria-label="CDL Institute home">
+            <img src="assets/shield-fill.svg" alt="CDL Institute" class="h-9 w-9">
+            <span class="font-bold text-lg tracking-tight">CDL Institute</span>
+          </a>
+          <button id="startBtnDesktop" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-blue text-white font-semibold hover:bg-blue-600">
+            Start Free Assessment <i class="ri-arrow-right-line text-base"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== Centered Wrapper ===== -->
+    <main id="content" class="min-h-[calc(100dvh-8rem)]">
+      <section class="mx-auto max-w-5xl container-pad">
+        <div class="py-8 md:py-14"></div>
+
+        <!-- Desktop-centered page card -->
+        <div class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft">
+          <!-- Top: Title -->
+          <div class="px-5 sm:px-8 py-6 border-b border-zinc-200 text-center">
+            <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+              <i class="ri-sparkling-2-line"></i> Free Readiness Check
+            </p>
+            <h1 class="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight">Ready to ace this? We’ll show you what to expect.</h1>
+            <p class="mt-3 text-zinc-600 max-w-2xl mx-auto">
+              Quick, accurate, and aligned with FMCSA exam standards. Answer a few questions and get your
+              readiness score with clear next steps—no tricks, no fluff.
+            </p>
+          </div>
+
+          <!-- Body: Trust + explainer -->
+          <div class="px-5 sm:px-8 py-6 space-y-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="flex items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2">
+                <i class="ri-shield-check-line text-lg text-brand-blue"></i>
+                <span class="text-sm font-medium">FMCSA-aligned</span>
+              </div>
+              <div class="flex items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2">
+                <i class="ri-flashlight-line text-lg text-brand-green"></i>
+                <span class="text-sm font-medium">Adaptive items</span>
+              </div>
+              <div class="flex items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2">
+                <i class="ri-time-line text-lg text-brand-amber"></i>
+                <span class="text-sm font-medium">~10 minutes</span>
+              </div>
+              <div class="flex items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2">
+                <i class="ri-bar-chart-2-line text-lg text-brand-blue"></i>
+                <span class="text-sm font-medium">Instant results</span>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-zinc-50 border border-zinc-200 px-4 py-4">
+              <p class="text-sm text-zinc-700">
+                Don’t worry if you don’t know everything right away—every answer helps us pinpoint your strengths and the
+                few areas to sharpen. You’ll get a simple score and a plan to focus only on what matters.
+              </p>
+            </div>
+
+            <div aria-labelledby="what-to-expect" class="space-y-3">
+              <div id="what-to-expect" class="text-sm font-semibold text-zinc-700">What to expect</div>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3">
+                  <i class="ri-checkbox-circle-line mt-0.5 text-brand-green"></i>
+                  <div>
+                    <div class="text-sm font-medium">Questions like the real test</div>
+                    <p class="text-sm text-zinc-600">Wording and difficulty that mirror the DMV exam.</p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3">
+                  <i class="ri-checkbox-circle-line mt-0.5 text-brand-green"></i>
+                  <div>
+                    <div class="text-sm font-medium">Immediate feedback</div>
+                    <p class="text-sm text-zinc-600">See correct/incorrect with quick explanations.</p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3">
+                  <i class="ri-checkbox-circle-line mt-0.5 text-brand-green"></i>
+                  <div>
+                    <div class="text-sm font-medium">No credit card needed</div>
+                    <p class="text-sm text-zinc-600">Start free—upgrade later only if you want more.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bottom actions -->
+          <div class="px-5 sm:px-8 pt-2 pb-6 border-t border-zinc-200 flex items-center justify-end gap-3">
+            <a href="index.html" class="text-sm text-zinc-600 hover:text-zinc-900">Maybe later</a>
+            <button id="startBtnBottom" class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-brand-blue text-white font-semibold hover:bg-blue-600">
+              Start Assessment <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== SAMPLE QUESTIONS (hidden until Start clicked) ===== -->
+        <div id="questionsWrap" class="space-y-8 mt-8 mb-16 hidden">
+          <!-- Q1: Radios / Single-select -->
+          <div id="q1" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q1-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 1 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 9%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:9%;"></div></div>
+            </div>
+
+            <form class="px-5 sm:px-8 py-6" aria-describedby="q1-help">
+              <h2 id="q1-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Under Hours of Service (HOS), when must a driver take a 30-minute break?
+              </h2>
+              <p id="q1-help" class="mt-2 text-sm text-zinc-600">Choose one answer.</p>
+              <fieldset class="mt-4" role="radiogroup" aria-label="HOS 30-minute break">
+                <legend class="visually-hidden">HOS break requirement</legend>
+
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q1" value="A" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div>
+                    <div class="text-sm font-medium">After <strong>8 hours of driving time</strong></div>
+                    <p class="text-xs text-zinc-600">Break may be off-duty, sleeper berth, or on-duty not driving.</p>
+                  </div>
+                </label>
+
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q1" value="B" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">After 6 hours of driving time</div></div>
+                </label>
+
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q1" value="C" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">After 10 hours of on-duty time</div></div>
+                </label>
+
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q1" value="D" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Before the 14-hour duty window ends</div></div>
+                </label>
+              </fieldset>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q2: 16:9 IMAGE + MCQ (radios) -->
+          <div id="q2" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q2-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 2 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 18%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:18%;"></div></div>
+            </div>
+
+            <form class="px-5 sm:px-8 py-6">
+              <h2 id="q2-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Refer to the diagram. Which trailer connection is required before performing a tug test?
+              </h2>
+
+              <div class="mt-4 frame-16x9 border border-zinc-200">
+                <img src="https://placehold.co/1280x720/png?text=16:9+Training+Diagram" alt="Training diagram showing trailer connections">
+              </div>
+
+              <fieldset class="mt-4" role="radiogroup" aria-label="Trailer connection for tug test">
+                <legend class="visually-hidden">Trailer connection</legend>
+
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q2" value="A" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Glad hands and service/emergency lines connected</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q2" value="B" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Fifth-wheel jaws unlocked</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q2" value="C" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Kingpin removed</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q2" value="D" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Chocks removed from wheels</div></div>
+                </label>
+              </fieldset>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q3: 16:9 VIDEO + CHECKBOXES (multi-select) -->
+          <div id="q3" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q3-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 3 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 27%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:27%;"></div></div>
+            </div>
+
+            <form class="px-5 sm:px-8 py-6" aria-describedby="q3-help">
+              <h2 id="q3-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Watch the clip. Which pre-trip items must be inspected on this coupling?
+              </h2>
+              <p id="q3-help" class="mt-2 text-sm text-zinc-600">Select all that apply.</p>
+
+              <div class="mt-4 frame-16x9 border border-zinc-200">
+                <video controls preload="metadata" poster="https://placehold.co/1280x720/png?text=16:9+Video+Poster">
+                  <source src="" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              <fieldset class="mt-4" aria-label="Pre-trip coupling items">
+                <legend class="visually-hidden">Coupling inspection items</legend>
+
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="checkbox" name="q3[]" value="A" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Fifth-wheel platform secure and greased</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="checkbox" name="q3[]" value="B" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Locking jaws fully closed around kingpin</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="checkbox" name="q3[]" value="C" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Air bags intentionally deflated</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="checkbox" name="q3[]" value="D" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Safety latch/pin in locked position</div></div>
+                </label>
+              </fieldset>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q4: NUMERIC input (with unit adornment) -->
+          <div id="q4" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q4-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 4 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 36%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:36%;"></div></div>
+            </div>
+
+            <form class="px-5 sm:px-8 py-6" aria-describedby="q4-help">
+              <h2 id="q4-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                During an air-brake test, at what PSI should the governor <em>cut-out</em> typically occur?
+              </h2>
+              <p id="q4-help" class="mt-2 text-sm text-zinc-600">Enter a whole number.</p>
+
+              <div class="mt-4 max-w-xs">
+                <label for="q4num" class="text-sm font-medium">Cut-out pressure</label>
+                <div class="mt-2 flex items-stretch rounded-xl border border-zinc-300 overflow-hidden">
+                  <input id="q4num" name="q4num" type="number" inputmode="numeric" min="100" max="140" step="1"
+                         class="w-full px-3 py-2 outline-none text-sm"
+                         placeholder="e.g., 125" aria-describedby="q4unit">
+                  <div id="q4unit" class="px-3 py-2 text-sm bg-zinc-100 border-l border-zinc-300">PSI</div>
+                </div>
+              </div>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q5: INTERACTIVE MOCK (hotspots) + radio -->
+          <div id="q5" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q5-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 5 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 45%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:45%;"></div></div>
+            </div>
+
+            <form class="px-5 sm:px-8 py-6">
+              <h2 id="q5-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Tap the area of the trailer where you would check the ABS indicator light.
+              </h2>
+
+              <!-- Interactive mock frame (visual only) -->
+              <div class="mt-4 frame-16x9 border border-zinc-200">
+                <img src="https://placehold.co/1280x720/png?text=Trailer+Rear+View" alt="Trailer rear view for hotspot demo">
+                <!-- Fake hotspots (no logic) -->
+                <button type="button" class="hotspot" style="left: 72%; top: 22%;" aria-label="Hotspot 1"></button>
+                <button type="button" class="hotspot" style="left: 48%; top: 68%;" aria-label="Hotspot 2"></button>
+              </div>
+
+              <!-- Follow-up radio (structure only) -->
+              <fieldset class="mt-4" role="radiogroup" aria-label="ABS light location">
+                <legend class="visually-hidden">ABS light location</legend>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q5" value="A" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Left rear of trailer near the license plate bracket</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q5" value="B" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Inside the tractor cab on the dash</div></div>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q5" value="C" class="mt-1.5 h-4 w-4 accent-brand-blue" />
+                  <div><div class="text-sm font-medium">Under the fifth-wheel platform</div></div>
+                </label>
+              </fieldset>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q6: DROPDOWN (single-select) -->
+          <div id="q6" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q6-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 6 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 55%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:55%;"></div></div>
+            </div>
+            <form class="px-5 sm:px-8 py-6">
+              <h2 id="q6-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Choose the CDL class required to operate a combination vehicle with GCWR ≥ 26,001 lbs towing a unit > 10,000 lbs.
+              </h2>
+              <div class="mt-4 max-w-xs">
+                <label for="q6select" class="text-sm font-medium">CDL Class</label>
+                <select id="q6select" name="q6select" class="mt-2 w-full rounded-xl border border-zinc-300 px-3 py-2 text-sm">
+                  <option value="" disabled selected>Select one</option>
+                  <option>Class A</option>
+                  <option>Class B</option>
+                  <option>Class C</option>
+                </select>
+              </div>
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q7: SHORT TEXT (term/label) -->
+          <div id="q7" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q7-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 7 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 64%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:64%;"></div></div>
+            </div>
+            <form class="px-5 sm:px-8 py-6">
+              <h2 id="q7-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                What is the term for the device that prevents the trailer from moving when parked?
+              </h2>
+              <div class="mt-4 max-w-md">
+                <label for="q7text" class="text-sm font-medium">Your answer</label>
+                <input id="q7text" name="q7text" type="text" class="mt-2 w-full rounded-xl border border-zinc-300 px-3 py-2 text-sm" placeholder="Type a short answer (e.g., ...)" />
+              </div>
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q8: TRUE / FALSE (radio variant) -->
+          <div id="q8" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q8-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 8 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 73%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:73%;"></div></div>
+            </div>
+            <form class="px-5 sm:px-8 py-6">
+              <h2 id="q8-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                True or False: The service brake is applied by using the hand (trolley) valve during normal driving.
+              </h2>
+              <fieldset class="mt-4" role="radiogroup" aria-label="Trolley valve usage">
+                <legend class="visually-hidden">Trolley valve usage</legend>
+                <label class="flex items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q8" value="True" class="h-4 w-4 accent-brand-blue" />
+                  <span class="text-sm font-medium">True</span>
+                </label>
+                <label class="flex items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 cursor-pointer hover:bg-zinc-50 mt-3">
+                  <input type="radio" name="q8" value="False" class="h-4 w-4 accent-brand-blue" />
+                  <span class="text-sm font-medium">False</span>
+                </label>
+              </fieldset>
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+         <!-- SNIPPET: Q9 – Sequencing with drag & drop (mouse + touch via Pointer Events) -->
+<div id="q9" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q9-title">
+    <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+      <div class="flex items-center justify-between">
+        <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 9 of 11</p>
+        <span class="text-xs text-zinc-500">Drag to reorder</span>
+      </div>
+      <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:82%;"></div></div>
+    </div>
+  
+    <form class="px-5 sm:px-8 py-6" aria-describedby="q9-help">
+      <h2 id="q9-title" class="text-lg sm:text-xl font-bold tracking-tight">
+        Arrange the first steps to safely uncouple a trailer.
+      </h2>
+      <p id="q9-help" class="mt-2 text-sm text-zinc-600">Drag items to reorder. <span class="sr-only">Keyboard users: focus an item and press Option/Alt + ↑/↓.</span></p>
+  
+      <!-- Sortable list -->
+      <ol id="uncoupleSteps" class="mt-4 space-y-2 relative select-none" aria-live="polite">
+        <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 cursor-grab active:cursor-grabbing" tabindex="0" data-id="1">
+          <i class="ri-drag-move-2-line text-zinc-400"></i>
+          <span class="flex-1 text-sm">Set parking brakes and chock wheels</span>
+        </li>
+        <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 cursor-grab active:cursor-grabbing" tabindex="0" data-id="2">
+          <i class="ri-drag-move-2-line text-zinc-400"></i>
+          <span class="flex-1 text-sm">Lower landing gear until it just touches ground</span>
+        </li>
+        <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 cursor-grab active:cursor-grabbing" tabindex="0" data-id="3">
+          <i class="ri-drag-move-2-line text-zinc-400"></i>
+          <span class="flex-1 text-sm">Disconnect air lines and electrical cable</span>
+        </li>
+        <li class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 cursor-grab active:cursor-grabbing" tabindex="0" data-id="4">
+          <i class="ri-drag-move-2-line text-zinc-400"></i>
+          <span class="flex-1 text-sm">Unlock fifth-wheel</span>
+        </li>
+      </ol>
+  
+      <!-- (Optional) Submit -->
+      <div class="mt-6 hidden sm:flex items-center justify-end">
+        <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">
+          Submit <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  
+
+          <!-- Q10: MATCHING (pairs via right-side dropdowns) -->
+          <div id="q10" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q10-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 10 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 91%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:91%;"></div></div>
+            </div>
+            <form class="px-5 sm:px-8 py-6" aria-describedby="q10-help">
+              <h2 id="q10-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Match each component to its purpose.
+              </h2>
+              <p id="q10-help" class="mt-2 text-sm text-zinc-600">Choose the best match for each item.</p>
+
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="rounded-xl border border-zinc-200 p-4">
+                  <div class="text-sm font-medium">Slack adjuster</div>
+                  <select class="mt-2 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm">
+                    <option value="" disabled selected>Select purpose</option>
+                    <option>Maintains proper brake shoe-to-drum clearance</option>
+                    <option>Controls trailer electrical systems</option>
+                    <option>Measures tire tread depth</option>
+                  </select>
+                </div>
+                <div class="rounded-xl border border-zinc-200 p-4">
+                  <div class="text-sm font-medium">Glad hand</div>
+                  <select class="mt-2 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm">
+                    <option value="" disabled selected>Select purpose</option>
+                    <option>Connects air brake hoses between tractor and trailer</option>
+                    <option>Secures cargo with chains</option>
+                    <option>Controls engine oil pressure</option>
+                  </select>
+                </div>
+                <div class="rounded-xl border border-zinc-200 p-4">
+                  <div class="text-sm font-medium">Kingpin</div>
+                  <select class="mt-2 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm">
+                    <option value="" disabled selected>Select purpose</option>
+                    <option>Engages fifth-wheel locking jaws</option>
+                    <option>Inflates air suspension</option>
+                    <option>Secures wheel lug nuts</option>
+                  </select>
+                </div>
+                <div class="rounded-xl border border-zinc-200 p-4">
+                  <div class="text-sm font-medium">DOT reflector tape</div>
+                  <select class="mt-2 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm">
+                    <option value="" disabled selected>Select purpose</option>
+                    <option>Improves trailer conspicuity at night</option>
+                    <option>Measures axle weight</option>
+                    <option>Controls coolant flow</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Q11: SLIDER / RANGE -->
+          <div id="q11" class="mx-auto w-full md:w-[680px] lg:w-[760px] bg-white border border-zinc-200 rounded-2xl shadow-soft" aria-labelledby="q11-title">
+            <div class="px-5 sm:px-8 py-6 border-b border-zinc-200">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Question 11 of 11</p>
+                <span class="text-xs text-zinc-500">Progress 100%</span>
+              </div>
+              <div class="mt-3 h-2 w-full bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-brand-blue" style="width:100%;"></div></div>
+            </div>
+            <form class="px-5 sm:px-8 py-6" aria-describedby="q11-help">
+              <h2 id="q11-title" class="text-lg sm:text-xl font-bold tracking-tight">
+                Use the slider to select the recommended minimum tread depth for steering axle tires.
+              </h2>
+              <p id="q11-help" class="mt-2 text-sm text-zinc-600">Slide to choose. (inches)</p>
+
+              <div class="mt-4 max-w-xl">
+                <input type="range" min="0" max="1" step="0.01" value="0.25" class="w-full" aria-label="Tread depth in inches">
+                <div class="mt-2 flex justify-between text-xs text-zinc-500">
+                  <span>0.00"</span><span>0.25"</span><span>0.50"</span><span>0.75"</span><span>1.00"</span>
+                </div>
+              </div>
+
+              <div class="mt-6 hidden sm:flex items-center justify-end">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-black text-white font-semibold">Submit <i class="ri-arrow-right-line"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /SAMPLE QUESTIONS -->
+      </section>
+    </main>
+
+    <!-- ===== Sticky Mobile Footer CTA (switches when questions are shown) ===== -->
+    <div class="sm:hidden fixed inset-x-0 bottom-0 z-40 border-t border-zinc-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+      <div class="mx-auto max-w-7xl container-pad py-3 flex items-center gap-3">
+        <a href="index.html" class="flex-1 text-center text-sm text-zinc-600">Skip</a>
+        <button id="startBtnMobile" class="flex-[2] inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-black text-white font-semibold">
+          Continue <i class="ri-arrow-right-line"></i>
+        </button>
+        <button id="submitBtnMobile" class="hidden flex-[2] inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-black text-white font-semibold">
+          Submit <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+      <div class="h-[10px]"></div>
+    </div>
+
+    <!-- ===== Simple Footer ===== -->
+    <footer class="bg-zinc-950 text-zinc-300 border-t border-zinc-800">
+      <div class="mx-auto max-w-7xl container-pad py-8 text-sm text-center">
+        © <span id="year"></span> CDL Institute LLC. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- ===== Scripts (reveal + year + show questions) ===== -->
+    <script>
+      // Reveal animation
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('in'); obs.unobserve(entry.target); }
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      }
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Minimal behavior: reveal all sample questions on "Start"
+      function showQuestions() {
+        const wrap = document.getElementById('questionsWrap');
+        wrap.classList.remove('hidden');
+        const startM = document.getElementById('startBtnMobile');
+        const submitM = document.getElementById('submitBtnMobile');
+        if (startM && submitM) { startM.classList.add('hidden'); submitM.classList.remove('hidden'); }
+        document.getElementById('q1').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      const d1 = document.getElementById('startBtnDesktop');
+      const d2 = document.getElementById('startBtnBottom');
+      const m1 = document.getElementById('startBtnMobile');
+      if (d1) d1.addEventListener('click', showQuestions);
+      if (d2) d2.addEventListener('click', showQuestions);
+      if (m1) m1.addEventListener('click', showQuestions);
+
+      (() => {
+  const list = document.getElementById('uncoupleSteps');
+  if (!list) return;
+
+  let dragging = null;
+  let placeholder = null;
+  let originRect = null;
+  let yOffset = 0;
+
+  const onPointerDown = (e) => {
+    const li = e.target.closest('li');
+    if (!li || !list.contains(li)) return;
+
+    e.preventDefault();
+    li.setPointerCapture?.(e.pointerId);
+
+    dragging = li;
+    originRect = li.getBoundingClientRect();
+    yOffset = e.clientY - originRect.top;
+
+    // Placeholder keeps layout height
+    placeholder = document.createElement('li');
+    placeholder.className = 'my-2 h-[48px] rounded-xl border-2 border-dashed border-brand-blue';
+    placeholder.setAttribute('aria-hidden', 'true');
+    list.insertBefore(placeholder, li.nextSibling);
+
+    // Float the dragged element
+    li.style.width = originRect.width + 'px';
+    li.style.position = 'fixed';
+    li.style.left = originRect.left + 'px';
+    li.style.top = originRect.top + 'px';
+    li.style.zIndex = 60;
+    li.style.pointerEvents = 'none';
+    li.classList.add('opacity-70', 'ring-2', 'ring-brand-blue');
+
+    document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerup', onPointerUp);
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    dragging.style.top = (e.clientY - yOffset) + 'px';
+
+    // Find where to place the placeholder
+    const siblings = [...list.querySelectorAll('li')].filter(el => el !== dragging && el !== placeholder);
+    let placed = false;
+    for (const sib of siblings) {
+      const r = sib.getBoundingClientRect();
+      if (e.clientY < r.top + r.height / 2) {
+        list.insertBefore(placeholder, sib);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) list.appendChild(placeholder);
+  };
+
+  const onPointerUp = (e) => {
+    if (!dragging) return;
+
+    // Drop: insert dragged before placeholder and cleanup
+    list.insertBefore(dragging, placeholder);
+    dragging.classList.remove('opacity-70', 'ring-2', 'ring-brand-blue');
+    Object.assign(dragging.style, { position:'', left:'', top:'', width:'', zIndex:'', pointerEvents:'' });
+
+    placeholder.remove();
+    placeholder = null;
+    dragging = null;
+
+    document.removeEventListener('pointermove', onPointerMove);
+    document.removeEventListener('pointerup', onPointerUp);
+
+    announceOrder();
+  };
+
+  // Keyboard fallback: Alt/Option + Up/Down to move focused item
+  list.addEventListener('keydown', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    if (!e.altKey) return; // require Alt/Option to avoid interfering with page scroll
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prev = li.previousElementSibling;
+      if (prev) list.insertBefore(li, prev);
+      announceOrder();
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const next = li.nextElementSibling;
+      if (next) list.insertBefore(next, li);
+      announceOrder();
+    }
+  });
+
+  // Bind pointerdown to list (delegate)
+  list.addEventListener('pointerdown', onPointerDown);
+
+  // SR announcement of new order
+  function announceOrder() {
+    const items = [...list.querySelectorAll('li')].map((li, i) => `${i+1}. ${li.innerText.trim()}`);
+    list.setAttribute('aria-label', `Current order: ${items.join('; ')}`);
+  }
+})();
+    </script>
+  </body>
+</html>

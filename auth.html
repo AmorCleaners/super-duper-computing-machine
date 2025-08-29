@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continue to Your Study Plan | CDL Institute</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 
+        ======================================================================
+        CDL Institute - On-Page Style System (v7 - Universal Auth Copy )
+        ======================================================================
+        */
+        :root {
+            --brand-blue: #2563eb;
+            --brand-blue-dark: #1d4ed8;
+            --brand-red: #dc2626;
+            --brand-green: #16a34a;
+            --zinc-900: #18181b;
+            --zinc-700: #3f3f46;
+            --zinc-500: #71717a;
+            --zinc-200: #e4e4e7;
+            --zinc-100: #f4f4f5;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: white;
+            color: var(--zinc-900);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Layout */
+        @media (min-width: 768px) {
+            body { background-color: var(--zinc-100); }
+            .desktop-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; }
+            .desktop-main { display: flex; justify-content: center; padding: 2rem; }
+            .auth-modal {
+                width: 100%;
+                max-width: 440px;
+                background-color: white;
+                border: 1px solid var(--zinc-200);
+                border-radius: 1.5rem;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+                overflow: hidden;
+            }
+        }
+
+        /* Components */
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.125rem; color: var(--zinc-900); }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; font-weight: 600; padding: 0.875rem; border-radius: 0.75rem; transition: all 150ms ease; border: none; cursor: pointer; }
+        .btn-primary { background-color: var(--brand-blue); color: white; }
+        .btn-primary:hover { background-color: var(--brand-blue-dark); }
+        .btn-social { background-color: white; color: var(--zinc-900); border: 1px solid var(--zinc-200); }
+        .btn-social:hover { background-color: var(--zinc-100); }
+
+        .form-input { width: 100%; padding: 0.875rem; border: 1px solid var(--zinc-200); border-radius: 0.75rem; background-color: white; font-weight: 500; }
+        .form-input:focus { outline: none; border-color: var(--brand-blue); }
+        .form-input.is-invalid { border-color: var(--brand-red); }
+        
+        .divider { display: flex; align-items: center; text-align: center; color: var(--zinc-500); font-size: 0.875rem; font-weight: 500; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--zinc-200); }
+        .divider:not(:empty)::before { margin-right: .75em; }
+        .divider:not(:empty)::after { margin-left: .75em; }
+
+        /* Notification System */
+        .notif { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; border-radius: 0.75rem; border: 1px solid; }
+        .notif-icon { flex-shrink: 0; width: 1.25rem; height: 1.25rem; display: grid; place-items: center; border-radius: 9999px; }
+        .notif-title { font-weight: 600; }
+        .notif-body { font-size: 0.875rem; }
+        
+        .notif-error { border-color: var(--brand-red); background-color: #fef2f2; color: #b91c1c; }
+        .notif-error .notif-icon { background-color: var(--brand-red); color: white; }
+        
+        .notif-success { border-color: var(--brand-green); background-color: #f0fdf4; color: #14532d; }
+        .notif-success .notif-icon { background-color: var(--brand-green); color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <!-- ======================= -->
+        <!--    Desktop View (md+)   -->
+        <!-- ======================= -->
+        <div class="hidden md:block">
+            <header class="desktop-header">
+                <a href="index.html" class="logo">
+                    <i class="ri-shield-fill text-2xl text-brand-blue"></i>
+                    <span>CDL Institute</span>
+                </a>
+            </header>
+            <main class="desktop-main">
+                <div class="auth-modal">
+                    <div class="p-6 text-center">
+                        <!-- NEW UNIVERSAL HEADLINE -->
+                        <h1 class="text-2xl font-bold tracking-tight mb-2">Continue to Your Personalized Study Plan</h1>
+                        <!-- NEW UNIVERSAL SUB-HEADLINE -->
+                        <p class="text-zinc-500">Sign in or create your free account to access your results, track your progress, and start studying.</p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <!-- Notification Area -->
+                        <div id="notif-desktop" class="mb-4"></div>
+
+                        <div class="space-y-3 mb-4">
+                            <!-- NEW UNIVERSAL BUTTON COPY -->
+                            <a href="#" class="btn btn-social"><i class="ri-google-fill text-xl"></i><span>Continue with Google</span></a>
+                            <a href="#" class="btn btn-social"><i class="ri-apple-fill text-xl"></i><span>Continue with Apple</span></a>
+                        </div>
+                        <div class="divider my-4">or</div>
+                        <form id="auth-form-desktop" class="space-y-4">
+                            <div>
+                                <label for="email-desktop" class="text-sm font-semibold mb-1 block">Email address</label>
+                                <input type="email" id="email-desktop" class="form-input" placeholder="you@example.com">
+                            </div>
+                            <!-- NEW UNIVERSAL BUTTON COPY -->
+                            <button type="submit" class="btn btn-primary !mt-6">Continue with Email</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ======================= -->
+        <!--     Mobile View (<md)    -->
+        <!-- ======================= -->
+        <div class="md:hidden flex flex-col flex-grow min-h-screen p-6">
+            <header class="text-center mb-8">
+                <i class="ri-shield-fill text-5xl text-brand-blue mx-auto mb-4"></i>
+                <!-- NEW UNIVERSAL HEADLINE -->
+                <h1 class="text-3xl font-bold tracking-tight">Continue to Your Study Plan</h1>
+                <!-- NEW UNIVERSAL SUB-HEADLINE -->
+                <p class="text-zinc-500 mt-2">Sign in or create your free account to access your results and track your progress.</p>
+            </header>
+            <main class="flex-grow">
+                <!-- Notification Area -->
+                <div id="notif-mobile" class="mb-4"></div>
+                <div class="space-y-3 mb-6">
+                    <!-- NEW UNIVERSAL BUTTON COPY -->
+                    <a href="#" class="btn btn-social"><i class="ri-google-fill text-xl"></i><span>Continue with Google</span></a>
+                    <a href="#" class="btn btn-social"><i class="ri-apple-fill text-xl"></i><span>Continue with Apple</span></a>
+                </div>
+                <div class="divider">or</div>
+                <form id="auth-form-mobile" class="space-y-4 mt-6">
+                     <div>
+                        <label for="email-mobile" class="text-sm font-semibold mb-1 block">Email address</label>
+                        <input type="email" id="email-mobile" class="form-input" placeholder="you@example.com">
+                    </div>
+                    <!-- NEW UNIVERSAL BUTTON COPY -->
+                    <button type="submit" class="btn btn-primary !mt-6">Continue with Email</button>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Script remains the same as it handles the notification logic perfectly.
+        function showNotification(container, type, title, message) {
+            const isError = type === 'error';
+            const iconClass = isError ? 'ri-error-warning-fill' : 'ri-checkbox-circle-fill';
+            const notifClass = isError ? 'notif-error' : 'notif-success';
+
+            container.innerHTML = `
+                <div class="notif ${notifClass}">
+                    <div class="notif-icon">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <div>
+                        <h3 class="notif-title">${title}</h3>
+                        <p class="notif-body">${message}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const formId = e.target.id;
+            const isDesktop = formId.includes('desktop');
+            
+            const emailInput = document.getElementById(isDesktop ? 'email-desktop' : 'email-mobile');
+            const notifContainer = document.getElementById(isDesktop ? 'notif-desktop' : 'notif-mobile');
+            
+            notifContainer.innerHTML = '';
+            emailInput.classList.remove('is-invalid');
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(emailInput.value)) {
+                showNotification(notifContainer, 'error', 'Invalid Email', 'Please double-check your email address and try again.');
+                emailInput.classList.add('is-invalid');
+            } else {
+                // In a real app, the backend would determine if this is a login or signup.
+                showNotification(notifContainer, 'success', 'Check your inbox!', 'We sent a secure link to ' + emailInput.value + ' to continue.');
+            }
+        }
+
+        document.getElementById('auth-form-desktop').addEventListener('submit', handleAuthSubmit);
+        document.getElementById('auth-form-mobile').addEventListener('submit', handleAuthSubmit);
+    </script>
+
+</body>
+</html>

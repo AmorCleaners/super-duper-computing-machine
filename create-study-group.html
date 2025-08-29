@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Study Group | CDL Institute</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <div class="leading">
+                <a href="18-study-groups.html" class="btn-link text-sm">Cancel</a>
+            </div>
+            <div class="title">Create Group</div>
+        </header>
+        <main class="app-content">
+            <form action="18-study-groups.html" class="space-y-6">
+                <div>
+                    <label for="group-name" class="form-label">Group Name</label>
+                    <input type="text" id="group-name" class="form-input" placeholder="e.g., Air Brakes Crew">
+                </div>
+                <div>
+                    <label for="group-topic" class="form-label">Focus Topic</label>
+                    <select id="group-topic" class="form-input bg-white">
+                        <option>Air Brakes</option>
+                        <option>HazMat Endorsement</option>
+                        <option>Pre-Trip Inspection</option>
+                    </select>
+                </div>
+            </form>
+        </main>
+        <footer class="p-4 border-t border-zinc-200">
+            <button type="submit" class="btn btn-primary w-full">Create and Invite</button>
+        </footer>
+    </div>
+</body>
+</html>

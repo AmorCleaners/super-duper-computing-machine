@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Test | CDL Institute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <div class="leading">
+                <a href="index.html" class="btn-link text-sm">Cancel</a>
+            </div>
+            <div class="title">Step 1 of 2</div>
+        </header>
+
+        <main class="app-content">
+            <div class="pt-4 pb-6">
+                <h1 class="text-3xl font-bold tracking-tight">What are you studying for?</h1>
+                <p class="text-zinc-600 mt-2">This helps us create your personalized study plan.</p>
+            </div>
+
+            <form action="06-path-customization.html" class="space-y-3">
+                <label class="selectable-card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="font-semibold">Class A CDL</h2>
+                            <p class="text-zinc-600 text-sm mt-1">For combination vehicles (tractor-trailers ).</p>
+                        </div>
+                        <input type="radio" name="cdl_class" class="mt-1 h-5 w-5 accent-[var(--brand-blue)]">
+                    </div>
+                </label>
+                <label class="selectable-card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="font-semibold">Class B CDL</h2>
+                            <p class="text-zinc-600 text-sm mt-1">For single heavy vehicles (straight trucks, buses).</p>
+                        </div>
+                        <input type="radio" name="cdl_class" class="mt-1 h-5 w-5 accent-[var(--brand-blue)]" checked>
+                    </div>
+                </label>
+                <label class="selectable-card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="font-semibold">Class C CDL</h2>
+                            <p class="text-zinc-600 text-sm mt-1">For smaller passenger or HazMat vehicles.</p>
+                        </div>
+                        <input type="radio" name="cdl_class" class="mt-1 h-5 w-5 accent-[var(--brand-blue)]">
+                    </div>
+                </label>
+            </form>
+        </main>
+
+        <footer class="p-4 border-t border-zinc-200">
+            <a href="06-path-customization.html" class="btn btn-primary w-full">Next</a>
+        </footer>
+    </div>
+</body>
+</html>

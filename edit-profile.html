@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | CDL Institute</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <div class="leading">
+                <a href="19-user-profile.html" class="btn-link text-sm">Cancel</a>
+            </div>
+            <div class="title">Edit Profile</div>
+            <div class="trailing">
+                <a href="19-user-profile.html" class="btn-link text-sm">Save</a>
+            </div>
+        </header>
+        <main class="app-content">
+            <div class="text-center my-8">
+                <div class="relative inline-block">
+                    <img src="https://placehold.co/96x96/e5e5e5/1d1d1f?text=A" alt="User Avatar" class="w-24 h-24 rounded-full">
+                    <button class="absolute bottom-0 right-0 bg-zinc-900 text-white w-8 h-8 rounded-full flex items-center justify-center border-2 border-white">
+                        <i class="ri-pencil-fill"></i>
+                    </button>
+                </div>
+            </div>
+            <form action="19-user-profile.html" class="space-y-4">
+                <div>
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" class="form-input" value="Alex Johnson">
+                </div>
+                <div>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" value="alex.j@example.com">
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
