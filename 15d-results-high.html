@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Readiness Score: 90% | CDL Institute</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; }
+        .progress-ring-bg { stroke: #e4e4e7; }
+        .progress-ring-fg { stroke: #22c55e; transition: stroke-dashoffset 0.5s ease-out; }
+        .topic-bar-bg { background-color: #f3f4f6; }
+        .topic-bar-fg { transition: width 0.5s ease-out; }
+        #score-modal { transition: opacity 0.3s ease-in-out; }
+        #score-modal-content { transition: all 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="text-zinc-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-sm border-b border-zinc-200">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8"><span class="font-semibold text-lg">CDL Institute</span></a>
+            <div class="flex items-center gap-2">
+                <button class="flex items-center gap-1 text-zinc-600 hover:text-zinc-900 transition text-sm font-medium"><span>California</span><i class="ri-arrow-down-s-line"></i></button>
+                <button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-100"><i class="ri-menu-line text-xl"></i></button>
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto py-8 sm:py-12 px-4">
+        <!-- Score Section -->
+        <section class="text-center">
+            <h1 class="text-2xl font-bold">Excellent Work! You're Almost Test-Ready.</h1>
+            <p class="mt-2 text-zinc-600 max-w-xl mx-auto">Your score is very high. Let's polish the few remaining areas to ensure you walk into the exam with total confidence.</p>
+            <div class="relative w-48 h-48 mx-auto mt-6">
+                <svg class="w-full h-full" viewBox="0 0 36 36"><path class="progress-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path><path id="progress-ring" class="progress-ring-fg" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4" stroke-dasharray="90, 100"></path></svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="text-5xl font-bold text-green-600">90%</span></div>
+            </div>
+            <button id="open-modal-btn" class="mt-2 text-sm text-zinc-500 hover:text-zinc-800">What is a Readiness Score? <i class="ri-information-line"></i></button>
+        </section>
+
+        <!-- Key Metrics -->
+        <section class="mt-8 grid grid-cols-2 gap-4 text-center">
+            <div class="p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+                <p class="text-sm text-zinc-500">Correct Answers</p>
+                <p class="text-2xl font-bold">18 <span class="text-lg text-zinc-400">/ 20</span></p>
+            </div>
+            <div class="p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+                <p class="text-sm text-zinc-500">Time Completed</p>
+                <p class="text-2xl font-bold">08:32</p>
+            </div>
+        </section>
+
+        <!-- Performance Insights -->
+        <section class="mt-10 space-y-4">
+            <div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-50 border border-zinc-200">
+                <i class="ri-award-line text-xl text-green-600 mt-1"></i>
+                <div><h3 class="font-semibold">EXCELLENT KNOWLEDGE</h3><p class="text-sm text-zinc-600">You have mastered General Knowledge and Air Brakes. No need to spend more time here.</p></div>
+            </div>
+            <div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-50 border border-zinc-200">
+                <i class="ri-focus-3-line text-xl text-amber-600 mt-1"></i>
+                <div><h3 class="font-semibold">FINAL POLISH</h3><p class="text-sm text-zinc-600">A quick review of Combination Vehicles coupling procedures will get you to 100% readiness.</p></div>
+            </div>
+        </section>
+
+        <!-- Learning Path -->
+        <section class="mt-10">
+            <h2 class="text-xl font-bold">Your Learning Path</h2>
+            <div class="mt-4 space-y-4">
+                <div class="p-4 rounded-lg border-2 border-blue-600 bg-blue-50">
+                    <p class="font-semibold text-blue-800">1. Final Review: Combination Vehicles</p>
+                    <p class="text-sm text-blue-700 mt-1">Just a few questions to solidify your knowledge.</p>
+                    <div class="w-full topic-bar-bg rounded-full h-2 mt-3"><div class="bg-blue-600 h-2 rounded-full topic-bar-fg" style="width: 80%;"></div></div>
+                </div>
+                <div class="p-4 rounded-lg border border-zinc-200">
+                    <p class="font-semibold">2. Full Practice Exams</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sticky Footer CTA -->
+    <footer class="sticky bottom-0 bg-white/90 backdrop-blur-sm border-t border-zinc-200 py-4 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h3 class="text-lg font-bold">Continue For Free, Upgrade When You're Ready</h3>
+            <p class="text-sm text-zinc-600 mt-1">Create your free account to save your high score and access your final review plan.</p>
+            <a href="auth.html" class="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700">Create Account & Lock In Score</a>
+        </div>
+    </footer>
+
+    <!-- Score Explanation Modal -->
+    <div id="score-modal" class="fixed inset-0 z-50 bg-black/60 hidden opacity-0">
+        <div id="score-modal-content" class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto mt-20 p-6 transform scale-95 opacity-0">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold">What is a Readiness Score?</h2>
+                <button id="close-modal-btn" class="text-zinc-400 hover:text-zinc-800"><i class="ri-close-line text-2xl"></i></button>
+            </div>
+            <p class="mt-2 text-zinc-600">Your Readiness Score is a data-driven projection based on this initial assessment. It’s more than a simple percentage; it’s a weighted score that analyzes your performance against thousands of data points to predict your test-day readiness.</p>
+            <div class="mt-6 space-y-4">
+                <div class="flex items-start gap-4"><i class="ri-checkbox-circle-line text-xl text-blue-600 mt-1"></i><div><h3 class="font-semibold">Question Accuracy</h3><p class="text-sm text-zinc-600">Your correct answer rate across different question types and difficulty levels.</p></div></div>
+                <div class="flex items-start gap-4"><i class="ri-time-line text-xl text-blue-600 mt-1"></i><div><h3 class="font-semibold">Response Time</h3><p class="text-sm text-zinc-600">How quickly you answer questions compared to optimal timing patterns.</p></div></div>
+                <div class="flex items-start gap-4"><i class="ri-search-eye-line text-xl text-blue-600 mt-1"></i><div><h3 class="font-semibold">Knowledge Gaps</h3><p class="text-sm text-zinc-600">Areas where you show uncertainty or consistent difficulty patterns.</p></div></div>
+                <div class="flex items-start gap-4"><i class="ri-bar-chart-2-line text-xl text-blue-600 mt-1"></i><div><h3 class="font-semibold">Historical Data</h3><p class="text-sm text-zinc-600">Comparison with thousands of successful test-takers’ performance patterns.</p></div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const score = 90;
+        const progressRing = document.getElementById('progress-ring' );
+        const circumference = progressRing.r.baseVal.value * 2 * Math.PI;
+        progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+        function setProgress(percent) { progressRing.style.strokeDashoffset = circumference - percent / 100 * circumference; }
+        setTimeout(() => setProgress(score), 200);
+
+        const openBtn = document.getElementById('open-modal-btn');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const modal = document.getElementById('score-modal');
+        const modalContent = document.getElementById('score-modal-content');
+        function openModal() { modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('opacity-0', 'scale-95'); }, 10); }
+        function closeModal() { modal.classList.add('opacity-0'); modalContent.classList.add('opacity-0', 'scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); }
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Readiness Score: 25% | CDL Institute</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <style>
+        /* Minimal custom CSS for elements Tailwind doesn't directly handle */
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #ffffff; }
+        .progress-ring-bg { stroke: #e4e4e7; }
+        .progress-ring-fg { stroke: #ef4444; transition: stroke-dashoffset 0.5s ease-out; }
+        .topic-bar-bg { background-color: #f3f4f6; }
+        .topic-bar-fg { transition: width 0.5s ease-out; }
+    </style>
+</head>
+<body class="text-zinc-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-sm border-b border-zinc-200">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <a href="home.html" class="flex items-center gap-3" aria-label="CDL Institute home"><img src="assets/shield-fill-dark.svg" alt="CDL Institute Logo" class="h-8 w-8"><span class="font-semibold text-lg">CDL Institute</span></a>
+            <div class="flex items-center gap-2">
+                <button class="flex items-center gap-1 text-zinc-600 hover:text-zinc-900 transition text-sm font-medium"><span>California</span><i class="ri-arrow-down-s-line"></i></button>
+                <button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-100"><i class="ri-menu-line text-xl"></i></button>
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto py-8 sm:py-12 px-4">
+        <!-- Score Section -->
+        <section class="text-center">
+            <h1 class="text-2xl font-bold">Let's Build Your Foundation</h1>
+            <p class="mt-2 text-zinc-600 max-w-xl mx-auto">This is the starting line. This score helps us find exactly where to focus so you can improve quickly and pass with confidence.</p>
+            <div class="relative w-48 h-48 mx-auto mt-6">
+                <svg class="w-full h-full" viewBox="0 0 36 36"><path class="progress-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path><path id="progress-ring" class="progress-ring-fg" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4" stroke-dasharray="25, 100"></path></svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="text-5xl font-bold text-red-600">25%</span></div>
+            </div>
+            <button id="explanation-toggle-btn" class="mt-2 text-sm text-zinc-500 hover:text-zinc-800 inline-flex items-center gap-1">
+                <span>What is a Readiness Score?</span> 
+                <i id="explanation-icon" class="ri-information-line transition-transform duration-300"></i>
+            </button>
+            
+            <!-- DEBUGGED & RELIABLE DISCLOSURE WIDGET -->
+            <div id="score-explanation-container" class="h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                <div class="mt-6 p-6 bg-zinc-50 rounded-lg border border-zinc-200 text-left">
+                    <h2 class="text-lg font-bold text-center mb-4">How We Calculate Your Score</h2>
+                    <p class="text-zinc-600 text-center mb-6">This isn't just a simple percentage. Your Readiness Score is a smart projection of how you'd do on the real test, based on these key factors:</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4"><i class="ri-checkbox-multiple-line text-2xl text-blue-600"></i><div><h3 class="font-semibold">Question Accuracy</h3><p class="text-sm text-zinc-600">We look at not just how many you got right, but also the difficulty of the questions.</p></div></div>
+                        <div class="flex items-start gap-4"><i class="ri-timer-flash-line text-2xl text-blue-600"></i><div><h3 class="font-semibold">Your Speed & Confidence</h3><p class="text-sm text-zinc-600">Answering quickly and correctly shows true mastery. We compare your timing to successful drivers.</p></div></div>
+                        <div class="flex items-start gap-4"><i class="ri-search-eye-line text-2xl text-blue-600"></i><div><h3 class="font-semibold">Knowledge Gaps</h3><p class="text-sm text-zinc-600">We pinpoint the exact topics where you consistently struggle so you know where to focus.</p></div></div>
+                        <div class="flex items-start gap-4"><i class="ri-group-2-line text-2xl text-blue-600"></i><div><h3 class="font-semibold">Performance Benchmarking</h3><p class="text-sm text-zinc-600">We compare your performance patterns against thousands of students who have successfully passed the CDL exam.</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Metrics -->
+        <section class="mt-8 grid grid-cols-2 gap-4 text-center">
+            <div class="p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+                <p class="text-sm text-zinc-500">Correct Answers</p>
+                <p class="text-2xl font-bold">5 <span class="text-lg text-zinc-400">/ 20</span></p>
+            </div>
+            <div class="p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+                <p class="text-sm text-zinc-500">Time Completed</p>
+                <p class="text-2xl font-bold">12:45</p>
+            </div>
+        </section>
+
+        <!-- Performance Insights & Learning Path sections remain the same -->
+        <section class="mt-10 space-y-4">
+            <div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-50 border border-zinc-200"><i class="ri-focus-3-line text-xl text-red-600 mt-1"></i><div><h3 class="font-semibold">FOCUS AREAS</h3><p class="text-sm text-zinc-600">Your results show the biggest opportunities for improvement are in General Knowledge and Air Brakes.</p></div></div>
+            <div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-50 border border-zinc-200"><i class="ri-lightbulb-flash-line text-xl text-amber-600 mt-1"></i><div><h3 class="font-semibold">CHALLENGE HIGHLIGHT</h3><p class="text-sm text-zinc-600">Questions about the 14-hour rule were the most missed. This is common for new drivers!</p></div></div>
+        </section>
+        <section class="mt-10">
+            <h2 class="text-xl font-bold">Your Personalized Learning Path</h2>
+            <div class="mt-4 space-y-4">
+                <div class="p-4 rounded-lg border-2 border-blue-600 bg-blue-50"><p class="font-semibold text-blue-800">1. Start with General Knowledge</p><p class="text-sm text-blue-700 mt-1">Build a strong foundation with the core rules of the road.</p><div class="w-full topic-bar-bg rounded-full h-2 mt-3"><div class="bg-blue-600 h-2 rounded-full topic-bar-fg" style="width: 10%;"></div></div></div>
+                <div class="p-4 rounded-lg border border-zinc-200"><p class="font-semibold">2. Master Air Brakes</p></div>
+                <div class="p-4 rounded-lg border border-zinc-200"><p class="font-semibold">3. Tackle Combination Vehicles</p></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sticky Footer CTA -->
+    <footer class="sticky bottom-0 bg-white/90 backdrop-blur-sm border-t border-zinc-200 py-4 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h3 class="text-lg font-bold">Let's Turn That Score Around!</h3>
+            <p class="text-sm text-zinc-600 mt-1">Create your free account to access your personalized study plan and start improving your score today.</p>
+            <a href="auth.html" class="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700">Create Free Account & Start Learning</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function( ) {
+            // Score Ring Animation
+            const score = 25;
+            const progressRing = document.getElementById('progress-ring');
+            if (progressRing) {
+                const circumference = progressRing.r.baseVal.value * 2 * Math.PI;
+                progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+                const setProgress = (percent) => { progressRing.style.strokeDashoffset = circumference - percent / 100 * circumference; };
+                setTimeout(() => setProgress(score), 200);
+            }
+
+            // --- DEBUGGED & SIMPLIFIED DISCLOSURE LOGIC ---
+            const toggleBtn = document.getElementById('explanation-toggle-btn');
+            const explanationContainer = document.getElementById('score-explanation-container');
+            const explanationIcon = document.getElementById('explanation-icon');
+
+            if (toggleBtn && explanationContainer && explanationIcon) {
+                toggleBtn.addEventListener('click', () => {
+                    const isClosed = explanationContainer.classList.contains('h-0');
+                    
+                    if (isClosed) {
+                        // Expand it
+                        explanationContainer.classList.remove('h-0', 'opacity-0');
+                        // Set height based on content scroll height for perfect fit
+                        explanationContainer.style.height = `${explanationContainer.scrollHeight}px`;
+                        explanationIcon.classList.add('rotate-180');
+                    } else {
+                        // Collapse it
+                        explanationContainer.style.height = '0';
+                        explanationContainer.classList.add('opacity-0');
+                        // We don't add h-0 back immediately, to let the transition finish
+                        explanationIcon.classList.remove('rotate-180');
+                    }
+                });
+
+                // Reset height to 0 after transition ends to allow re-opening
+                explanationContainer.addEventListener('transitionend', () => {
+                    if (explanationContainer.style.height !== '0px') {
+                        // If it just opened, set height to auto to be responsive
+                        explanationContainer.style.height = 'auto';
+                    } else {
+                        // If it just closed, add h-0 back
+                        explanationContainer.classList.add('h-0');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
